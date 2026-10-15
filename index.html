@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  RAMFAM BUILDERS: QUICK-EDIT GUIDE
+  ---------------------------------
+  1. Business info (phone, email, service area, socials, Google review link, form endpoint):
+     edit SITE_CONFIG at the top of the <script> near the bottom of this file.
+     It updates every phone/email link, social icon, review button and the JSON-LD schema.
+  2. Project photos: edit photos.js (shared with gallery.html). Mark photos with
+     featured: true to show them in the home-page "Recent Projects" carousel.
+  3. Logo: drop your file at assets/logo.png
+  4. Search this file for "REPLACE" to find every placeholder (photos, copy, meta tags).
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RamFam Builders | Custom Homes, Septic &amp; Concrete in Eastern NC</title>
+<meta name="description" content="RamFam Builders is a family-owned custom home builder serving Eastern North Carolina. Custom homes, remodels and additions, concrete, and septic installation and repair. Free estimates.">
+<!-- REPLACE: your live domain in canonical + og:url -->
+<link rel="canonical" href="https://www.ramfambuilders.com/">
+<meta name="theme-color" content="#2E2B28">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RamFam Builders">
+<meta property="og:title" content="RamFam Builders | Building Dream Homes in Eastern NC">
+<meta property="og:description" content="Family-owned custom home builder. Custom homes, remodels, concrete, and septic work across Eastern North Carolina. Free estimates.">
+<meta property="og:url" content="https://www.ramfambuilders.com/">
+<!-- social preview image (absolute URL on the live domain; optimized copy of heroimage.png) -->
+<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1920.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- hero photo (keep in sync with the hero <picture> below) -->
+<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
+      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
+
+<!-- JSON-LD schema: values are refreshed from SITE_CONFIG by the script at the bottom; these are fallbacks. -->
+<script type="application/ld+json" id="schema">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "RamFam Builders",
+  "description": "Family-owned custom home builder serving Eastern North Carolina: custom homes, remodels and additions, concrete, and septic installation and repair.",
+  "url": "https://www.ramfambuilders.com/",
+  "logo": "https://www.ramfambuilders.com/assets/logo.png",
+  "image": "https://www.ramfambuilders.com/images/hero/hero-1920.jpg",
+  "telephone": "+15555555555",
+  "email": "info@ramfambuilders.com",
+  "priceRange": "$$$",
+  "address": { "@type": "PostalAddress", "addressLocality": "Greenville", "addressRegion": "NC", "postalCode": "27834", "addressCountry": "US" },
+  "areaServed": "Eastern North Carolina",
+  "openingHours": "Mo-Fr 07:00-18:00",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "25" },
+  "sameAs": []
+}
+</script>
+
+<style>
+/* ================= TOKENS ================= */
+:root{
+  /* color */
+  --gold:#C9A24A;            /* accent only: buttons, rules, small highlights */
+  --gold-hover:#B78F37;
+  --gold-text:#866620;       /* darker gold for small text on light bg (WCAG AA) */
+  --gold-light:#E6CC8C;      /* gold text on dark bg */
+  --charcoal:#2E2B28;
+  --charcoal-deep:#211F1D;
+  --ink:#2E2B28;
+  --muted:#5D5750;
+  --line:#E4DED5;
+  --white:#FFFFFF;
+  --warm:#F6F3EE;            /* soft warm-gray section bg */
+  /* type */
+  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fs-body:clamp(1rem, .96rem + .2vw, 1.075rem);
+  --fs-lead:clamp(1.06rem, 1rem + .35vw, 1.22rem);
+  --fs-h1:clamp(3rem, 1.6rem + 6.4vw, 6.75rem);
+  --fs-h2:clamp(2rem, .9rem + 1.6vw + 1.7vh, 3.5rem);      /* vw + vh: shrinks on short laptop screens */
+  --fs-h3:clamp(1.35rem, .95rem + .4vw + .6vh, 1.7rem);
+  /* spacing scale */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+  --section-y:clamp(48px, 9vw, 72px);                       /* compact on phones/tablets; desktop value below */
+  --gutter:clamp(20px, 4vw, 40px);
+  /* shape */
+  --radius-sm:4px;
+  --radius:10px;
+  --shadow-sm:0 2px 10px rgba(33,31,29,.06);
+  --shadow:0 18px 50px -18px rgba(33,31,29,.28);
+  /* layout */
+  --wrap:1240px;
+  --header-h:72px;
+}
+@media (min-width:1024px){ :root{ --header-h:88px; } }
+
+/* ================= BASE (mobile first) ================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-size:var(--fs-body);line-height:1.7;color:var(--ink);background:var(--white);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.01em;margin:0 0 .45em;color:var(--charcoal)}
+h2{font-size:var(--fs-h2)}
+h3{font-size:var(--fs-h3);line-height:1.15}
+p{margin:0 0 1em}
+.wrap{width:100%;max-width:calc(var(--wrap) + var(--gutter)*2);margin:0 auto;padding:0 var(--gutter)}
+.section{padding:var(--section-y) 0}
+.section--warm{background:var(--warm)}
+.eyebrow{display:flex;align-items:center;gap:var(--s-3);font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin:0 0 var(--s-4)}
+.eyebrow::before{content:"";width:32px;height:2px;background:var(--gold);flex:none}
+.section-head{max-width:680px;margin-bottom:clamp(36px, 4vw, 64px)}
+.section-head--center{margin-inline:auto;text-align:center}
+.section-head--center .eyebrow{justify-content:center}
+.section-head--center .eyebrow::after{content:"";width:32px;height:2px;background:var(--gold)}
+.section-head--row{max-width:none;display:flex;flex-direction:column;gap:var(--s-5)}
+.section-head--row > div{max-width:640px}
+.lead{font-size:var(--fs-lead);color:var(--muted);line-height:1.65}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-80px;z-index:500;background:var(--charcoal);color:#fff;padding:12px 18px;border-radius:var(--radius-sm)}
+.skip-link:focus{top:12px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.center{text-align:center}
+
+/* ================= BUTTONS ================= */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);min-height:52px;padding:14px 28px;border-radius:var(--radius-sm);font:600 1rem/1.2 var(--sans);letter-spacing:.01em;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s;width:100%}
+.btn:active{transform:translateY(1px)}
+.btn--gold{background:var(--gold);color:var(--charcoal-deep);border-color:var(--gold)}
+.btn--gold:hover{background:var(--gold-hover);border-color:var(--gold-hover);box-shadow:0 10px 24px -10px rgba(201,162,74,.75)}
+.btn--ghost{color:#fff;border-color:rgba(255,255,255,.8);background:transparent}
+.btn--ghost:hover{background:#fff;color:var(--charcoal)}
+.btn--dark{color:var(--charcoal);border-color:var(--charcoal);background:transparent}
+.btn--dark:hover{background:var(--charcoal);color:#fff}
+.btn--sm{min-height:44px;padding:10px 20px;font-size:.92rem;width:auto}
+.link-arrow{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:var(--charcoal);text-decoration:none}
+.link-arrow span{border-bottom:2px solid var(--gold);padding-bottom:2px}
+.link-arrow svg{width:18px;height:18px;transition:transform .2s}
+.link-arrow:hover svg{transform:translateX(4px)}
+.icon{width:20px;height:20px;flex:none}
+@media (min-width:600px){ .btn{width:auto} }
+
+/* ================= HEADER ================= */
+/* solid light bar that sits above the hero (in normal flow), sticky, shadow after scrolling */
+.site-header{position:sticky;top:0;z-index:200;height:var(--header-h);background:#FCFBF8;color:var(--charcoal);border-bottom:1px solid var(--line);transition:box-shadow .3s,border-color .3s}
+.site-header.is-solid{border-bottom-color:transparent;box-shadow:0 6px 22px -10px rgba(33,31,29,.22)}
+.header-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);height:100%}
+/* header brand: [logo] RamFam Builders, one link */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px;flex:none}
+.brand img{height:38px;width:auto;flex:none}
+.brand-text{display:block;white-space:nowrap;font-family:var(--serif);font-size:clamp(1.15rem,.95rem + .9vw,1.55rem);font-weight:700;letter-spacing:.01em;line-height:1;color:var(--charcoal)}
+@media (max-width:359px){ .brand .brand-text{display:none} }   /* very small phones: logo only */
+.brand-text b{color:var(--gold-text);font-weight:700}
+.no-logo img{display:none}
+.no-logo .brand-text{display:block}
+.main-nav,.header-actions{display:none}
+.header-mobile{display:flex;align-items:center;gap:var(--s-2)}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--line);background:#fff;color:var(--charcoal);cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}
+.icon-btn:hover{border-color:var(--charcoal)}
+.icon-btn svg{width:20px;height:20px}
+.btn--charcoal{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.btn--charcoal:hover{background:var(--charcoal-deep);border-color:var(--charcoal-deep)}
+.nav-toggle .i-close{display:none}
+.menu-open .nav-toggle .i-open{display:none}
+.menu-open .nav-toggle .i-close{display:block}
+
+/* full-screen mobile overlay nav */
+.menu-overlay{position:fixed;inset:0;z-index:150;background:var(--charcoal-deep);color:#fff;padding:calc(var(--header-h) + 16px) var(--gutter) calc(var(--s-7) + env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.menu-open .menu-overlay{opacity:1;visibility:visible}
+.menu-overlay ul{list-style:none;margin:0 0 var(--s-6);padding:0}
+.menu-overlay li a{display:flex;align-items:center;justify-content:space-between;min-height:60px;font-family:var(--serif);font-size:clamp(1.8rem,7vw,2.4rem);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.1)}
+.menu-overlay li a::after{content:"";width:8px;height:8px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);transform:rotate(45deg)}
+.menu-overlay li a:hover{color:var(--gold-light)}
+.menu-overlay .btn{margin-bottom:var(--s-3)}
+.menu-overlay .menu-meta{margin-top:auto;padding-top:var(--s-5);font-size:.9rem;color:rgba(255,255,255,.7)}
+.menu-open{overflow:hidden}
+
+/* sticky mobile call bar */
+
+/* ================= HERO ================= */
+/* Bright full-width photo with ONE compact, centered content stack up in the sky area.
+   Sized so header + hero + trust strip (+ the mobile call bar) fill exactly one screen. */
+:root{--trust-h:84px}                                     /* trust strip height: 2x2 grid on phones */
+@media (min-width:768px){ :root{--trust-h:68px} }       /* 1 row */
+.hero{--hero-pos:40% 50%;--hero-h:max(520px, calc(100svh - var(--header-h) - var(--trust-h)));position:relative;height:var(--hero-h);display:flex;justify-content:center;text-align:center;background:#AFC2D2;isolation:isolate;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero-media picture,.split-media picture,.bleed-media picture,.card-media picture,.cta-band > picture,.marquee-item picture{display:contents}
+/* Photo framing for the hero (heroimage.png → images/hero/hero-1920 / hero-1024; 1942x809, 2.4:1).
+   The roof touches the top edge, the house base is ~93% down, and the house spans ~23%-84% across
+   (porch + front doors ~25%-55%). Every screen is narrower than 2.4:1, so the photo's full height
+   always shows and only the sides are cropped: --hero-pos x picks the part of the house in view.
+   - phones (<768): 40% 50%, the covered porch, columns and front doors
+   - tablets (768-1023): 46% 50%, porch + front doors + the start of the stairs
+   - desktop (≥1024): 54% 50%, the whole house, centered
+   - very wide screens (aspect ≥ 2.2:1): the hero gets wider than the photo, so y matters: 50% 20%
+   REPLACE: if you swap the hero photo, re-tune the --hero-pos values. */
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border-radius:0;object-fit:cover;object-position:var(--hero-pos)}
+/* soft shade at the bottom, behind the buttons sitting over the lawn */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%)}
+.hero-content{width:100%;max-width:792px;display:flex;flex-direction:column;align-items:center;padding:max(28px, calc(var(--hero-h) * .035)) 16px 0}   /* at least 28px below the header */
+.hero-band{width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.6);border-radius:6px;background:rgba(255,255,255,.72)}
+@supports ((-webkit-backdrop-filter:blur(6px)) or (backdrop-filter:blur(6px))){
+  .hero-band{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+}
+.hero h1{margin:0;color:var(--charcoal-deep);font-size:clamp(2rem,4.2vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:.08em;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 2px rgba(255,255,255,.6)}
+/* text sitting on the sky is dark, with a soft light glow so it stays crisp over clouds */
+.hero-sub{text-shadow:0 0 3px rgba(255,255,255,.95),0 0 12px rgba(255,255,255,.9)}
+/* call link + helper text get a soft translucent pill so they stay legible over sky or roof */
+.hero-sub,.hero-call,.hero-note{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.55);border-radius:999px}
+@supports ((-webkit-backdrop-filter:blur(6px)) or (backdrop-filter:blur(6px))){
+  .hero-sub,.hero-call,.hero-note{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+}
+.hero-sub{margin:16px 0 0;padding:5px 16px;font-size:.95rem;font-weight:500;line-height:1.4;color:var(--charcoal-deep);text-wrap:balance}
+.hero .hero-sub{background:rgba(255,255,255,.7)}   /* the roof can sit behind it, so a slightly firmer pill */
+/* buttons + helper text: one centered group low in the hero, over the lawn */
+.hero-cta{position:absolute;left:0;right:0;bottom:18px;display:flex;flex-direction:column;align-items:center;padding:0 16px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
+.hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+.hero .btn{border-radius:999px;width:100%;max-width:360px;min-height:48px;padding:12px 24px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
+.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:8px;padding:0 16px;font-size:.92rem;font-weight:600;color:var(--charcoal-deep);text-decoration:none}
+.hero-call svg{width:16px;height:16px;color:var(--charcoal-deep)}
+.hero-call span{border-bottom:2px solid var(--gold);padding-bottom:1px}
+.hero-call:hover span{border-bottom-color:var(--charcoal-deep)}
+.hero-note{margin:8px 0 0;padding:3px 12px;font-size:.8rem;white-space:nowrap;font-weight:500;color:#3A3633}   /* ~85% charcoal: keeps WCAG AA on the pill */
+.hero .hero-note{background:rgba(255,255,255,.74)}
+
+/* trust strip: charcoal band right under the hero, at an exact height (--trust-h) */
+.trust-strip{height:var(--trust-h);display:flex;align-items:center;background:var(--charcoal);color:#F6F3EE;border-bottom:1px solid rgba(201,162,74,.22)}
+.trust-strip .wrap{width:100%}
+.trust{display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;gap:10px 24px;list-style:none;margin:0;padding:0;font-size:.88rem;font-weight:600;line-height:1.3;color:#F6F3EE}
+.trust li{display:flex;align-items:center;gap:8px}
+.trust svg{width:20px;height:20px;color:var(--gold);flex:none}
+.trust .stars{color:var(--gold);letter-spacing:1px;font-size:.82rem}
+.trust-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-bottom:1px solid rgba(201,162,74,.55);padding-bottom:1px}
+.trust-link:hover{color:var(--gold-light);border-bottom-color:var(--gold)}
+
+/* the one load-in animation on the page */
+@keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero-content{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
+
+/* ================= SPLITS ================= */
+.split{display:grid;gap:clamp(32px,5vw,88px);align-items:center}
+.split-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius)}
+.framed{position:relative;isolation:isolate}
+/* even offset frame: same size as the image, shifted 16px down/right, sitting behind it */
+.framed::after{content:"";position:absolute;z-index:-1;inset:16px -16px -16px 16px;border:1.5px solid var(--gold);border-radius:var(--radius);pointer-events:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin:var(--s-6) 0 var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--line)}
+.stats strong{display:block;font-family:var(--serif);font-size:clamp(2rem,1.6rem + 1.4vw,2.8rem);font-weight:600;line-height:1;color:var(--charcoal)}
+.stats .star{display:inline-block;margin-left:.08em;font-family:var(--sans);font-size:.78em;line-height:1;vertical-align:.1em;color:var(--gold-text)}
+.stats span:not(.star){font-size:.84rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+
+/* ================= SERVICES ================= */
+/* base list styles; below 1024px it becomes the snap carousel (SERVICES CAROUSEL block); desktop: grid */
+.services{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:var(--s-4);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--gutter)*-1);padding:var(--s-1) var(--gutter) var(--s-5);scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch;scrollbar-width:none;list-style:none}
+.services::-webkit-scrollbar{display:none}
+.services > li{scroll-snap-align:start;display:flex}
+.card{background:#fff;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;width:100%;box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+.card-media{overflow:hidden}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s ease}
+.card:hover img{transform:scale(1.04)}
+.card-body{padding:var(--s-5) var(--s-5) var(--s-4);display:flex;flex-direction:column;flex:1}
+.card-body h3{margin-bottom:var(--s-2)}
+.card-body p{color:var(--muted);flex:1;font-size:.98rem}
+.card-body .card-tag{flex:none;font-size:.72rem;line-height:1.4;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text);margin-bottom:var(--s-2)}
+.card--cta{background:var(--charcoal);color:rgba(255,255,255,.85);border-color:var(--charcoal);justify-content:center;padding:var(--s-6) var(--s-5)}
+.card--cta h3{color:#fff}
+.card--cta .btn{margin-top:var(--s-3)}
+.card--cta a.tel{color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;margin-top:var(--s-2)}
+
+/* ================= CRAFTSMANSHIP (full-bleed split) ================= */
+.bleed{display:grid;background:var(--charcoal);color:rgba(255,255,255,.86)}
+.bleed-media img{width:100%;height:100%;min-height:320px;aspect-ratio:4/3;object-fit:cover}
+.bleed-text{padding:var(--section-y) var(--gutter)}
+.bleed h2{color:#fff}
+.bleed .eyebrow{color:var(--gold-light)}
+.bleed .lead{color:rgba(255,255,255,.78)}
+.checklist{list-style:none;padding:0;margin:var(--s-5) 0 var(--s-6)}
+.checklist li{display:flex;gap:var(--s-3);align-items:flex-start;padding:var(--s-3) 0;border-top:1px solid rgba(255,255,255,.12)}
+.checklist li:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+.checklist svg{width:20px;height:20px;color:var(--gold);flex:none;margin-top:4px}
+
+/* ================= PROCESS ================= */
+.steps{display:grid;gap:var(--s-4);list-style:none;padding:0;margin:0 0 var(--s-7)}
+.step{position:relative;padding:var(--s-5) 0 var(--s-5) 72px;border-top:1px solid var(--line)}
+.step-num{position:absolute;left:0;top:var(--s-5);font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--gold-text);font-weight:600}
+.step h3{margin-bottom:var(--s-2)}
+.step p{color:var(--muted);margin:0}
+
+/* ================= GALLERY ================= */
+.filters{display:flex;flex-wrap:nowrap;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;margin:-6px calc(var(--gutter)*-1);padding:6px var(--gutter)}
+.filters::-webkit-scrollbar{display:none}
+.filter-btn{flex:none;min-height:44px;padding:8px 14px;border:1px solid var(--line);background:#fff;border-radius:999px;font:500 .9rem var(--sans);color:var(--charcoal);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.filter-btn:hover{border-color:var(--charcoal)}
+.filter-btn[aria-pressed="true"]{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+/* Recent Projects header: title + "See All Our Work" on one line; lead and filters below */
+.gallery-head{display:grid;grid-template-areas:"title" "lead" "all";max-width:none}
+.gallery-head .gh-title{grid-area:title}
+.gallery-head .lead{grid-area:lead;max-width:640px}
+.gallery-head .btn-all{grid-area:all;width:100%;margin:0 0 var(--s-4)}
+
+/* Project carousel: ONE row drifting left, full-bleed, clean faded edges.
+   The track holds the photo set exactly twice. JS measures one set's real width
+   (cards + gaps) and animates translateX(0 → −setWidth), so the loop is seamless. */
+.marquee-wrap{position:relative;margin-bottom:clamp(40px,6vh,52px)}   /* space between carousel and the estimate button */
+.marquee{--card-w:min(74vw,320px);--card-gap:16px;position:relative;margin:0;overflow:hidden;transition:opacity .3s ease}
+.marquee.is-fading{opacity:0}
+.marquee-row{--fade:clamp(28px,6vw,72px);overflow:hidden;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
+.marquee-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;will-change:transform}
+.marquee-item{flex:0 0 var(--card-w);width:var(--card-w);margin-right:var(--card-gap)}   /* margin (not gap) so both halves are identical */
+.marquee-item button{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:var(--line);cursor:zoom-in;border-radius:6px;overflow:hidden;transition:transform .35s ease,filter .35s ease}
+.marquee-item img{display:block;width:100%;height:100%;object-fit:cover}
+.marquee-item button:hover,.marquee-item button:focus-visible{transform:scale(1.03);filter:brightness(1.07)}
+.g-tag{position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(33,31,29,.78);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:background-color .35s ease,color .35s ease}
+.marquee-item button:hover .g-tag,.marquee-item button:focus-visible .g-tag{background:var(--gold);color:var(--charcoal-deep)}
+/* small round pause/play button in the carousel's bottom-right corner */
+.marquee-toggle{position:absolute;z-index:2;top:calc(100% + 2px);right:max(var(--gutter), calc((100% - var(--wrap)) / 2));width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--charcoal);cursor:pointer;transition:border-color .2s,background-color .2s}
+.marquee-toggle:hover{border-color:var(--charcoal)}
+.marquee-toggle svg{width:16px;height:16px}
+.marquee-toggle .i-play{display:none}
+.marquee-toggle[aria-pressed="true"] .i-play{display:block}
+.marquee-toggle[aria-pressed="true"] .i-pause{display:none}
+/* entrance: the row fades + slides in once (class added by JS) */
+.marquee.reveal-ready .marquee-row{opacity:0;transform:translateX(48px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.marquee.reveal-ready.is-in .marquee-row{opacity:1;transform:none}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(15,13,12,.96);display:none;align-items:center;justify-content:center;padding:64px 0 72px;touch-action:pan-y}
+.lightbox.open{display:flex}
+.lightbox figure{margin:0;width:100%;max-width:1280px;padding:0 var(--s-3);text-align:center}
+.lightbox img{max-height:76svh;width:auto;max-width:100%;margin:0 auto;border-radius:var(--radius-sm);user-select:none;-webkit-user-drag:none}
+.lightbox figcaption{display:flex;justify-content:center;gap:var(--s-4);color:rgba(255,255,255,.85);margin-top:var(--s-4);font-size:.95rem;padding:0 var(--s-4)}
+.lb-count{color:var(--gold-light);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lb-btn{position:absolute;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.4);color:#fff;cursor:pointer}
+.lb-btn:hover{background:rgba(0,0,0,.7);border-color:#fff}
+.lb-btn svg{width:22px;height:22px}
+.lb-close{top:12px;right:12px}
+.lb-prev,.lb-next{bottom:12px}
+.lb-prev{left:calc(50% - 60px)}
+.lb-next{right:calc(50% - 60px)}
+
+/* ================= REVIEWS ================= */
+.reviews{display:grid;gap:var(--s-4);margin-bottom:var(--s-7)}
+.review{background:#fff;border-radius:var(--radius);padding:var(--s-6) var(--s-5);margin:0;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
+.review .stars{color:var(--gold);letter-spacing:3px;margin-bottom:var(--s-4)}
+.review blockquote{margin:0 0 var(--s-5);font-family:var(--serif);font-size:clamp(1.3rem,1.2rem + .4vw,1.5rem);line-height:1.4;color:var(--charcoal);flex:1}
+.review figcaption{display:flex;align-items:center;gap:var(--s-3);font-size:.9rem;color:var(--muted);padding-top:var(--s-4);border-top:1px solid var(--line)}
+.review figcaption strong{display:block;color:var(--charcoal)}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--warm);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--gold-text);flex:none}
+.rating-badge{display:inline-flex;align-items:center;gap:var(--s-3);padding:10px 18px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:.95rem}
+.rating-badge .stars{color:var(--gold);letter-spacing:2px}
+.rating-badge svg{width:18px;height:18px}
+
+/* ================= CTA BAND ================= */
+/* compact band (not a full-screen section): ~320-380px desktop, ~280-340px phones */
+.cta-band{position:relative;isolation:isolate;color:#fff;text-align:center;padding:clamp(40px,5.3vw,72px) 0;background:var(--charcoal-deep);overflow:hidden}
+.cta-band > img,.cta-band > picture > img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+.cta-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,13,12,.72),rgba(15,13,12,.84))}
+.cta-band h2{color:#fff;font-size:clamp(1.75rem,3vw,2.5rem);margin-bottom:10px}
+.cta-band p{color:rgba(255,255,255,.85);font-size:clamp(.98rem,.94rem + .2vw,1.06rem);line-height:1.55;max-width:620px;margin:0 auto 24px;text-wrap:balance}
+.cta-actions{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cta-band .btn{width:100%;max-width:360px}
+.cta-phone{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:var(--sans);font-size:clamp(1.1rem,1.04rem + .3vw,1.22rem);font-weight:600;letter-spacing:.01em;color:#fff;text-decoration:none}   /* same sans as the buttons */
+.cta-phone svg{width:20px;height:20px;color:var(--gold)}
+.cta-phone:hover{color:var(--gold-light)}
+
+/* ================= CONTACT ================= */
+.contact-grid{display:grid;gap:var(--s-7)}
+.contact-list{list-style:none;padding:0;margin:var(--s-6) 0 0}
+.contact-list li{display:flex;gap:var(--s-4);align-items:flex-start;padding:var(--s-4) 0;border-top:1px solid var(--line)}
+.contact-list li > svg{color:var(--gold-text);margin-top:4px}
+.contact-list small{display:block;color:var(--muted);font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:2px}
+.contact-list a{font-weight:600;text-decoration:none;font-size:1.05rem}
+.contact-list a:hover{color:var(--gold-text)}
+.form-card{background:#fff;border-radius:var(--radius);padding:var(--s-6) var(--s-5);box-shadow:var(--shadow);border:1px solid var(--line)}
+.form-card h3{margin-bottom:var(--s-1)}
+.form-card > p{color:var(--muted);font-size:.95rem;margin-bottom:var(--s-5)}
+.form-row{display:grid;gap:0 var(--s-4)}
+.field{margin-bottom:var(--s-4)}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
+.field .req{color:#A0341F}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:16px;line-height:1.4;color:var(--ink);background:#fff;border:1px solid #CBC3B7;border-radius:var(--radius-sm);padding:13px 14px;min-height:52px;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%232E2B28' stroke-width='1.6' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.field textarea{min-height:140px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--charcoal);box-shadow:0 0 0 3px rgba(201,162,74,.45)}
+.field.invalid input,.field.invalid select{border-color:#A0341F}
+.error{display:none;color:#A0341F;font-size:.85rem;margin:6px 0 0}
+.field.invalid .error{display:block}
+.form-card .btn{width:100%}
+.form-note{font-size:.84rem;color:var(--muted);margin:var(--s-3) 0 0;text-align:center}
+.form-note.is-error{color:#A0341F;font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-success{display:none;text-align:center;padding:var(--s-6) var(--s-2)}
+.form-success svg{width:60px;height:60px;color:var(--gold);margin:0 auto var(--s-4)}
+.form-card.sent form,.form-card.sent > h3,.form-card.sent > p{display:none}
+.form-card.sent .form-success{display:block}
+
+/* ================= FOOTER ================= */
+.site-footer{background:var(--charcoal-deep);color:rgba(255,255,255,.72);padding:var(--s-9) 0 var(--s-6);font-size:.95rem}
+.footer-grid{display:grid;gap:var(--s-7);margin-bottom:var(--s-7)}
+.site-footer h3{font-family:var(--sans);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:var(--s-4);font-weight:600}
+.site-footer ul{list-style:none;padding:0;margin:0}
+.site-footer li a{display:inline-flex;align-items:center;min-height:36px;text-decoration:none;color:rgba(255,255,255,.86)}
+.site-footer a:hover{color:#fff}
+.footer-logo{display:inline-flex;flex-wrap:wrap;align-items:center;gap:12px;max-width:100%;margin-bottom:var(--s-4);text-decoration:none}
+.footer-brand img{height:56px;width:auto;padding:6px 10px;border-radius:8px;background:#FBF8F2}   /* light tile: the logo lettering is dark */
+.footer-brand .brand-text{display:block;color:#fff;font-size:clamp(1.35rem,1rem + 1.6vw,1.7rem)}
+.footer-brand p{max-width:30ch}
+.social{display:flex;gap:var(--s-3);margin-top:var(--s-5)}
+.social a{width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.22);border-radius:50%;color:#fff;transition:border-color .2s,color .2s}
+.social a:hover{border-color:var(--gold);color:var(--gold)}
+.social svg{width:20px;height:20px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s-5);font-size:.85rem;display:flex;flex-direction:column;gap:var(--s-2)}
+
+/* ================= ≥600px ================= */
+@media (min-width:600px){
+  .cta-actions{flex-direction:row;justify-content:center;gap:28px}
+  .cta-band .btn{width:auto}
+  .form-row{grid-template-columns:1fr 1fr}
+}
+
+/* ================= ≥768px (tablet) ================= */
+@media (min-width:768px){
+  .services{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,1fr);gap:var(--s-5);overflow:visible;margin:0;padding:0}
+  .hero{--hero-pos:46% 50%}   /* tablets */
+  .hero-content{padding-top:max(24px, calc(var(--hero-h) * .04))}   /* text kept compact so the house can be larger */
+  .hero-cta{bottom:28px}
+  .hero-band{width:max-content;max-width:calc(100vw - 2 * var(--gutter));padding:16px 32px}   /* hugs the headline */
+  .hero h1{white-space:nowrap}
+  .hero-sub{margin-top:18px;font-size:1.1rem}
+  .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px 16px}
+  .hero-call{margin-top:0}
+  .hero .btn{width:auto;min-width:250px}
+  .hero-note{margin-top:13px;font-size:.9rem}
+  .trust{display:flex;flex-wrap:nowrap;gap:0;font-size:.92rem}
+  .trust li{padding:0 16px}
+  .trust li + li{border-left:1px solid rgba(201,162,74,.3)}   /* thin gold dividers */
+  .trust svg{width:22px;height:22px}
+  .filter-btn{padding:8px 20px;font-size:.95rem}
+  .filters{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
+  .marquee{--card-w:clamp(280px,38vw,320px);--card-gap:18px}
+  .gallery-head{grid-template-columns:1fr auto;grid-template-areas:"title all" "lead lead";column-gap:var(--s-6)}
+  .gallery-head .btn-all{width:auto;align-self:center;justify-self:end;margin:0 0 .45em}
+  .steps{grid-template-columns:repeat(2,1fr);gap:0 var(--s-6)}
+  .reviews{max-width:720px;margin-inline:auto;gap:var(--s-5)}
+  .form-card{padding:var(--s-7) var(--s-7)}
+  .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+  .footer-grid > :last-child{grid-column:1 / -1}
+  .footer-bottom{flex-direction:row;justify-content:space-between}
+  .section-head--row{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .lb-prev,.lb-next{bottom:auto;top:50%;transform:translateY(-50%)}
+  .lb-prev{left:20px}.lb-next{right:20px}
+  .lightbox figure{padding:0 84px}
+  .lightbox{padding:64px 0}
+}
+
+/* ================= ≥1024px (desktop) ================= */
+@media (min-width:1024px){
+  .header-mobile,.menu-overlay{display:none !important}
+  .menu-open{overflow:auto}
+  .brand{gap:12px}
+  .brand img{height:50px}
+  .main-nav{display:block}
+  .main-nav ul{display:flex;gap:clamp(18px,1.8vw,34px);list-style:none;margin:0;padding:0}
+  .main-nav a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:.94rem;font-weight:500;position:relative}
+  .main-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .main-nav a:hover::after,.main-nav a:focus-visible::after{transform:scaleX(1)}
+  .main-nav a{color:var(--charcoal)}
+  .header-actions{display:flex;align-items:center;gap:var(--s-3)}
+  .header-phone{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-right:var(--s-2);font-size:.85rem;font-weight:500;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .header-phone svg{width:15px;height:15px;color:var(--gold-text)}
+  .header-phone:hover{color:var(--charcoal)}
+  .main-nav a,.brand-text,.header-actions .btn{white-space:nowrap}
+
+  /* compact top + bottom content so they cover as little of the house as possible */
+  .hero{--hero-pos:54% 50%}
+  .hero-content{padding-top:22px}
+  .hero-band{padding:10px 28px}
+  .hero h1{font-size:clamp(2rem,3.2vw,3rem)}
+  .hero-sub{margin-top:10px;font-size:1rem}
+  /* button, call pill and helper text in one row, ~28px above the trust strip */
+  .hero-cta{bottom:28px;flex-direction:row;justify-content:center;align-items:center;gap:16px}
+  .hero-actions{width:auto;flex-wrap:nowrap}
+  .hero .btn{min-width:220px;min-height:48px;padding:12px 26px}
+  .hero-note{margin-top:0}
+  .trust{font-size:1rem}
+  .trust li{padding:0 32px}
+  .trust svg{width:24px;height:24px}
+  .trust .stars{font-size:.9rem}
+
+
+  /* asymmetric splits */
+  .split{grid-template-columns:7fr 5fr}
+  .split--flip{grid-template-columns:5fr 7fr}
+  .split--flip .split-media{order:2}
+  .split-media img{aspect-ratio:5/4}
+
+  .services{grid-template-columns:repeat(3,1fr);gap:var(--s-6)}
+
+  .bleed{grid-template-columns:1fr 1fr;min-height:640px}
+  .bleed-media img{aspect-ratio:auto}
+  .bleed-text{align-self:center;padding:var(--s-9) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--s-9) clamp(48px,6vw,112px);max-width:none}
+
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .reviews{grid-template-columns:repeat(3,1fr);max-width:none}
+  .step{padding:var(--s-7) 0 0;border-top:2px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-2px;left:0;width:56px;height:2px;background:var(--gold)}
+  .step-num{position:static;display:block;margin-bottom:var(--s-4);font-size:3.4rem}
+
+
+  .contact-grid{grid-template-columns:5fr 7fr;gap:clamp(48px,6vw,112px);align-items:start}
+  .footer-grid{grid-template-columns:2fr 1fr 1fr 1.3fr}
+  .footer-grid > :last-child{grid-column:auto}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .main-nav ul{gap:20px}
+  .main-nav a{font-size:.9rem}
+  .header-phone{display:none}   /* too tight for the phone at this width; it returns at 1280px+ */
+}
+@media (min-width:1440px){
+  .services{gap:var(--s-7)}
+}
+
+/* =====================================================================
+   SECTION FIT
+   Desktop/laptop (≥1024px): every section below the hero fits in one
+   screen: 100svh minus the sticky header (--header-h).
+   Phones/tablets: sections stay compact but are not forced to one screen.
+   ===================================================================== */
+main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav links land below the sticky header */
+.btn[hidden]{display:none}
+.stats strong,.step-num{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.gallery-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-3)}
+.section-head--row .btn{white-space:nowrap;flex:none}
+
+@media (max-width:1023px){
+  .section-head{margin-bottom:clamp(24px,5vw,40px)}
+  .split{gap:28px}
+  .split-media img,.card img{max-height:45svh}
+  .bleed-media img{min-height:0;max-height:45svh}
+  .bleed-text{padding:var(--section-y) var(--gutter)}
+  .stats{margin:var(--s-5) 0}
+  .steps{margin-bottom:var(--s-6)}
+  .reviews{margin-bottom:var(--s-6)}
+  .contact-grid{gap:36px}
+}
+
+@media (min-width:1024px){
+  :root{
+    --section-y:clamp(40px,6vh,80px);
+    --fit-h:calc(100svh - var(--header-h));                 /* one screen below the header */
+    --fit-inner:calc(var(--fit-h) - 2 * var(--section-y));  /* room left for content */
+  }
+  /* each section fills one screen with its content vertically centered */
+  .section{min-height:var(--fit-h);display:flex;flex-direction:column;justify-content:center}
+  .section-head{margin-bottom:clamp(20px,3.5vh,40px)}
+  .eyebrow{margin-bottom:10px}
+  .section .lead{font-size:clamp(1rem,.85rem + .35vh,1.15rem)}
+
+  /* About + Our Story: side by side, image capped at ~70vh */
+  .split,.split--flip{grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
+  .split-media img{aspect-ratio:auto;height:min(70vh, var(--fit-inner))}
+  .split > div:not(.split-media){max-width:34rem}
+  .split--flip > div:not(.split-media){justify-self:end}
+  .split p{font-size:.96rem;line-height:1.65}
+  .split .lead{font-size:clamp(1rem,.9rem + .25vh,1.1rem)}
+  .stats{margin:clamp(14px,2.5vh,28px) 0;padding-top:clamp(12px,2vh,20px)}
+  .stats strong{font-size:clamp(1.8rem,1rem + 2vh,2.5rem)}
+
+  /* Services: one compact row of five; the extra "Not sure where to start?" tile
+     is hidden here because the section heading already has a quote button */
+  .services{grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,1.4vw,24px)}
+  .services > li:last-child{display:none}
+  .card img{aspect-ratio:auto;height:clamp(120px,18vh,180px)}
+  .card-body{padding:16px 18px 8px}
+  .card-body h3{font-size:clamp(1.2rem,.75rem + .5vw + .5vh,1.5rem)}
+  .card-body p{font-size:.9rem;line-height:1.55;margin-bottom:6px}
+  .card-body .card-tag{font-size:.66rem;letter-spacing:.12em}
+
+  /* Craftsmanship: image and text side by side at exactly one screen tall */
+  .bleed{min-height:0;height:var(--fit-h);max-height:1000px}
+  .bleed-media{height:100%;overflow:hidden}
+  .bleed-media img{height:100%;max-height:none}
+  .bleed-text{padding:var(--section-y) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--section-y) clamp(40px,5vw,96px)}
+  .checklist{margin:clamp(14px,2.5vh,24px) 0 clamp(18px,3vh,32px)}
+  .checklist li{padding:clamp(8px,1.3vh,12px) 0}
+
+  /* How It Works: four steps in one row */
+  .steps{margin-bottom:clamp(24px,4vh,48px)}
+  .step{padding-top:clamp(24px,4vh,48px)}
+  .step-num{font-size:clamp(2.4rem,1.4rem + 2.6vh,3.4rem);margin-bottom:clamp(8px,1.5vh,16px)}
+
+  /* Gallery: two carousel rows sized so the whole section fits one screen */
+  .marquee{--card-gap:20px;--card-w:clamp(240px, min(21vw, calc((var(--fit-h) - 380px) * 4 / 3)), 300px)}
+  /* this section hugs its content (no full-screen centering), with a short bottom margin */
+  #gallery.section{min-height:0;padding-top:clamp(32px,5vh,56px);padding-bottom:clamp(48px,6vh,64px)}
+  .gallery-head .lead{margin:0}
+
+  /* Reviews */
+  .reviews{margin-bottom:clamp(20px,3.5vh,40px)}
+  .review{padding:clamp(20px,3vh,32px) 24px}
+  .review .stars{margin-bottom:clamp(8px,1.5vh,16px)}
+  .review blockquote{font-size:clamp(1.15rem,.75rem + 1vh,1.4rem);margin-bottom:clamp(14px,2.5vh,24px)}
+  .review figcaption{padding-top:clamp(10px,1.8vh,16px)}
+
+  /* Facebook video: text left, reel right, whole section fits one screen */
+  .video-sec.section{min-height:0;padding:clamp(32px,5vh,56px) 0}
+  .video-grid{--video-w:clamp(280px, calc((100svh - var(--header-h) - 2 * clamp(32px,5vh,56px) - 48px) * 267 / 476), 320px);grid-template-columns:minmax(0,1fr) var(--video-w);align-items:center}
+  .video-frame{width:var(--video-w)}
+
+  /* CTA band */
+
+  /* Contact: info beside a compact form */
+  .contact-grid{align-items:center}
+  .contact-list{margin-top:clamp(16px,3vh,32px)}
+  .contact-list li{padding:clamp(8px,1.4vh,16px) 0}
+  .form-card{padding:clamp(20px,3.5vh,40px) clamp(24px,3vw,40px)}
+  .form-card > p{margin-bottom:clamp(12px,2vh,24px)}
+  .field{margin-bottom:clamp(8px,1.6vh,16px)}
+  .field label{margin-bottom:4px;font-size:.88rem}
+  .field input,.field select{min-height:44px;padding:10px 12px}
+  .field textarea{min-height:clamp(64px,10vh,120px);padding:10px 12px}
+  .form-card .btn{min-height:48px}
+  .form-note{margin-top:8px}
+}
+/* tablets: services in 3 compact columns (2 rows) instead of 3 tall rows */
+@media (min-width:768px) and (max-width:1023px){
+  .services{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
+  .card img{aspect-ratio:16/10}
+  .card-body{padding:16px 16px 6px}
+  .card-body p{font-size:.9rem;line-height:1.55}
+  .card .link-arrow{font-size:.92rem;white-space:nowrap}
+}
+/* small laptops: five service cards are narrow, so trim them further */
+@media (min-width:1024px) and (max-width:1279px){
+  .services{gap:12px}
+  .card-body{padding:14px 14px 6px}
+  .card-body .card-tag{display:none}
+  .card-body p{font-size:.86rem;line-height:1.5}
+  .card .link-arrow{font-size:.9rem;white-space:nowrap}
+}
+
+/* ================= SERVICES CAROUSEL (below 1024px only; desktop keeps the 5-card grid) ================= */
+.svc-controls,.svc-cta{display:none}
+@media (max-width:1023px){
+  .svc-head-btn{display:none}                              /* the quote button moves to the bottom of the section */
+  #services .section-head{margin-bottom:20px}
+  /* native scroll-snap track, full-bleed so cards can center; scrollbar hidden but still scrollable */
+  .svc-track{position:relative;container-type:inline-size;margin:0 calc(var(--gutter) * -1);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .svc-track::-webkit-scrollbar{display:none}
+  .svc-track:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+  .svc-track .services{display:flex;grid-template-columns:none;gap:16px;margin:0;padding:4px 0 18px 9cqw;overflow:visible;scroll-snap-type:none}
+  /* end spacer (scroll containers drop trailing padding), so the last card can center too */
+  .svc-track .services::after{content:"";flex:0 0 calc(9cqw - 16px)}
+  .services > li{flex:0 0 82cqw;scroll-snap-align:center;display:flex}
+  .services > li:last-child{display:none}                  /* "Not sure where to start?" tile: the bottom button covers it */
+  /* cards: equal height, quote link pinned to the bottom */
+  .services .card{height:100%}
+  .services .card img{aspect-ratio:auto;height:190px;max-height:none}
+  .services .card-body{padding:16px 18px 10px}
+  .services .card-body .card-tag{display:block;font-size:.68rem;letter-spacing:.12em;line-height:1.4;min-height:2.8em;margin-bottom:6px}   /* room for 2 lines on every card, so titles line up */
+  .services .card-body h3{font-size:1.45rem}
+  .services .card-body p{font-size:.94rem;line-height:1.55}
+  .services .card .link-arrow{margin-top:auto;white-space:nowrap}
+  /* no per-card animation here: the carousel shows as one piece */
+  .js .services > li[data-reveal]{opacity:1;transform:none;transition:none}
+  /* dots + arrows */
+  .svc-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px}
+  .svc-arrow{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;border-radius:50%;border:1.5px solid var(--charcoal);background:transparent;color:var(--charcoal);cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}
+  .svc-arrow svg{width:20px;height:20px}
+  .svc-arrow:hover:not(:disabled){background:var(--charcoal);color:#fff}
+  .svc-arrow:disabled{opacity:.3;cursor:default}
+  .svc-dots{display:flex;align-items:center;gap:2px}
+  .svc-dot{width:24px;height:44px;padding:0;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+  .svc-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#BDB5A9;transition:background-color .2s,transform .2s}
+  .svc-dot.is-active::before{background:var(--gold);transform:scale(1.25)}
+  .svc-dot:focus-visible,.svc-arrow:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .svc-cta{display:flex;justify-content:center;margin-top:18px}
+  .svc-cta .btn{width:100%;max-width:360px}
+}
+/* tablets: ~45% cards, two in view plus a peek, snapping card by card from the left edge */
+@media (min-width:768px) and (max-width:1023px){
+  .svc-track{scroll-padding-inline:var(--gutter)}
+  .svc-track .services{padding-left:var(--gutter)}
+  .svc-track .services::after{flex-basis:max(1px, calc(var(--gutter) - 16px))}
+  .services > li{flex-basis:45cqw;scroll-snap-align:start}
+  .services .card img{height:200px}
+}
+@media (max-width:1023px) and (prefers-reduced-motion:reduce){
+  .svc-track{scroll-behavior:auto}
+}
+
+/* ================= SCROLL REVEAL =================
+   Elements marked data-reveal fade in and rise slightly (or slide from a side) once,
+   when ~15% of them is on screen. They are only hidden while <html> has the "js" class
+   (set in <head>), so content still shows if JavaScript fails.
+   Only opacity + transform are animated (no layout shift). */
+.js [data-reveal]{opacity:0;transform:translate3d(0,18px,0);transition:opacity .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),transform .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms)}
+.js [data-reveal="left"]{transform:translate3d(-20px,0,0)}
+.js [data-reveal="right"]{transform:translate3d(20px,0,0)}
+.js [data-reveal="fade"]{transform:none}
+.js [data-reveal].is-revealed{opacity:1;transform:none}
+main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways scrolling (clip keeps sticky elements working) */
+/* split-section photos also settle from a very slight zoom */
+.js .split-media[data-reveal] img,.js .bleed-media[data-reveal] img{transform:scale(1.04);transition:transform .9s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms)}
+.js .split-media[data-reveal].is-revealed img,.js .bleed-media[data-reveal].is-revealed img{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js [data-reveal],.js [data-reveal] img{opacity:1 !important;transform:none !important}
+}
+
+/* ================= FACEBOOK VIDEO ================= */
+/* compact charcoal band between About (white) and Services (warm) */
+.video-sec{background:var(--charcoal);color:rgba(255,255,255,.82)}
+.video-grid{display:grid;gap:clamp(28px,4vw,48px);max-width:1000px;margin:0 auto}
+.video-sec h2{color:#fff}
+.video-sec .eyebrow{color:var(--gold-light)}
+.video-sec .lead{color:rgba(255,255,255,.8)}
+.video-text .btn{margin-top:8px}
+.video-links{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.video-sec .link-arrow{color:#fff}
+.video-sec .link-arrow svg.fb{width:20px;height:20px;color:var(--gold)}
+/* 9:16 frame for the vertical reel (267:476), never wider than the screen */
+.video-frame{position:relative;width:min(300px,100%);aspect-ratio:267/476;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--charcoal-deep);box-shadow:0 22px 50px -18px rgba(0,0,0,.6),0 0 0 1px rgba(201,162,74,.25)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;overflow:hidden;z-index:1}
+/* fallback under the iframe: shows while it loads, or if Facebook is blocked */
+.video-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
+.video-fallback svg{width:52px;height:52px;color:var(--gold)}
+.video-watch{display:block;margin-top:12px;text-align:center;font-size:.88rem;color:rgba(255,255,255,.75)}
+.video-watch a{color:var(--gold-light)}
+
+/* hero framing on very wide desktop screens (the hero is much wider than the photo) */
+@media (min-width:1024px) and (min-aspect-ratio:11/5){ .hero{--hero-pos:50% 20%} }
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  /* gallery carousel becomes two swipeable/scrollable rows (no duplicates are built) */
+  .marquee-row{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+  .marquee-item{scroll-snap-align:start}
+  .marquee-toggle{display:none}
+}
+</style>
+<!-- Scroll reveal: mark that JS is running so reveal elements can start hidden.
+     Failsafe: if the reveal script has not started within 3s, show everything. -->
+<script>document.documentElement.classList.add("js");setTimeout(function(){var h=document.documentElement;if(!h.classList.contains("reveal-on"))h.classList.remove("js")},3000)</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-swipe" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.2c-.3 0-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.2H7.6V12h2.7v10H14V12h2.8l.4-3.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6z"/></symbol>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="RamFam Builders home">
+      <!-- Logo: logo-transparent.png in this folder. Not lazy-loaded (visible on load). -->
+      <img src="logo-transparent.png" alt="RamFam Builders logo" width="90" height="48" decoding="async" onerror="this.parentNode.classList.add(&#39;no-logo&#39;)">
+      <span class="brand-text" aria-hidden="true">Ram<b>Fam</b> Builders</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Our Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+      <a class="icon-btn" href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+      <a class="btn btn--charcoal btn--sm" href="#contact">Contact Us</a>
+    </div>
+
+    <div class="header-mobile">
+      <a class="icon-btn" href="tel:+15555555555" data-phone-link aria-label="Call RamFam Builders"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-overlay">
+        <svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full-screen mobile menu -->
+<div class="menu-overlay" id="menu-overlay" aria-label="Site menu">
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Our Work</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+  <a class="btn btn--ghost" href="tel:+15555555555" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Call <span data-phone-text>(555) 555-5555</span></a>
+  <p class="menu-meta">Family owned · Licensed &amp; insured · Serving <span data-area-text>Eastern North Carolina</span></p>
+</div>
+
+<main id="main">
+
+<!-- ================= 1. HERO ================= -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-media">
+    <!-- Hero photo (full bleed): optimized copies of heroimage.png, WebP first, JPG fallback.
+         Keep the <head> preload link in sync. Not lazy-loaded: this is the first thing visitors see.
+         Phones show a tall crop of this wide photo (about 2.4x the screen width), so they also use the 1920 file. -->
+    <picture>
+      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
+      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)"
+           width="1920" height="800" fetchpriority="high" decoding="async"
+           alt="Three-story white coastal home raised on pilings, with a deep covered porch, board-and-batten siding, a side staircase and a green lawn, surrounded by tall pines under a blue sky">
+    </picture>
+  </div>
+  <div class="hero-content">
+    <div class="hero-band">
+      <h1 id="hero-title">Building Dream Homes</h1>
+    </div>
+    <p class="hero-sub">Custom homes, concrete &amp; septic in Eastern NC.</p>
+  </div>
+  <div class="hero-cta">
+    <div class="hero-actions">
+      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+      <a class="hero-call" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(555) 555-5555</span></span></a>
+    </div>
+    <p class="hero-note">Free estimates · Typically reply within 24 hours</p>
+  </div>
+</section>
+
+<!-- Trust strip (directly below the hero) -->
+<div class="trust-strip">
+  <div class="wrap">
+    <ul class="trust" aria-label="Why homeowners choose RamFam" data-reveal-stagger="90" data-reveal-base="300">
+      <li data-reveal><svg aria-hidden="true"><use href="#i-home"/></svg>Family Owned</li>
+      <li data-reveal><svg aria-hidden="true"><use href="#i-shield"/></svg>Licensed &amp; Insured</li>
+      <li data-reveal><svg aria-hidden="true"><use href="#i-doc"/></svg>Free Estimates</li>
+      <!-- REPLACE: your real Google rating -->
+      <li data-reveal><a class="trust-link" href="#google-review-link" data-review-link target="_blank" rel="noopener"><span class="stars" aria-hidden="true">★★★★★</span><span><span data-rating-text>5.0</span> on Google</span></a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= 2. INTRO ================= -->
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap split">
+    <div class="split-media framed" data-reveal="left">
+      <!-- Real photo: Havelock, NC project -->
+      <picture>
+        <source type="image/webp" srcset="images/gallery/havelock-home-34-full.webp">
+        <img src="images/gallery/havelock-home-34-full.jpg" loading="lazy" decoding="async" width="640" height="510"
+             alt="Raised white coastal home built by RamFam Builders, at the end of a curving paver walkway with a wide lawn and tall pines">
+      </picture>
+    </div>
+    <div data-reveal="right">
+      <p class="eyebrow">About RamFam</p>
+      <h2 id="about-title">Built on Family. Built on Trust.</h2>
+      <p class="lead">RamFam Builders is a family-owned company that builds every project like it's going up next door to our own. You work directly with the family that owns the business, from the first walk of your lot to the day we hand you the keys.</p>
+      <p>Custom homes, remodels, concrete, and septic, all handled by one trusted crew. That means clear communication, honest pricing, and work we're proud to put our name on.</p>
+      <!-- REPLACE: your real numbers -->
+      <div class="stats">
+        <div><strong>15+</strong><span>Years building in Eastern NC</span></div>
+        <div><strong>200+</strong><span>Projects completed</span></div>
+        <div><strong>5.0<span class="star" aria-hidden="true">★</span></strong><span>Average Google rating</span></div>
+      </div>
+      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FACEBOOK VIDEO ================= -->
+<section class="section video-sec" id="video" aria-labelledby="video-title">
+  <div class="wrap">
+    <div class="video-grid">
+      <div class="video-text" data-reveal="left">
+        <p class="eyebrow">On the Job</p>
+        <h2 id="video-title">See Us on the Job</h2>
+        <p class="lead">Watch our crew at work, from pouring footings to the final walkthrough. Real projects, real people, the same family-run team that will build yours.</p>
+        <div class="video-links">
+          <a class="link-arrow" href="#facebook" data-facebook-link target="_blank" rel="noopener"><svg class="fb" aria-hidden="true"><use href="#i-fb"/></svg><span>Follow Us on Facebook</span></a>
+        </div>
+        <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+      </div>
+      <div data-reveal="right">
+        <div class="video-frame">
+          <a class="video-fallback" href="https://www.facebook.com/reel/1491935242946406/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M10 8l6 4-6 4z"/></svg>
+            Watch on Facebook
+          </a>
+          <iframe src="https://www.facebook.com/plugins/video.php?height=476&amp;href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1491935242946406%2F&amp;show_text=false&amp;width=267&amp;t=0" width="267" height="476" title="RamFam Builders on the job (Facebook video)" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p class="video-watch">Video not loading? <a href="https://www.facebook.com/reel/1491935242946406/" target="_blank" rel="noopener">Watch on Facebook</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. SERVICES ================= -->
+<section class="section section--warm" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="section-head section-head--row" data-reveal>
+      <div>
+        <p class="eyebrow">What We Do</p>
+        <h2 id="services-title">Services</h2>
+        <p class="lead">From the ground up and everything underneath it. One family-run crew handles it all.</p>
+      </div>
+      <a class="btn btn--dark svc-head-btn" href="#contact">Request a Quote</a>
+    </div>
+    <!-- below 1024px this is a scroll-snap carousel (dots + arrows added by the script after this section) -->
+    <div class="svc-track" role="region" aria-label="Services">
+    <ul class="services" data-reveal-stagger="90">
+      <li data-reveal>
+        <article class="card">
+          <div class="card-media">
+            <!-- Real photo: Havelock, NC project -->
+            <picture>
+              <source type="image/webp" srcset="images/gallery/havelock-home-61-full.webp">
+              <img src="images/gallery/havelock-home-61-full.jpg" loading="lazy" decoding="async" width="640" height="428"
+                   alt="Raised white custom home with board-and-batten siding, a two-level porch and a long wooden staircase">
+            </picture>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Design + Build</p>
+            <h3>Custom Homes</h3>
+            <p>Your plans, your style, built right, from lot prep and foundation to finish carpentry and final walkthrough.</p>
+            <a class="link-arrow" href="#contact" data-service="Custom Homes"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </li>
+      <li data-reveal>
+        <article class="card">
+          <div class="card-media">
+            <!-- Real photo: Havelock, NC project (primary bath). REPLACE with a remodel job photo when you have one -->
+            <picture>
+              <source type="image/webp" srcset="images/gallery/havelock-home-09-full.webp">
+              <img src="images/gallery/havelock-home-09-full.jpg" loading="lazy" decoding="async" width="640" height="428"
+                   alt="Bathroom with a walnut double vanity, arched wood mirrors, brass fixtures and a blue shiplap wall">
+            </picture>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Renovation</p>
+            <h3>Remodels &amp; Additions</h3>
+            <p>Kitchens, baths, and room additions that blend seamlessly with your home and add lasting value.</p>
+            <a class="link-arrow" href="#contact" data-service="Remodels & Additions"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </li>
+      <li data-reveal>
+        <article class="card">
+          <div class="card-media">
+            <!-- REPLACE: real job photo -->
+            <img src="https://images.unsplash.com/photo-1692133188474-8c5591e6a6a8?w=800&q=70&auto=format" loading="lazy" decoding="async" width="800" height="600" alt="Wide new concrete driveway leading to a two-car garage">
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Driveways · Slabs · Patios · Foundations</p>
+            <h3>Concrete</h3>
+            <p>Properly formed, reinforced, and finished concrete that stands up to Eastern NC weather for decades.</p>
+            <a class="link-arrow" href="#contact" data-service="Concrete"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </li>
+      <li data-reveal>
+        <article class="card">
+          <div class="card-media">
+            <!-- Real photo: septic work -->
+            <picture>
+              <source type="image/webp" srcset="images/gallery/septic-03-thumb.webp">
+              <img src="images/gallery/septic-03-thumb.jpg" loading="lazy" decoding="async" width="600" height="800"
+                   alt="Drain field trench with a newly installed black plastic chamber system and distribution box">
+            </picture>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">New Systems</p>
+            <h3>Septic Installation</h3>
+            <p>Permitted, inspected septic systems for new builds and replacements, done right the first time.</p>
+            <a class="link-arrow" href="#contact" data-service="Septic Installation"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </li>
+      <li data-reveal>
+        <article class="card">
+          <div class="card-media">
+            <!-- Real photo: septic work -->
+            <picture>
+              <source type="image/webp" srcset="images/gallery/septic-01-thumb.webp">
+              <img src="images/gallery/septic-01-thumb.jpg" loading="lazy" decoding="async" width="600" height="800"
+                   alt="New effluent filter cartridge inside a concrete septic tank, seen through the riser opening">
+            </picture>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Diagnose + Fix</p>
+            <h3>Septic Repair</h3>
+            <p>Drain field problems, backups, and failing tanks diagnosed honestly and fixed fast.</p>
+            <a class="link-arrow" href="#contact" data-service="Septic Repair"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </li>
+      <li data-reveal>
+        <div class="card card--cta">
+          <h3>Not sure where to start?</h3>
+          <p>Tell us about your land and your plans. We'll walk you through options, timeline, and cost, free.</p>
+          <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+          <a class="tel" href="tel:+15555555555" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+        </div>
+      </li>
+    </ul>
+    </div>
+    <!-- carousel controls + bottom quote button (phones/tablets only) -->
+    <div class="svc-controls" data-reveal>
+      <button class="svc-arrow svc-prev" type="button" aria-label="Previous service" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+      <div class="svc-dots" role="group" aria-label="Choose a service"></div>
+      <button class="svc-arrow svc-next" type="button" aria-label="Next service"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="svc-cta" data-reveal><a class="btn btn--dark" href="#contact">Request a Quote</a></div>
+  </div>
+</section>
+<script>
+/* Services carousel (below 1024px): dots + prev/next for the native scroll-snap track. No autoplay. */
+(function () {
+  var track = document.querySelector(".svc-track"), list = track.querySelector(".services");
+  var dotsBox = document.querySelector(".svc-dots"), prev = document.querySelector(".svc-prev"), next = document.querySelector(".svc-next");
+  var mq = matchMedia("(max-width:1023px)"), reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  var cards = Array.prototype.filter.call(list.children, function (li) { return !li.querySelector(".card--cta"); });   // the 5 services
+  var dots = cards.map(function (li, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "svc-dot";
+    b.setAttribute("aria-label", "Show " + li.querySelector("h3").textContent + " (" + (i + 1) + " of " + cards.length + ")");
+    b.addEventListener("click", function () { go(i); });
+    dotsBox.appendChild(b); return b;
+  });
+  // scroll position at which card i is snapped (center on phones, start on tablets)
+  function target(i) {
+    var li = cards[i], align = getComputedStyle(li).scrollSnapAlign;
+    var t = /center/.test(align) ? li.offsetLeft + li.offsetWidth / 2 - track.clientWidth / 2
+                                 : li.offsetLeft - (parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0);
+    return Math.max(0, Math.min(t, track.scrollWidth - track.clientWidth));
+  }
+  var current = -1;
+  function update() {
+    if (!mq.matches) return;
+    var x = track.scrollLeft, max = track.scrollWidth - track.clientWidth, best = 0, bestD = Infinity;
+    cards.forEach(function (li, i) { var d = Math.abs(target(i) - x); if (d < bestD - 1) { bestD = d; best = i; } });
+    if (x >= max - 2) best = cards.length - 1;               // at the end: last card is fully in view
+    if (best === current) return;
+    current = best;
+    dots.forEach(function (d, i) { d.classList.toggle("is-active", i === best); if (i === best) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    prev.disabled = best === 0;
+    next.disabled = best === cards.length - 1;
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    track.scrollTo({ left: target(i), behavior: reduce.matches ? "auto" : "smooth" });
+  }
+  // arrows move to the nearest snap point that actually changes the scroll position
+  // (on tablets two cards show at the end, so several cards share the last position)
+  function step(dir) {
+    var x = track.scrollLeft, i;
+    if (dir > 0) { for (i = 0; i < cards.length; i++) if (target(i) > x + 2) return go(i); }
+    else { for (i = cards.length - 1; i >= 0; i--) if (target(i) < x - 2) return go(i); }
+  }
+  prev.addEventListener("click", function () { step(-1); });
+  next.addEventListener("click", function () { step(1); });
+  var raf = 0;
+  track.addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; update(); }); }, { passive: true });
+  // the track is a keyboard-scrollable tab stop only while it is a carousel
+  function setMode() { if (mq.matches) track.setAttribute("tabindex", "0"); else track.removeAttribute("tabindex"); }
+  addEventListener("resize", function () { current = -1; setMode(); update(); });
+  setMode();
+  update();
+})();
+</script>
+
+<!-- ================= 4. GALLERY (Recent Projects) ================= -->
+<!-- Photos are generated from the GALLERY array in the <script> at the bottom of this file. -->
+<section class="section" id="gallery" aria-labelledby="gallery-title">
+  <div class="wrap">
+    <div class="section-head gallery-head" data-reveal>
+      <div class="gh-title">
+        <p class="eyebrow">Our Work</p>
+        <h2 id="gallery-title">Recent Projects</h2>
+      </div>
+      <a class="btn btn--dark btn-all" href="gallery.html">See All Our Work</a>
+      <p class="lead">Homes, concrete, and septic jobs we've completed around Eastern North Carolina.</p>
+    </div>
+  </div>
+  <!-- Project carousel: one row built from the GALLERY array in the <script> below. -->
+  <div class="marquee-wrap">
+  <div class="marquee" id="gallery-grid" role="region" aria-roledescription="carousel" aria-label="Recent project photos">
+    <div class="marquee-row"><ul class="marquee-track"></ul></div>
+  </div>
+    <button class="marquee-toggle" type="button" id="marquee-toggle" aria-pressed="false" aria-label="Pause project carousel" aria-controls="gallery-grid">
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
+    </button>
+  </div>
+  <div class="wrap">
+    <div class="gallery-actions">
+      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. CRAFTSMANSHIP (full-bleed split) ================= -->
+<section class="bleed" aria-labelledby="craft-title">
+  <div class="bleed-media" data-reveal="fade">
+    <!-- Real photo: Havelock, NC project (kitchen) -->
+    <picture>
+      <source type="image/webp" srcset="images/gallery/havelock-home-18-full.webp">
+      <img src="images/gallery/havelock-home-18-full.jpg" loading="lazy" decoding="async" width="427" height="640"
+           alt="Gas range under a custom wood range hood, white shaker cabinets and a window over the sink in a RamFam-built kitchen">
+    </picture>
+  </div>
+  <div class="bleed-text" data-reveal="right">
+    <p class="eyebrow">Our Standard</p>
+    <h2 id="craft-title">Craftsmanship Inside and Out</h2>
+    <p class="lead">A great home starts underground and shows in every detail you touch. We sweat the parts you'll never see as much as the ones you will.</p>
+    <ul class="checklist">
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Solid foundations and properly installed septic from day one</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quality materials, clean job sites, and tight finish work</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Clear schedules and a straight answer whenever you call</li>
+    </ul>
+    <a class="btn btn--gold" href="#contact">Start the Process</a>
+  </div>
+</section>
+
+<!-- ================= 6. HOW IT WORKS ================= -->
+<section class="section section--warm" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">How It Works</p>
+      <h2 id="process-title">Four Simple Steps</h2>
+      <p class="lead">No surprises. Here's exactly what working with RamFam looks like.</p>
+    </div>
+    <ol class="steps" data-reveal-stagger="90">
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">01</span><h3>Consultation</h3><p>We meet at your property, listen to your goals, and walk the site together, free of charge.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">02</span><h3>Design &amp; Estimate</h3><p>You get a clear plan and a detailed, honest estimate with no hidden costs.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">03</span><h3>Build</h3><p>Our family crew gets to work and keeps you updated at every milestone.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><h3>Walkthrough &amp; Handoff</h3><p>We walk every detail with you and don't call it done until you're thrilled.</p></li>
+    </ol>
+    <div class="center" data-reveal><a class="btn btn--gold" href="#contact">Book Your Free Consultation</a></div>
+  </div>
+</section>
+
+<!-- ================= 7. OUR STORY ================= -->
+<section class="section" id="story" aria-labelledby="story-title">
+  <div class="wrap split split--flip">
+    <div class="split-media framed" data-reveal="right">
+      <!-- REPLACE: photo of the owner (later a family photo) -->
+      <img src="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=1200&q=75&auto=format"
+           srcset="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=700&q=70&auto=format 700w, https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=1200&q=75&auto=format 1200w"
+           sizes="(min-width:1024px) 58vw, 100vw" loading="lazy" decoding="async" width="1200" height="960"
+           alt="Owner of RamFam Builders in a hard hat on a job site">
+    </div>
+    <div data-reveal="left">
+      <p class="eyebrow">Our Story</p>
+      <h2 id="story-title">A Family Name on Every Job</h2>
+      <!-- REPLACE: owner's story -->
+      <p class="lead">RamFam Builders started with one truck, a few tools, and a simple promise: build every home like our own family would live in it.</p>
+      <p>[Owner name] grew up in Eastern North Carolina working alongside [family member], learning the trade from the ground up, from digging footings and setting septic tanks to framing and finish work. That experience became RamFam Builders, a company where the whole family is still part of the work.</p>
+      <p>Today we're proud to help neighbors across [towns/counties] build the homes they've dreamed about, and we still answer the phone ourselves.</p>
+      <!-- /REPLACE: owner's story -->
+      <a class="btn btn--dark" href="#contact">Work With Our Family</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. REVIEWS ================= -->
+<section class="section section--warm" id="reviews" aria-labelledby="reviews-title">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">Reviews</p>
+      <h2 id="reviews-title">What Our Neighbors Say</h2>
+      <!-- REPLACE: your real Google rating -->
+      <p class="rating-badge"><svg aria-hidden="true"><use href="#i-google"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><span data-rating-text>5.0</span> on Google</span></p>
+    </div>
+    <div class="reviews" data-reveal-stagger="100">
+      <!-- REPLACE: real customer review -->
+      <figure class="review" data-reveal>
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"They built our forever home and treated us like family the entire time. Every question answered, every detail right."</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">S</span><span><strong>Sarah &amp; Mike T.</strong>Custom Home · Greenville</span></figcaption>
+      </figure>
+      <!-- REPLACE: real customer review -->
+      <figure class="review" data-reveal>
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"Our septic failed on a Friday. RamFam was out the next morning and had it fixed fast at a fair price. Highly recommend."</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">J</span><span><strong>James R.</strong>Septic Repair · Washington</span></figcaption>
+      </figure>
+      <!-- REPLACE: real customer review -->
+      <figure class="review" data-reveal>
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"Beautiful new driveway and patio. Clean crew, on schedule, and the finish work is perfect. We'll use them again."</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">L</span><span><strong>Linda K.</strong>Concrete · Kinston</span></figcaption>
+      </figure>
+    </div>
+    <div class="center" data-reveal>
+      <a class="btn btn--dark" href="#google-review-link" data-review-link target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-google"/></svg>Leave Us a Google Review
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. CTA BAND ================= -->
+<section class="cta-band" aria-labelledby="cta-title">
+  <!-- Real photo: Havelock, NC project (decorative background) -->
+  <picture>
+    <source type="image/webp" srcset="images/gallery/havelock-home-51-full.webp">
+    <img src="images/gallery/havelock-home-51-full.jpg" loading="lazy" decoding="async" width="640" height="468" alt="">
+  </picture>
+  <div class="wrap" data-reveal>
+    <h2 id="cta-title">Ready to build?</h2>
+    <p>Tell us about your project and we'll get back to you with a free, no-pressure estimate.</p>
+    <div class="cta-actions">
+      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+      <a class="cta-phone" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. CONTACT ================= -->
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid" data-reveal-stagger="100">
+    <div data-reveal>
+      <p class="eyebrow">Free Estimate</p>
+      <h2 id="contact-title">Let's Talk About Your Project</h2>
+      <p class="lead">Fill out the form and a member of our family will reach out within one business day. Prefer to talk now? Give us a call.</p>
+      <ul class="contact-list">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small>Call or text</small><a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small>Email</small><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small>Service area</small><span data-area-text>Eastern North Carolina</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small>Hours</small><span data-hours-text>Mon–Fri 7am–6pm · Sat by appointment</span></div></li>
+      </ul>
+    </div>
+
+    <div class="form-card" id="form-card" data-reveal>
+      <h3>Request a Free Estimate</h3>
+      <p>Takes about a minute. No obligation.</p>
+      <!--
+        FORM ENDPOINT: set SITE_CONFIG.formEndpoint in the script below to your form service URL,
+        e.g. Formspree "https://formspree.io/f/xxxxxxx", Basin, Getform, or a Vercel function "/api/estimate".
+        While it's empty, the form validates and shows the success message but DOES NOT send data anywhere.
+      -->
+      <form id="estimate-form" action="#" method="POST" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+            <p class="error" id="e-name">Please enter your name.</p>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone">
+            <p class="error" id="e-phone">Please enter a valid 10-digit phone number.</p>
+          </div>
+        </div>
+        <div class="form-row">
+        <div class="field">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
+          <p class="error" id="e-email">Please enter a valid email address.</p>
+        </div>
+        <div class="field">
+          <label for="f-service">Service needed <span class="req" aria-hidden="true">*</span></label>
+          <select id="f-service" name="service" required aria-describedby="e-service">
+            <option value="">Select a service…</option>
+            <option>Custom Homes</option>
+            <option>Remodels &amp; Additions</option>
+            <option>Concrete</option>
+            <option>Septic Installation</option>
+            <option>Septic Repair</option>
+            <option>Other / Not sure</option>
+          </select>
+          <p class="error" id="e-service">Please choose a service.</p>
+        </div>
+        </div>
+        <div class="field">
+          <label for="f-details">Project details <span class="opt">(optional)</span></label>
+          <textarea id="f-details" name="details" placeholder="Location, timeline, size of project, anything we should know…"></textarea>
+        </div>
+        <!-- spam honeypot: keep hidden -->
+        <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+        <button class="btn btn--gold" type="submit">Request My Free Estimate</button>
+        <p class="form-note" role="status">We never share your information.</p>
+      </form>
+      <div class="form-success" role="status" aria-live="polite" tabindex="-1">
+        <svg aria-hidden="true"><use href="#i-check"/></svg>
+        <h3>Thank you!</h3>
+        <p>We received your request and will be in touch within one business day. Need us sooner? Call <a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= 11. FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="RamFam Builders home">
+          <img src="logo-transparent.png" alt="RamFam Builders logo" width="105" height="56" loading="lazy" decoding="async">
+          <span class="brand-text" aria-hidden="true">Ram<b>Fam</b> Builders</span>
+        </a>
+        <p>Family-owned custom home builder. Building dream homes across Eastern North Carolina.</p>
+        <div class="social">
+          <a href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+          <a href="#instagram" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+        </div>
+      </div>
+      <nav aria-label="Footer">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Free Estimate</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#services">Custom Homes</a></li>
+          <li><a href="#services">Remodels &amp; Additions</a></li>
+          <li><a href="#services">Concrete</a></li>
+          <li><a href="#services">Septic Installation</a></li>
+          <li><a href="#services">Septic Repair</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a></li>
+          <li><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></li>
+          <li style="padding:6px 0">Serving <span data-area-text>Eastern North Carolina</span></li>
+          <li style="padding:6px 0" data-license-text>NC Licensed General Contractor #00000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> RamFam Builders. All rights reserved.</span>
+      <span>Family Owned · Licensed &amp; Insured</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo viewer">
+  <button class="lb-btn lb-close" type="button" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+  <figure><img id="lb-img" alt=""><figcaption><span id="lb-cap"></span><span class="lb-count" id="lb-count"></span></figcaption></figure>
+</div>
+
+<!-- Shared project photo list (also used by gallery.html) -->
+<script src="photos.js"></script>
+<script>
+/* =====================================================================
+   SITE_CONFIG: UPDATE ALL BUSINESS INFO HERE (one place)
+   Fills every phone link, email link, social icon, review button,
+   rating, and the JSON-LD schema on the page.
+   ===================================================================== */
+const SITE_CONFIG = {
+  businessName:      "RamFam Builders",
+  phoneDisplay:      "(555) 555-5555",          // REPLACE: number as shown on the page
+  phoneLink:         "+15555555555",            // REPLACE: same number for tel: links (+1 then 10 digits)
+  email:             "info@ramfambuilders.com", // REPLACE
+  serviceArea:       "Eastern North Carolina",  // REPLACE: e.g. "Pitt, Beaufort & Lenoir Counties, NC"
+  hours:             "Mon–Fri 7am–6pm · Sat by appointment", // REPLACE
+  city:              "Greenville",              // REPLACE: base city (Google schema)
+  state:             "NC",
+  zip:               "27834",                   // REPLACE
+  license:           "NC Licensed General Contractor #00000", // REPLACE
+  website:           "https://www.ramfambuilders.com/",       // REPLACE: live domain
+  facebook:          "#facebook",               // REPLACE: https://facebook.com/yourpage
+  instagram:         "#instagram",              // REPLACE: https://instagram.com/yourhandle
+  googleReview:      "#google-review-link",     // REPLACE: your Google "write a review" link
+  googleRating:      "5.0",                     // REPLACE
+  googleReviewCount: "25",                      // REPLACE
+  formEndpoint:      ""                         // REPLACE: e.g. "https://formspree.io/f/xxxxxxx" (empty = nothing is sent)
+};
+
+/* Project photos live in photos.js (shared with gallery.html).
+   Photos marked featured: true are the ones shown in the Recent Projects carousel. */
+const GALLERY = window.RAMFAM_PHOTOS || [];
+
+/* ===================== no edits needed below ===================== */
+(function () {
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const C = SITE_CONFIG;
+  const esc = s => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+  /* ---- Business info from SITE_CONFIG ---- */
+  $$("[data-phone-link]").forEach(a => a.href = "tel:" + C.phoneLink);
+  $$("[data-phone-text]").forEach(e => e.textContent = C.phoneDisplay);
+  $$("[data-email-link]").forEach(a => a.href = "mailto:" + C.email);
+  $$("[data-email-text]").forEach(e => e.textContent = C.email);
+  $$("[data-area-text]").forEach(e => e.textContent = C.serviceArea);
+  $$("[data-hours-text]").forEach(e => e.textContent = C.hours);
+  $$("[data-license-text]").forEach(e => e.textContent = C.license);
+  $$("[data-rating-text]").forEach(e => e.textContent = C.googleRating);
+  $$("[data-review-link]").forEach(a => a.href = C.googleReview);
+  $$("[data-facebook-link]").forEach(a => a.href = C.facebook);
+  $$("[data-instagram-link]").forEach(a => a.href = C.instagram);
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ---- JSON-LD schema from SITE_CONFIG ---- */
+  try {
+    const s = JSON.parse($("#schema").textContent);
+    Object.assign(s, {
+      name: C.businessName, url: C.website, logo: C.website.replace(/\/$/, "") + "/assets/logo.png",
+      telephone: C.phoneLink, email: C.email, areaServed: C.serviceArea,
+      sameAs: [C.facebook, C.instagram].filter(u => /^https?:/.test(u))
+    });
+    Object.assign(s.address, { addressLocality: C.city, addressRegion: C.state, postalCode: C.zip });
+    Object.assign(s.aggregateRating, { ratingValue: C.googleRating, reviewCount: C.googleReviewCount });
+    $("#schema").textContent = JSON.stringify(s);
+  } catch (e) {}
+
+  /* ---- Header: solid with shadow after scrolling ---- */
+  const header = $("#site-header");
+  const onScroll = () => header.classList.toggle("is-solid", window.scrollY > 24);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---- Full-screen mobile menu ---- */
+  const toggle = $(".nav-toggle"), overlay = $("#menu-overlay");
+  const setMenu = open => {
+    document.body.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", open);
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    overlay.toggleAttribute("inert", !open);
+  };
+  overlay.setAttribute("inert", "");
+  toggle.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  $$("a", overlay).forEach(a => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && document.body.classList.contains("menu-open")) { setMenu(false); toggle.focus(); }
+  });
+  matchMedia("(min-width:1024px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
+
+  /* ---- "Request a Quote" links pre-select the service ---- */
+  $$("[data-service]").forEach(a => a.addEventListener("click", () => { $("#f-service").value = a.dataset.service; }));
+
+  /* ---- Gallery: single-row project carousel ---- */
+  const LABELS = { homes: "Custom Home", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card
+  const PROJECTS = window.RAMFAM_PROJECTS || {};
+  const webp = src => src.replace(/\.jpe?g$/i, ".webp");
+  const grid = $("#gallery-grid");                 // carousel container (the lightbox listens for clicks here)
+  const row = $(".marquee-row", grid), track = $(".marquee-track", grid);
+  const toggleBtn = $("#marquee-toggle");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SPEED = 36;                                // px per second: slow and calm
+  let currentList = [], globalPaused = false, anim = null, rate = 1;
+  const hold = { hover: false, touch: false, focus: false };
+
+  // Cards use the thumbnail size (WebP with a JPG fallback); the lightbox loads the full size.
+  const cardHTML = (i, isCopy) => {
+    const p = GALLERY[i];
+    return `<li class="marquee-item"${isCopy ? ' aria-hidden="true"' : ""}>
+      <button type="button" data-index="${i}"${isCopy ? ' tabindex="-1"' : ""} aria-label="View larger: ${esc(p.alt)}">
+        <picture><source type="image/webp" srcset="${esc(webp(p.thumb))}">
+        <img src="${esc(p.thumb)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" width="${p.w}" height="${p.h}"></picture>
+        <span class="g-tag" aria-hidden="true">${LABELS[p.category] || ""}</span>
+      </button>
+    </li>`;
+  };
+
+  // Animate the track left by exactly one set's measured width, forever.
+  const startLoop = keepProgress => {
+    const items = track.children, half = items.length / 2;
+    // distance from the first card to its duplicate = one full set including every gap (sub-pixel exact)
+    const loopW = items[half].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+    const duration = (loopW / SPEED) * 1000;
+    let progress = 0;
+    if (anim) {
+      if (keepProgress) { const d = anim.effect.getTiming().duration; progress = (anim.currentTime % d) / d; }
+      anim.cancel();
+    }
+    anim = track.animate([{ transform: "translate3d(0,0,0)" }, { transform: `translate3d(${-loopW}px,0,0)` }],
+                         { duration, iterations: Infinity, easing: "linear" });
+    anim.currentTime = progress * duration;
+    anim.playbackRate = rate;
+  };
+
+  // Build the row: the photo set (repeated if needed so ONE set is wider than the screen), then an exact copy of it.
+  const buildTrack = keepProgress => {
+    if (reduceMotion) {                            // static, swipeable row; no copies
+      track.innerHTML = currentList.map(i => cardHTML(i, false)).join("");
+      return;
+    }
+    track.innerHTML = cardHTML(currentList[0], false);
+    const first = track.firstElementChild;
+    const step = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
+    const reps = Math.max(1, Math.ceil((row.clientWidth + step) / (step * currentList.length)));
+    const set = Array.from({ length: reps }, () => currentList).flat();
+    const seen = new Set();                        // only the first appearance of each photo is focusable/announced
+    track.innerHTML = [...set, ...set].map(i => { const copy = seen.has(i); seen.add(i); return cardHTML(i, copy); }).join("");
+    startLoop(keepProgress);
+  };
+
+  // Featured photos only, in their featured order (1, 2, 3… in photos.js).
+  const renderGallery = keepProgress => {
+    currentList = GALLERY.map((p, i) => i).filter(i => GALLERY[i].featured)
+      .sort((a, b) => (GALLERY[a].order || 99) - (GALLERY[b].order || 99) || a - b);
+    if (!currentList.length) { grid.hidden = true; return; }   // nothing marked featured
+    buildTrack(keepProgress);
+  };
+  renderGallery(false);
+
+  // Smooth pause/resume: ease the playback rate between 1 and 0 (hover, touch, keyboard focus, or the toggle).
+  let rampRaf = 0;
+  const settle = () => {
+    if (!anim) return;
+    const target = (globalPaused || hold.hover || hold.touch || hold.focus) ? 0 : 1;
+    cancelAnimationFrame(rampRaf);
+    const from = rate, t0 = performance.now(), D = 450;
+    const tick = now => {
+      const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+      rate = from + (target - from) * e;
+      anim.playbackRate = rate;
+      if (k < 1) rampRaf = requestAnimationFrame(tick);
+    };
+    rampRaf = requestAnimationFrame(tick);
+  };
+  if (!reduceMotion) {
+    row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") { hold.hover = true; settle(); } });
+    row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hold.hover = false; settle(); } });
+    let touchTimer;
+    row.addEventListener("touchstart", () => { clearTimeout(touchTimer); hold.touch = true; settle(); }, { passive: true });
+    const release = () => { touchTimer = setTimeout(() => { hold.touch = false; settle(); }, 1200); };
+    row.addEventListener("touchend", release, { passive: true });
+    row.addEventListener("touchcancel", release, { passive: true });
+    row.addEventListener("focusin", () => { hold.focus = !!row.querySelector(":focus-visible"); settle(); });   // keyboard focus only
+    row.addEventListener("focusout", e => { if (!row.contains(e.relatedTarget)) { hold.focus = false; settle(); } });
+    // re-measure on resize so the loop stays seamless at the new card size
+    let lastW = row.clientWidth, resizeTimer;
+    addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { if (row.clientWidth !== lastW) { lastW = row.clientWidth; buildTrack(true); } }, 200);
+    });
+  }
+  toggleBtn.addEventListener("click", () => {
+    globalPaused = !globalPaused;
+    toggleBtn.setAttribute("aria-pressed", globalPaused);
+    toggleBtn.setAttribute("aria-label", globalPaused ? "Play project carousel" : "Pause project carousel");
+    settle();
+  });
+
+
+  // Entrance: the row fades + slides in the first time the carousel scrolls into view.
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    grid.classList.add("reveal-ready");
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(en => en.isIntersecting)) { grid.classList.add("is-in"); io.disconnect(); }
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    io.observe(grid);
+  }
+
+  /* ---- Lightbox (click, keyboard arrows, swipe) ---- */
+  const lb = $("#lightbox"), lbImg = $("#lb-img"), lbCap = $("#lb-cap"), lbCount = $("#lb-count");
+  let current = 0, lastFocus = null;
+  // step through every photo in the current filter (each once, in GALLERY order)
+  const visible = () => currentList;
+  const show = i => {
+    current = i; const p = GALLERY[i], v = visible();
+    lbImg.src = p.src; lbImg.alt = p.alt;
+    lbCap.textContent = [PROJECTS[p.project], p.caption || p.alt].filter(Boolean).join(" · "); lbCount.textContent = `${v.indexOf(i) + 1} / ${v.length}`;
+  };
+  const step = d => { const v = visible(); show(v[(v.indexOf(current) + d + v.length) % v.length]); };
+  const openLb = i => { lastFocus = document.activeElement; show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; $(".lb-close", lb).focus(); };
+  const closeLb = () => { lb.classList.remove("open"); document.body.style.overflow = ""; lbImg.removeAttribute("src"); if (lastFocus) lastFocus.focus(); };
+
+  grid.addEventListener("click", e => { const b = e.target.closest("button[data-index]"); if (b) openLb(+b.dataset.index); });
+  $(".lb-close", lb).addEventListener("click", closeLb);
+  $(".lb-prev", lb).addEventListener("click", () => step(-1));
+  $(".lb-next", lb).addEventListener("click", () => step(1));
+  lb.addEventListener("click", e => { if (e.target === lb || e.target.tagName === "FIGURE") closeLb(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+    else if (e.key === "Tab") {
+      const f = $$(".lb-btn", lb), first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  let tx = null, ty = null;
+  lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) closeLb();   // swipe down to close
+    tx = ty = null;
+  });
+
+  /* ---- Estimate form ---- */
+  const form = $("#estimate-form"), card = $("#form-card"), note = $(".form-note", form);
+  const rules = {
+    name:    v => v.trim().length >= 2,
+    phone:   v => v.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "").length === 10,
+    email:   v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    service: v => v !== ""
+  };
+  const check = el => {
+    const ok = rules[el.name](el.value);
+    el.closest(".field").classList.toggle("invalid", !ok);
+    el.setAttribute("aria-invalid", String(!ok));
+    return ok;
+  };
+  Object.keys(rules).forEach(n => {
+    const el = form.elements[n];
+    el.addEventListener("blur", () => { if (el.value) check(el); });
+    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => { if (el.closest(".field").classList.contains("invalid")) check(el); });
+  });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const bad = Object.keys(rules).map(n => form.elements[n]).filter(el => !check(el));
+    if (bad.length) { bad[0].focus(); return; }
+    if (form.elements.company.value) return; // bot filled the honeypot
+
+    const btn = $("button[type=submit]", form), label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      if (C.formEndpoint) {
+        const res = await fetch(C.formEndpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error("Request failed");
+      }
+      card.classList.add("sent");
+      $(".form-success", card).focus();
+    } catch (err) {
+      btn.disabled = false; btn.textContent = label;
+      note.classList.add("is-error");
+      note.textContent = "Sorry, something went wrong. Please call us at " + C.phoneDisplay + ".";
+    }
+  });
+})();
+</script>
+<!-- Scroll reveal (fade + rise once, IntersectionObserver, no libraries) -->
+<script>
+(function () {
+  var html = document.documentElement;
+  var els = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  // stagger grouped items: children of [data-reveal-stagger="ms"] get increasing delays
+  Array.prototype.forEach.call(document.querySelectorAll("[data-reveal-stagger]"), function (group) {
+    var step = +group.getAttribute("data-reveal-stagger") || 90,
+        base = +group.getAttribute("data-reveal-base") || 0,
+        cols = +group.getAttribute("data-reveal-cols") || 0;   // restart the stagger on each row of a grid
+    Array.prototype.filter.call(group.children, function (c) { return c.hasAttribute("data-reveal"); })
+      .forEach(function (el, i) { el.style.setProperty("--reveal-delay", (base + (cols ? i % cols : i) * step) + "ms"); });
+  });
+  html.classList.add("reveal-on");
+  var show = function (el) { el.classList.add("is-revealed"); };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) { els.forEach(show); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
