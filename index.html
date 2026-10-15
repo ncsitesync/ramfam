@@ -39,7 +39,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- hero photo (keep in sync with the hero <picture> below) -->
-<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
+<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-mobile.webp" media="(max-width: 767px)">
+<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp" media="(min-width: 768px)"
       imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
 
 <!-- JSON-LD schema: values are refreshed from SITE_CONFIG by the script at the bottom; these are fallbacks. -->
@@ -742,6 +743,24 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 /* hero framing on very wide desktop screens (the hero is much wider than the photo) */
 @media (min-width:1024px) and (min-aspect-ratio:11/5){ .hero{--hero-pos:50% 20%} }
 
+/* ================= HERO ON PHONES (under 768px only) =================
+   Shorter hero (62svh, min 476px) with its own 4:5 photo (whole house mid-frame: roof ~30% down,
+   base ~67%), compact headline over the sky and a compact button stack over the lawn. */
+@media (max-width:767px){
+  .hero{--hero-h:max(476px, 62svh);--hero-pos:50% 50%}
+  .hero-content{padding:14px 16px 0}
+  .hero-band,.hero .hero-band{width:auto;max-width:100%;padding:10px 16px}
+  .hero h1{font-size:clamp(1.5rem,7vw,1.9rem);letter-spacing:.06em;line-height:1.1}
+  .hero .hero-sub{margin-top:8px;padding:0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+    font-size:.92rem;font-weight:600;line-height:1.35;max-width:22em;
+    text-shadow:0 0 2px rgba(255,255,255,1),0 0 8px rgba(255,255,255,.95),0 0 16px rgba(255,255,255,.8)}
+  .hero-cta{bottom:14px}
+  .hero .btn{min-height:46px;max-width:320px;padding:10px 22px;font-size:.98rem}
+  .hero-call{min-height:34px;margin-top:6px;padding:0 12px;font-size:.86rem}
+  .hero-call svg{width:14px;height:14px}
+  .hero-note{margin-top:6px;padding:2px 10px;font-size:.74rem}
+}
+
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -838,8 +857,12 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <div class="hero-media">
     <!-- Hero photo (full bleed): optimized copies of heroimage.png, WebP first, JPG fallback.
          Keep the <head> preload link in sync. Not lazy-loaded: this is the first thing visitors see.
-         Phones show a tall crop of this wide photo (about 2.4x the screen width), so they also use the 1920 file. -->
+         Phones (under 768px) use their own 4:5 photo: this wide photo can't show the whole house on a tall screen. -->
     <picture>
+      <!-- REPLACE: phone hero = 4:5 crop of Havelock-34 (images/hero/hero-mobile.*, made by tools/optimize-photos.js).
+           Swap for a sharper portrait exterior when you have one. -->
+      <source media="(max-width: 767px)" type="image/webp" srcset="images/hero/hero-mobile.webp" width="408" height="510">
+      <source media="(max-width: 767px)" srcset="images/hero/hero-mobile.jpg" width="408" height="510">
       <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
       <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)"
            width="1920" height="800" fetchpriority="high" decoding="async"
