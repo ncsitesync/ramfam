@@ -394,6 +394,9 @@ p{margin:0 0 1em}
 .form-card .btn{width:100%}
 .form-note{font-size:.84rem;color:var(--muted);margin:var(--s-3) 0 0;text-align:center}
 .form-note.is-error{color:#A0341F;font-weight:600}
+.form-legal{font-size:.8rem;color:var(--muted);margin:6px 0 0;text-align:center}
+.form-legal a{color:var(--charcoal);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:2px}
+.form-legal a:hover{color:var(--gold-text)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-success{display:none;text-align:center;padding:var(--s-6) var(--s-2)}
 .form-success svg{width:60px;height:60px;color:var(--gold);margin:0 auto var(--s-4)}
@@ -407,6 +410,9 @@ p{margin:0 0 1em}
 .site-footer ul{list-style:none;padding:0;margin:0}
 .site-footer li a{display:inline-flex;align-items:center;min-height:36px;text-decoration:none;color:rgba(255,255,255,.86)}
 .site-footer a:hover{color:#fff}
+.footer-legal{white-space:nowrap}
+.footer-legal a{color:rgba(255,255,255,.86);text-decoration:underline;text-decoration-color:rgba(201,162,74,.6);text-underline-offset:3px;display:inline-block;padding:6px 0}   /* tap target */
+.footer-legal a:hover{color:var(--gold-light)}
 .footer-logo{display:inline-flex;flex-wrap:wrap;align-items:center;gap:12px;max-width:100%;margin-bottom:var(--s-4);text-decoration:none}
 .footer-brand img{height:56px;width:auto;padding:6px 10px;border-radius:8px;background:#FBF8F2}   /* light tile: the logo lettering is dark */
 .footer-brand .brand-text{display:block;color:#fff;font-size:clamp(1.35rem,1rem + 1.6vw,1.7rem)}
@@ -1172,11 +1178,12 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <section class="section" id="story" aria-labelledby="story-title">
   <div class="wrap split split--flip">
     <div class="split-media framed" data-reveal="right">
-      <!-- REPLACE: photo of the owner (later a family photo) -->
-      <img src="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=1200&q=75&auto=format"
-           srcset="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=700&q=70&auto=format 700w, https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?w=1200&q=75&auto=format 1200w"
-           sizes="(min-width:1024px) 58vw, 100vw" loading="lazy" decoding="async" width="1200" height="960"
-           alt="Owner of RamFam Builders in a hard hat on a job site">
+      <!-- REPLACE: swap for a better photo later (ideally the owner or the family on a job site) -->
+      <picture>
+        <source type="image/webp" srcset="images/gallery/septic-02-full.webp">
+        <img src="images/gallery/septic-02-full.jpg" loading="lazy" decoding="async" width="1200" height="1600"
+             alt="RamFam Builders crew member on a job site as a boom truck delivers a precast concrete septic tank to a fresh excavation">
+      </picture>
     </div>
     <div data-reveal="left">
       <p class="eyebrow">Our Story</p>
@@ -1309,6 +1316,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
         <button class="btn btn--gold" type="submit">Request My Free Estimate</button>
         <p class="form-note" role="status">We never share your information.</p>
+        <p class="form-legal">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>.</p>
       </form>
       <div class="form-success" role="status" aria-live="polite" tabindex="-1">
         <svg aria-hidden="true"><use href="#i-check"/></svg>
@@ -1368,7 +1376,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> RamFam Builders. All rights reserved.</span>
+      <span>© <span id="year">2026</span> RamFam Builders. All rights reserved. <span class="footer-legal">· <a href="privacy.html">Privacy Policy</a></span></span>
       <span>Family Owned · Licensed &amp; Insured</span>
     </div>
   </div>

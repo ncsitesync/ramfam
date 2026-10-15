@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  RAMFAM BUILDERS: PRIVACY POLICY PAGE
+  ------------------------------------
+  Search this file for "REPLACE" to find every placeholder (legal name, address, dates).
+  Phone and email fill in from SITE_CONFIG in the script at the bottom (keep it in sync with index.html).
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy Policy | RamFam Builders</title>
+<meta name="description" content="How RamFam Builders collects, uses, and protects the information you share through our website, estimate form, phone calls, and texts.">
+<!-- REPLACE: your live domain in canonical + og:url -->
+<link rel="canonical" href="https://www.ramfambuilders.com/privacy.html">
+<meta name="theme-color" content="#2E2B28">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RamFam Builders">
+<meta property="og:title" content="Privacy Policy | RamFam Builders">
+<meta property="og:description" content="How RamFam Builders handles the information you share with us.">
+<meta property="og:url" content="https://www.ramfambuilders.com/privacy.html">
+<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1920.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* Shared site styles (copied from index.html so this page is self-contained) */
+/* ================= TOKENS ================= */
+:root{
+  /* color */
+  --gold:#C9A24A;            /* accent only: buttons, rules, small highlights */
+  --gold-hover:#B78F37;
+  --gold-text:#866620;       /* darker gold for small text on light bg (WCAG AA) */
+  --gold-light:#E6CC8C;      /* gold text on dark bg */
+  --charcoal:#2E2B28;
+  --charcoal-deep:#211F1D;
+  --ink:#2E2B28;
+  --muted:#5D5750;
+  --line:#E4DED5;
+  --white:#FFFFFF;
+  --warm:#F6F3EE;            /* soft warm-gray section bg */
+  /* type */
+  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fs-body:clamp(1rem, .96rem + .2vw, 1.075rem);
+  --fs-lead:clamp(1.06rem, 1rem + .35vw, 1.22rem);
+  --fs-h1:clamp(3rem, 1.6rem + 6.4vw, 6.75rem);
+  --fs-h2:clamp(2rem, .9rem + 1.6vw + 1.7vh, 3.5rem);      /* vw + vh: shrinks on short laptop screens */
+  --fs-h3:clamp(1.35rem, .95rem + .4vw + .6vh, 1.7rem);
+  /* spacing scale */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+  --section-y:clamp(48px, 9vw, 72px);                       /* compact on phones/tablets; desktop value below */
+  --gutter:clamp(20px, 4vw, 40px);
+  /* shape */
+  --radius-sm:4px;
+  --radius:10px;
+  --shadow-sm:0 2px 10px rgba(33,31,29,.06);
+  --shadow:0 18px 50px -18px rgba(33,31,29,.28);
+  /* layout */
+  --wrap:1240px;
+  --header-h:72px;
+}
+@media (min-width:1024px){ :root{ --header-h:88px; } }
+
+/* ================= BASE (mobile first) ================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-size:var(--fs-body);line-height:1.7;color:var(--ink);background:var(--white);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.01em;margin:0 0 .45em;color:var(--charcoal)}
+h2{font-size:var(--fs-h2)}
+h3{font-size:var(--fs-h3);line-height:1.15}
+p{margin:0 0 1em}
+.wrap{width:100%;max-width:calc(var(--wrap) + var(--gutter)*2);margin:0 auto;padding:0 var(--gutter)}
+.section{padding:var(--section-y) 0}
+.section--warm{background:var(--warm)}
+.eyebrow{display:flex;align-items:center;gap:var(--s-3);font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin:0 0 var(--s-4)}
+.eyebrow::before{content:"";width:32px;height:2px;background:var(--gold);flex:none}
+.section-head{max-width:680px;margin-bottom:clamp(36px, 4vw, 64px)}
+.section-head--center{margin-inline:auto;text-align:center}
+.section-head--center .eyebrow{justify-content:center}
+.section-head--center .eyebrow::after{content:"";width:32px;height:2px;background:var(--gold)}
+.section-head--row{max-width:none;display:flex;flex-direction:column;gap:var(--s-5)}
+.section-head--row > div{max-width:640px}
+.lead{font-size:var(--fs-lead);color:var(--muted);line-height:1.65}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-80px;z-index:500;background:var(--charcoal);color:#fff;padding:12px 18px;border-radius:var(--radius-sm)}
+.skip-link:focus{top:12px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.center{text-align:center}
+
+/* ================= BUTTONS ================= */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);min-height:52px;padding:14px 28px;border-radius:var(--radius-sm);font:600 1rem/1.2 var(--sans);letter-spacing:.01em;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s;width:100%}
+.btn:active{transform:translateY(1px)}
+.btn--gold{background:var(--gold);color:var(--charcoal-deep);border-color:var(--gold)}
+.btn--gold:hover{background:var(--gold-hover);border-color:var(--gold-hover);box-shadow:0 10px 24px -10px rgba(201,162,74,.75)}
+.btn--ghost{color:#fff;border-color:rgba(255,255,255,.8);background:transparent}
+.btn--ghost:hover{background:#fff;color:var(--charcoal)}
+.btn--dark{color:var(--charcoal);border-color:var(--charcoal);background:transparent}
+.btn--dark:hover{background:var(--charcoal);color:#fff}
+.btn--sm{min-height:44px;padding:10px 20px;font-size:.92rem;width:auto}
+.link-arrow{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:var(--charcoal);text-decoration:none}
+.link-arrow span{border-bottom:2px solid var(--gold);padding-bottom:2px}
+.link-arrow svg{width:18px;height:18px;transition:transform .2s}
+.link-arrow:hover svg{transform:translateX(4px)}
+.icon{width:20px;height:20px;flex:none}
+@media (min-width:600px){ .btn{width:auto} }
+
+/* ================= HEADER ================= */
+/* solid light bar that sits above the hero (in normal flow), sticky, shadow after scrolling */
+.site-header{position:sticky;top:0;z-index:200;height:var(--header-h);background:#FCFBF8;color:var(--charcoal);border-bottom:1px solid var(--line);transition:box-shadow .3s,border-color .3s}
+.site-header.is-solid{border-bottom-color:transparent;box-shadow:0 6px 22px -10px rgba(33,31,29,.22)}
+.header-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);height:100%}
+/* header brand: [logo] RamFam Builders, one link */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px;flex:none}
+.brand img{height:38px;width:auto;flex:none}
+.brand-text{display:block;white-space:nowrap;font-family:var(--serif);font-size:clamp(1.15rem,.95rem + .9vw,1.55rem);font-weight:700;letter-spacing:.01em;line-height:1;color:var(--charcoal)}
+@media (max-width:359px){ .brand .brand-text{display:none} }   /* very small phones: logo only */
+.brand-text b{color:var(--gold-text);font-weight:700}
+.no-logo img{display:none}
+.no-logo .brand-text{display:block}
+.main-nav,.header-actions{display:none}
+.header-mobile{display:flex;align-items:center;gap:var(--s-2)}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--line);background:#fff;color:var(--charcoal);cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}
+.icon-btn:hover{border-color:var(--charcoal)}
+.icon-btn svg{width:20px;height:20px}
+.btn--charcoal{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.btn--charcoal:hover{background:var(--charcoal-deep);border-color:var(--charcoal-deep)}
+.nav-toggle .i-close{display:none}
+.menu-open .nav-toggle .i-open{display:none}
+.menu-open .nav-toggle .i-close{display:block}
+
+/* full-screen mobile overlay nav */
+.menu-overlay{position:fixed;inset:0;z-index:150;background:var(--charcoal-deep);color:#fff;padding:calc(var(--header-h) + 16px) var(--gutter) calc(var(--s-7) + env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.menu-open .menu-overlay{opacity:1;visibility:visible}
+.menu-overlay ul{list-style:none;margin:0 0 var(--s-6);padding:0}
+.menu-overlay li a{display:flex;align-items:center;justify-content:space-between;min-height:60px;font-family:var(--serif);font-size:clamp(1.8rem,7vw,2.4rem);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.1)}
+.menu-overlay li a::after{content:"";width:8px;height:8px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);transform:rotate(45deg)}
+.menu-overlay li a:hover{color:var(--gold-light)}
+.menu-overlay .btn{margin-bottom:var(--s-3)}
+.menu-overlay .menu-meta{margin-top:auto;padding-top:var(--s-5);font-size:.9rem;color:rgba(255,255,255,.7)}
+.menu-open{overflow:hidden}
+
+/* sticky mobile call bar */
+
+/* ================= HERO ================= */
+/* full-width bright photo; small glass headline band up in the sky, CTA stack at the bottom */
+.hero{position:relative;min-height:75svh;display:flex;text-align:center;background:var(--charcoal-deep);isolation:isolate;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+/* no full-image dimming: only a soft gradient at the bottom behind the white text */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 52%,rgba(0,0,0,.22) 72%,rgba(0,0,0,.45) 100%)}
+.hero-content{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:var(--s-6);padding:16px 16px 50px}
+.hero-band{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,.5);border-radius:6px;background:rgba(255,255,255,.62)}
+@supports ((-webkit-backdrop-filter:blur(3px)) or (backdrop-filter:blur(3px))){
+  .hero-band{background:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+}
+.hero h1{margin:0;color:var(--charcoal-deep);font-size:clamp(1.9rem,.6rem + 4.2vw,4rem);font-weight:600;line-height:1.1;letter-spacing:.07em;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 2px rgba(255,255,255,.55),0 0 14px rgba(255,255,255,.35)}
+.hero-cta{display:flex;flex-direction:column;align-items:center;width:100%}
+.hero-sub{margin:0 0 var(--s-3);font-size:.88rem;font-weight:500;line-height:1.4;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6),0 0 16px rgba(0,0,0,.4)}
+.hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+.hero .btn{border-radius:999px;width:100%;max-width:360px;box-shadow:0 10px 26px -10px rgba(0,0,0,.6)}
+.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--s-2);font-size:.95rem;font-weight:500;color:#fff;text-decoration:none;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.hero-call svg{width:16px;height:16px}
+.hero-call span{border-bottom:1px solid rgba(255,255,255,.55)}
+.hero-call:hover span{border-bottom-color:#fff}
+.hero-note{margin:0;font-size:.78rem;color:rgba(255,255,255,.82);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.hero-scroll{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85)}
+.hero-scroll svg{width:22px;height:22px;animation:nudge 2s ease-in-out infinite}
+.hero-scroll:hover{color:#fff}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* slim trust strip directly below the hero */
+.trust-strip{background:var(--warm);border-bottom:1px solid var(--line)}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-2) var(--s-5);list-style:none;margin:0;padding:var(--s-4) 0;font-size:.84rem;font-weight:500;line-height:1.4;color:var(--charcoal)}
+.trust li{display:flex;align-items:center;gap:var(--s-2)}
+.trust svg{width:16px;height:16px;color:var(--gold-text);flex:none}
+.trust .stars{color:var(--gold-text);letter-spacing:1px;font-size:.8rem}
+
+/* the one animation on the page */
+@keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero-content{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
+
+/* ================= SPLITS ================= */
+.split{display:grid;gap:clamp(32px,5vw,88px);align-items:center}
+.split-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius)}
+.framed{position:relative;isolation:isolate}
+/* even offset frame: same size as the image, shifted 16px down/right, sitting behind it */
+.framed::after{content:"";position:absolute;z-index:-1;inset:16px -16px -16px 16px;border:1.5px solid var(--gold);border-radius:var(--radius);pointer-events:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin:var(--s-6) 0 var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--line)}
+.stats strong{display:block;font-family:var(--serif);font-size:clamp(2rem,1.6rem + 1.4vw,2.8rem);font-weight:600;line-height:1;color:var(--charcoal)}
+.stats .star{display:inline-block;margin-left:.08em;font-family:var(--sans);font-size:.78em;line-height:1;vertical-align:.1em;color:var(--gold-text)}
+.stats span:not(.star){font-size:.84rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+
+/* ================= SERVICES ================= */
+/* phone: horizontal swipe row; tablet: 2 col; desktop: 3 col */
+.services{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:var(--s-4);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--gutter)*-1);padding:var(--s-1) var(--gutter) var(--s-5);scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch;scrollbar-width:none;list-style:none}
+.services::-webkit-scrollbar{display:none}
+.services > li{scroll-snap-align:start;display:flex}
+.swipe-hint{display:flex;align-items:center;gap:var(--s-2);font-size:.85rem;color:var(--muted);margin:0 0 var(--s-3)}
+.swipe-hint svg{width:16px;height:16px;color:var(--gold-text)}
+.card{background:#fff;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;width:100%;box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+.card-media{overflow:hidden}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s ease}
+.card:hover img{transform:scale(1.04)}
+.card-body{padding:var(--s-5) var(--s-5) var(--s-4);display:flex;flex-direction:column;flex:1}
+.card-body h3{margin-bottom:var(--s-2)}
+.card-body p{color:var(--muted);flex:1;font-size:.98rem}
+.card-body .card-tag{flex:none;font-size:.72rem;line-height:1.4;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text);margin-bottom:var(--s-2)}
+.card--cta{background:var(--charcoal);color:rgba(255,255,255,.85);border-color:var(--charcoal);justify-content:center;padding:var(--s-6) var(--s-5)}
+.card--cta h3{color:#fff}
+.card--cta .btn{margin-top:var(--s-3)}
+.card--cta a.tel{color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;margin-top:var(--s-2)}
+
+/* ================= CRAFTSMANSHIP (full-bleed split) ================= */
+.bleed{display:grid;background:var(--charcoal);color:rgba(255,255,255,.86)}
+.bleed-media img{width:100%;height:100%;min-height:320px;aspect-ratio:4/3;object-fit:cover}
+.bleed-text{padding:var(--section-y) var(--gutter)}
+.bleed h2{color:#fff}
+.bleed .eyebrow{color:var(--gold-light)}
+.bleed .lead{color:rgba(255,255,255,.78)}
+.checklist{list-style:none;padding:0;margin:var(--s-5) 0 var(--s-6)}
+.checklist li{display:flex;gap:var(--s-3);align-items:flex-start;padding:var(--s-3) 0;border-top:1px solid rgba(255,255,255,.12)}
+.checklist li:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+.checklist svg{width:20px;height:20px;color:var(--gold);flex:none;margin-top:4px}
+
+/* ================= PROCESS ================= */
+.steps{display:grid;gap:var(--s-4);list-style:none;padding:0;margin:0 0 var(--s-7)}
+.step{position:relative;padding:var(--s-5) 0 var(--s-5) 72px;border-top:1px solid var(--line)}
+.step-num{position:absolute;left:0;top:var(--s-5);font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--gold-text);font-weight:600}
+.step h3{margin-bottom:var(--s-2)}
+.step p{color:var(--muted);margin:0}
+
+/* ================= GALLERY ================= */
+.filters{display:flex;flex-wrap:nowrap;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;margin:-6px calc(var(--gutter)*-1);padding:6px var(--gutter)}
+.filters::-webkit-scrollbar{display:none}
+.filter-btn{flex:none;min-height:44px;padding:8px 14px;border:1px solid var(--line);background:#fff;border-radius:999px;font:500 .9rem var(--sans);color:var(--charcoal);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.filter-btn:hover{border-color:var(--charcoal)}
+.filter-btn[aria-pressed="true"]{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+/* Recent Projects header: title + "See All Our Work" on one line; lead and filters below */
+.gallery-head{display:grid;grid-template-areas:"title" "lead" "all" "filters";max-width:none}
+.gallery-head .gh-title{grid-area:title}
+.gallery-head .lead{grid-area:lead;max-width:640px}
+.gallery-head .btn-all{grid-area:all;width:100%;margin:0 0 var(--s-4)}
+.gallery-head .filters{grid-area:filters}
+
+/* Project carousel: ONE row drifting left, full-bleed, clean faded edges.
+   The track holds the photo set exactly twice. JS measures one set's real width
+   (cards + gaps) and animates translateX(0 → −setWidth), so the loop is seamless. */
+.marquee{--card-w:min(74vw,320px);--card-gap:16px;position:relative;margin:0 0 var(--s-6);overflow:hidden;transition:opacity .3s ease}
+.marquee.is-fading{opacity:0}
+.marquee-row{--fade:clamp(28px,6vw,72px);overflow:hidden;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
+.marquee-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;will-change:transform}
+.marquee-item{flex:0 0 var(--card-w);width:var(--card-w);margin-right:var(--card-gap)}   /* margin (not gap) so both halves are identical */
+.marquee-item button{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:var(--line);cursor:zoom-in;border-radius:6px;overflow:hidden;transition:transform .35s ease,filter .35s ease}
+.marquee-item img{display:block;width:100%;height:100%;object-fit:cover}
+.marquee-item button:hover,.marquee-item button:focus-visible{transform:scale(1.03);filter:brightness(1.07)}
+.g-tag{position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(33,31,29,.78);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:background-color .35s ease,color .35s ease}
+.marquee-item button:hover .g-tag,.marquee-item button:focus-visible .g-tag{background:var(--gold);color:var(--charcoal-deep)}
+/* small round pause/play button in the carousel's bottom-right corner */
+.marquee-toggle{position:absolute;z-index:2;right:clamp(14px,3vw,32px);bottom:20px;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.75);border-radius:50%;background:rgba(33,31,29,.74);color:#fff;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background-color .2s}
+.marquee-toggle:hover{background:var(--charcoal-deep)}
+.marquee-toggle svg{width:16px;height:16px}
+.marquee-toggle .i-play{display:none}
+.marquee-toggle[aria-pressed="true"] .i-play{display:block}
+.marquee-toggle[aria-pressed="true"] .i-pause{display:none}
+/* entrance: the row fades + slides in once (class added by JS) */
+.marquee.reveal-ready .marquee-row{opacity:0;transform:translateX(48px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.marquee.reveal-ready.is-in .marquee-row{opacity:1;transform:none}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(15,13,12,.96);display:none;align-items:center;justify-content:center;padding:64px 0 72px;touch-action:pan-y}
+.lightbox.open{display:flex}
+.lightbox figure{margin:0;width:100%;max-width:1280px;padding:0 var(--s-3);text-align:center}
+.lightbox img{max-height:76svh;width:auto;max-width:100%;margin:0 auto;border-radius:var(--radius-sm);user-select:none;-webkit-user-drag:none}
+.lightbox figcaption{display:flex;justify-content:center;gap:var(--s-4);color:rgba(255,255,255,.85);margin-top:var(--s-4);font-size:.95rem;padding:0 var(--s-4)}
+.lb-count{color:var(--gold-light);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lb-btn{position:absolute;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.4);color:#fff;cursor:pointer}
+.lb-btn:hover{background:rgba(0,0,0,.7);border-color:#fff}
+.lb-btn svg{width:22px;height:22px}
+.lb-close{top:12px;right:12px}
+.lb-prev,.lb-next{bottom:12px}
+.lb-prev{left:calc(50% - 60px)}
+.lb-next{right:calc(50% - 60px)}
+
+/* ================= REVIEWS ================= */
+.reviews{display:grid;gap:var(--s-4);margin-bottom:var(--s-7)}
+.review{background:#fff;border-radius:var(--radius);padding:var(--s-6) var(--s-5);margin:0;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
+.review .stars{color:var(--gold);letter-spacing:3px;margin-bottom:var(--s-4)}
+.review blockquote{margin:0 0 var(--s-5);font-family:var(--serif);font-size:clamp(1.3rem,1.2rem + .4vw,1.5rem);line-height:1.4;color:var(--charcoal);flex:1}
+.review figcaption{display:flex;align-items:center;gap:var(--s-3);font-size:.9rem;color:var(--muted);padding-top:var(--s-4);border-top:1px solid var(--line)}
+.review figcaption strong{display:block;color:var(--charcoal)}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--warm);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--gold-text);flex:none}
+.rating-badge{display:inline-flex;align-items:center;gap:var(--s-3);padding:10px 18px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:.95rem}
+.rating-badge .stars{color:var(--gold);letter-spacing:2px}
+.rating-badge svg{width:18px;height:18px}
+
+/* ================= CTA BAND ================= */
+.cta-band{position:relative;isolation:isolate;color:#fff;text-align:center;padding:clamp(88px,10vw,160px) 0;background:var(--charcoal-deep);overflow:hidden}
+.cta-band > picture{display:contents}
+.cta-band > img,.cta-band > picture > img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.cta-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,13,12,.72),rgba(15,13,12,.84))}
+.cta-band h2{color:#fff;font-size:clamp(2.6rem,1.6rem + 4vw,5rem);margin-bottom:var(--s-3)}
+.cta-band p{color:rgba(255,255,255,.85);font-size:var(--fs-lead);max-width:34rem;margin:0 auto var(--s-6)}
+.cta-actions{display:flex;flex-direction:column;align-items:center;gap:var(--s-4)}
+.cta-phone{display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;font-family:var(--serif);font-size:clamp(1.7rem,1.4rem + 1vw,2.2rem);font-weight:600;color:#fff;text-decoration:none}
+.cta-phone svg{width:24px;height:24px;color:var(--gold)}
+.cta-phone:hover{color:var(--gold-light)}
+
+/* ================= CONTACT ================= */
+.contact-grid{display:grid;gap:var(--s-7)}
+.contact-list{list-style:none;padding:0;margin:var(--s-6) 0 0}
+.contact-list li{display:flex;gap:var(--s-4);align-items:flex-start;padding:var(--s-4) 0;border-top:1px solid var(--line)}
+.contact-list li > svg{color:var(--gold-text);margin-top:4px}
+.contact-list small{display:block;color:var(--muted);font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:2px}
+.contact-list a{font-weight:600;text-decoration:none;font-size:1.05rem}
+.contact-list a:hover{color:var(--gold-text)}
+.form-card{background:#fff;border-radius:var(--radius);padding:var(--s-6) var(--s-5);box-shadow:var(--shadow);border:1px solid var(--line)}
+.form-card h3{margin-bottom:var(--s-1)}
+.form-card > p{color:var(--muted);font-size:.95rem;margin-bottom:var(--s-5)}
+.form-row{display:grid;gap:0 var(--s-4)}
+.field{margin-bottom:var(--s-4)}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
+.field .req{color:#A0341F}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:16px;line-height:1.4;color:var(--ink);background:#fff;border:1px solid #CBC3B7;border-radius:var(--radius-sm);padding:13px 14px;min-height:52px;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%232E2B28' stroke-width='1.6' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.field textarea{min-height:140px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--charcoal);box-shadow:0 0 0 3px rgba(201,162,74,.45)}
+.field.invalid input,.field.invalid select{border-color:#A0341F}
+.error{display:none;color:#A0341F;font-size:.85rem;margin:6px 0 0}
+.field.invalid .error{display:block}
+.form-card .btn{width:100%}
+.form-note{font-size:.84rem;color:var(--muted);margin:var(--s-3) 0 0;text-align:center}
+.form-note.is-error{color:#A0341F;font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-success{display:none;text-align:center;padding:var(--s-6) var(--s-2)}
+.form-success svg{width:60px;height:60px;color:var(--gold);margin:0 auto var(--s-4)}
+.form-card.sent form,.form-card.sent > h3,.form-card.sent > p{display:none}
+.form-card.sent .form-success{display:block}
+
+/* ================= FOOTER ================= */
+.site-footer{background:var(--charcoal-deep);color:rgba(255,255,255,.72);padding:var(--s-9) 0 var(--s-6);font-size:.95rem}
+.footer-grid{display:grid;gap:var(--s-7);margin-bottom:var(--s-7)}
+.site-footer h3{font-family:var(--sans);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:var(--s-4);font-weight:600}
+.site-footer ul{list-style:none;padding:0;margin:0}
+.site-footer li a{display:inline-flex;align-items:center;min-height:36px;text-decoration:none;color:rgba(255,255,255,.86)}
+.site-footer a:hover{color:#fff}
+.footer-legal{white-space:nowrap}
+.footer-legal a{color:rgba(255,255,255,.86);text-decoration:underline;text-decoration-color:rgba(201,162,74,.6);text-underline-offset:3px;display:inline-block;padding:6px 0}   /* tap target */
+.footer-legal a:hover{color:var(--gold-light)}
+.footer-logo{display:inline-flex;flex-wrap:wrap;align-items:center;gap:12px;max-width:100%;margin-bottom:var(--s-4);text-decoration:none}
+.footer-brand img{height:56px;width:auto;padding:6px 10px;border-radius:8px;background:#FBF8F2}   /* light tile: the logo lettering is dark */
+.footer-brand .brand-text{display:block;color:#fff;font-size:clamp(1.35rem,1rem + 1.6vw,1.7rem)}
+.footer-brand p{max-width:30ch}
+.social{display:flex;gap:var(--s-3);margin-top:var(--s-5)}
+.social a{width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.22);border-radius:50%;color:#fff;transition:border-color .2s,color .2s}
+.social a:hover{border-color:var(--gold);color:var(--gold)}
+.social svg{width:20px;height:20px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s-5);font-size:.85rem;display:flex;flex-direction:column;gap:var(--s-2)}
+
+/* ================= ≥600px ================= */
+@media (min-width:600px){
+  .cta-actions{flex-direction:row;justify-content:center;gap:var(--s-6)}
+  .form-row{grid-template-columns:1fr 1fr}
+}
+
+/* ================= ≥768px (tablet) ================= */
+@media (min-width:768px){
+  .services{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,1fr);gap:var(--s-5);overflow:visible;margin:0;padding:0}
+  .hero{min-height:78svh}
+  .hero-content{padding:clamp(40px,8svh,96px) var(--gutter) 64px}
+  .hero-band{width:auto;padding:14px 32px}
+  .hero h1{white-space:nowrap}
+  .hero-sub{font-size:1.18rem;letter-spacing:.01em}
+  .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:var(--s-2) var(--s-5)}
+  .hero .btn{width:auto;min-width:250px}
+  .hero-note{margin-top:var(--s-2)}
+  .trust{font-size:.88rem;gap:var(--s-2) var(--s-6)}
+  .swipe-hint{display:none}
+  .filter-btn{padding:8px 20px;font-size:.95rem}
+  .filters{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
+  .marquee{--card-w:clamp(280px,38vw,320px);--card-gap:18px}
+  .gallery-head{grid-template-columns:1fr auto;grid-template-areas:"title all" "lead lead" "filters filters";column-gap:var(--s-6)}
+  .gallery-head .btn-all{width:auto;align-self:center;justify-self:end;margin:0 0 .45em}
+  .steps{grid-template-columns:repeat(2,1fr);gap:0 var(--s-6)}
+  .reviews{max-width:720px;margin-inline:auto;gap:var(--s-5)}
+  .form-card{padding:var(--s-7) var(--s-7)}
+  .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+  .footer-grid > :last-child{grid-column:1 / -1}
+  .footer-bottom{flex-direction:row;justify-content:space-between}
+  .section-head--row{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .lb-prev,.lb-next{bottom:auto;top:50%;transform:translateY(-50%)}
+  .lb-prev{left:20px}.lb-next{right:20px}
+  .lightbox figure{padding:0 84px}
+  .lightbox{padding:64px 0}
+}
+
+/* ================= ≥1024px (desktop) ================= */
+@media (min-width:1024px){
+  .header-mobile,.menu-overlay{display:none !important}
+  .menu-open{overflow:auto}
+  .brand{gap:12px}
+  .brand img{height:50px}
+  .main-nav{display:block}
+  .main-nav ul{display:flex;gap:clamp(18px,1.8vw,34px);list-style:none;margin:0;padding:0}
+  .main-nav a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:.94rem;font-weight:500;position:relative}
+  .main-nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .main-nav a:hover::after,.main-nav a:focus-visible::after{transform:scaleX(1)}
+  .main-nav a{color:var(--charcoal)}
+  .header-actions{display:flex;align-items:center;gap:var(--s-3)}
+  .header-phone{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-right:var(--s-2);font-size:.85rem;font-weight:500;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .header-phone svg{width:15px;height:15px;color:var(--gold-text)}
+  .header-phone:hover{color:var(--charcoal)}
+  .main-nav a,.brand-text,.header-actions .btn{white-space:nowrap}
+
+  .hero{min-height:82svh}
+  .hero-content{padding:clamp(48px,9svh,104px) var(--gutter) 72px}
+  .hero-band{padding:16px 40px}
+  .hero-media img{object-position:50% 68%}
+
+  /* asymmetric splits */
+  .split{grid-template-columns:7fr 5fr}
+  .split--flip{grid-template-columns:5fr 7fr}
+  .split--flip .split-media{order:2}
+  .split-media img{aspect-ratio:5/4}
+
+  .services{grid-template-columns:repeat(3,1fr);gap:var(--s-6)}
+
+  .bleed{grid-template-columns:1fr 1fr;min-height:640px}
+  .bleed-media img{aspect-ratio:auto}
+  .bleed-text{align-self:center;padding:var(--s-9) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--s-9) clamp(48px,6vw,112px);max-width:none}
+
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .reviews{grid-template-columns:repeat(3,1fr);max-width:none}
+  .step{padding:var(--s-7) 0 0;border-top:2px solid var(--line)}
+  .step::before{content:"";position:absolute;top:-2px;left:0;width:56px;height:2px;background:var(--gold)}
+  .step-num{position:static;display:block;margin-bottom:var(--s-4);font-size:3.4rem}
+
+
+  .contact-grid{grid-template-columns:5fr 7fr;gap:clamp(48px,6vw,112px);align-items:start}
+  .footer-grid{grid-template-columns:2fr 1fr 1fr 1.3fr}
+  .footer-grid > :last-child{grid-column:auto}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .main-nav ul{gap:20px}
+  .main-nav a{font-size:.9rem}
+  .header-phone{display:none}   /* too tight for the phone at this width; it returns at 1280px+ */
+}
+@media (min-width:1440px){
+  .services{gap:var(--s-7)}
+}
+
+/* =====================================================================
+   SECTION FIT
+   Desktop/laptop (≥1024px): every section below the hero fits in one
+   screen: 100svh minus the sticky header (--header-h).
+   Phones/tablets: sections stay compact but are not forced to one screen.
+   ===================================================================== */
+main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav links land below the sticky header */
+.btn[hidden]{display:none}
+.stats strong,.step-num{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.gallery-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-3)}
+.section-head--row .btn{white-space:nowrap;flex:none}
+
+@media (max-width:1023px){
+  .section-head{margin-bottom:clamp(24px,5vw,40px)}
+  .split{gap:28px}
+  .split-media img,.card img{max-height:45svh}
+  .bleed-media img{min-height:0;max-height:45svh}
+  .bleed-text{padding:var(--section-y) var(--gutter)}
+  .stats{margin:var(--s-5) 0}
+  .steps{margin-bottom:var(--s-6)}
+  .marquee{margin-bottom:var(--s-5)}
+  .reviews{margin-bottom:var(--s-6)}
+  .cta-band{padding:clamp(56px,12vw,96px) 0}
+  .contact-grid{gap:36px}
+}
+
+@media (min-width:1024px){
+  :root{
+    --section-y:clamp(40px,6vh,80px);
+    --fit-h:calc(100svh - var(--header-h));                 /* one screen below the header */
+    --fit-inner:calc(var(--fit-h) - 2 * var(--section-y));  /* room left for content */
+  }
+  /* each section fills one screen with its content vertically centered */
+  .section,.cta-band{min-height:var(--fit-h);display:flex;flex-direction:column;justify-content:center}
+  .cta-band{padding:var(--section-y) 0}
+  .section-head{margin-bottom:clamp(20px,3.5vh,40px)}
+  .eyebrow{margin-bottom:10px}
+  .section .lead{font-size:clamp(1rem,.85rem + .35vh,1.15rem)}
+
+  /* About + Our Story: side by side, image capped at ~70vh */
+  .split,.split--flip{grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
+  .split-media img{aspect-ratio:auto;height:min(70vh, var(--fit-inner))}
+  .split > div:not(.split-media){max-width:34rem}
+  .split--flip > div:not(.split-media){justify-self:end}
+  .split p{font-size:.96rem;line-height:1.65}
+  .split .lead{font-size:clamp(1rem,.9rem + .25vh,1.1rem)}
+  .stats{margin:clamp(14px,2.5vh,28px) 0;padding-top:clamp(12px,2vh,20px)}
+  .stats strong{font-size:clamp(1.8rem,1rem + 2vh,2.5rem)}
+
+  /* Services: one compact row of five; the extra "Not sure where to start?" tile
+     is hidden here because the section heading already has a quote button */
+  .services{grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,1.4vw,24px)}
+  .services > li:last-child{display:none}
+  .card img{aspect-ratio:auto;height:clamp(120px,18vh,180px)}
+  .card-body{padding:16px 18px 8px}
+  .card-body h3{font-size:clamp(1.2rem,.75rem + .5vw + .5vh,1.5rem)}
+  .card-body p{font-size:.9rem;line-height:1.55;margin-bottom:6px}
+  .card-body .card-tag{font-size:.66rem;letter-spacing:.12em}
+
+  /* Craftsmanship: image and text side by side at exactly one screen tall */
+  .bleed{min-height:0;height:var(--fit-h);max-height:1000px}
+  .bleed-media{height:100%;overflow:hidden}
+  .bleed-media img{height:100%;max-height:none}
+  .bleed-text{padding:var(--section-y) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--section-y) clamp(40px,5vw,96px)}
+  .checklist{margin:clamp(14px,2.5vh,24px) 0 clamp(18px,3vh,32px)}
+  .checklist li{padding:clamp(8px,1.3vh,12px) 0}
+
+  /* How It Works: four steps in one row */
+  .steps{margin-bottom:clamp(24px,4vh,48px)}
+  .step{padding-top:clamp(24px,4vh,48px)}
+  .step-num{font-size:clamp(2.4rem,1.4rem + 2.6vh,3.4rem);margin-bottom:clamp(8px,1.5vh,16px)}
+
+  /* Gallery: two carousel rows sized so the whole section fits one screen */
+  .marquee{--card-gap:20px;--card-w:min(clamp(300px,25vw,360px), calc((var(--fit-inner) - 330px) * 4 / 3));margin-bottom:clamp(14px,2.5vh,28px)}
+  .gallery-head{grid-template-areas:"title all" "lead filters";align-items:end}
+  .gallery-head .lead{margin:0}
+  .gallery-head .filters{justify-self:end}
+
+  /* Reviews */
+  .reviews{margin-bottom:clamp(20px,3.5vh,40px)}
+  .review{padding:clamp(20px,3vh,32px) 24px}
+  .review .stars{margin-bottom:clamp(8px,1.5vh,16px)}
+  .review blockquote{font-size:clamp(1.15rem,.75rem + 1vh,1.4rem);margin-bottom:clamp(14px,2.5vh,24px)}
+  .review figcaption{padding-top:clamp(10px,1.8vh,16px)}
+
+  /* CTA band */
+  .cta-band h2{font-size:clamp(2.4rem,.8rem + 2vw + 3vh,4.5rem)}
+
+  /* Contact: info beside a compact form */
+  .contact-grid{align-items:center}
+  .contact-list{margin-top:clamp(16px,3vh,32px)}
+  .contact-list li{padding:clamp(8px,1.4vh,16px) 0}
+  .form-card{padding:clamp(20px,3.5vh,40px) clamp(24px,3vw,40px)}
+  .form-card > p{margin-bottom:clamp(12px,2vh,24px)}
+  .field{margin-bottom:clamp(8px,1.6vh,16px)}
+  .field label{margin-bottom:4px;font-size:.88rem}
+  .field input,.field select{min-height:44px;padding:10px 12px}
+  .field textarea{min-height:clamp(64px,10vh,120px);padding:10px 12px}
+  .form-card .btn{min-height:48px}
+  .form-note{margin-top:8px}
+}
+/* tablets: services in 3 compact columns (2 rows) instead of 3 tall rows */
+@media (min-width:768px) and (max-width:1023px){
+  .services{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
+  .card img{aspect-ratio:16/10}
+  .card-body{padding:16px 16px 6px}
+  .card-body p{font-size:.9rem;line-height:1.55}
+  .card .link-arrow{font-size:.92rem;white-space:nowrap}
+}
+/* small laptops: five service cards are narrow, so trim them further */
+@media (min-width:1024px) and (max-width:1279px){
+  .services{gap:12px}
+  .card-body{padding:14px 14px 6px}
+  .card-body .card-tag{display:none}
+  .card-body p{font-size:.86rem;line-height:1.5}
+  .card .link-arrow{font-size:.9rem;white-space:nowrap}
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  /* gallery carousel becomes two swipeable/scrollable rows (no duplicates are built) */
+  .marquee-row{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+  .marquee-item{scroll-snap-align:start}
+  .marquee-toggle{display:none}
+}
+
+/* =====================================================================
+   OUR WORK PAGE
+   ===================================================================== */
+/* compact page header: breadcrumb, title, one-line intro */
+.page-head{background:var(--warm);padding:clamp(20px,3vw,30px) 0 clamp(18px,2.6vw,26px);border-bottom:1px solid var(--line)}
+.crumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 6px;padding:0;list-style:none;font-size:.82rem;color:var(--muted)}
+.crumbs li + li::before{content:"/";margin-right:6px;color:#A69D92}
+.crumbs a{display:inline-block;padding:3px 0;color:var(--charcoal);font-weight:500;text-decoration:none;border-bottom:1px solid var(--gold)}
+.crumbs a:hover{color:var(--gold-text)}
+.page-head h1{font-size:clamp(2rem,3.5vw,2.75rem);line-height:1.1;margin:0 0 4px}
+.page-head .lead{font-size:clamp(.95rem,.9rem + .2vw,1.05rem);margin:0}
+
+/* category tabs stay pinned under the sticky header */
+.gtabs{position:sticky;top:var(--header-h);z-index:90;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.gtabs .filters{margin-top:0;margin-bottom:0;padding-top:8px;padding-bottom:8px}
+.gtabs .filter-btn{min-height:40px;padding:6px 16px;font-size:.88rem}
+
+.ggroups{padding-top:clamp(16px,2.2vw,24px);padding-bottom:clamp(48px,6vw,80px);transition:opacity .25s ease}
+.ggroups.is-fading{opacity:0}
+.ggroup{container-type:inline-size;scroll-margin-top:calc(var(--header-h) + 68px)}
+.ggroup[hidden],.filter-btn[hidden],.gtabs[hidden]{display:none}
+.ggroup + .ggroup:not([hidden]){margin-top:clamp(28px,4vw,44px)}
+.ggroup-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-4);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.ggroup-head h2{font-size:clamp(1.5rem,1.3rem + .5vw,1.75rem);margin:0}
+.ggroup-count{font-size:.82rem;color:var(--muted);white-space:nowrap}
+/* projects inside a category (e.g. Custom Homes → Havelock, NC) */
+.gproject + .gproject{margin-top:clamp(24px,3.5vw,36px)}
+.gproject-head{display:flex;align-items:baseline;gap:12px;margin:0 0 10px}
+.gproject-head h3{font-size:clamp(1.15rem,1.05rem + .35vw,1.35rem);margin:0}
+.gcard picture{display:contents}
+
+/* Even-filling grid: every row is the same height (cards are 4:3 at full column width),
+   and any leftover photos in a category's last row widen to fill it, at any photo count. */
+.ggrid{display:grid;gap:10px;margin:0;padding:0;list-style:none;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:calc((100cqw - 10px) / 2 * .75)}
+.ggrid > li{min-width:0}
+.gcard{position:relative;display:block;width:100%;height:100%;padding:0;border:0;border-radius:6px;overflow:hidden;background:var(--line);cursor:zoom-in;transition:transform .35s ease,filter .35s ease}
+.gcard img{display:block;width:100%;height:100%;object-fit:cover}
+.gcard:hover,.gcard:focus-visible{transform:scale(1.03);filter:brightness(1.07)}
+.gcard:hover .g-tag,.gcard:focus-visible .g-tag{background:var(--gold);color:var(--charcoal-deep)}
+.ggrid .g-tag{left:8px;bottom:8px;font-size:.64rem;padding:2px 8px}
+@supports not (width:1cqw){ .ggrid{grid-auto-rows:auto} .gcard{aspect-ratio:4/3;height:auto} }
+#lb-cap strong{color:var(--gold-light);font-weight:600;margin-right:10px;padding-right:10px;border-right:1px solid rgba(255,255,255,.3)}
+
+/* phones: 2 per row; an odd last photo spans the full row */
+@media (max-width:767px){
+  .ggrid > li:nth-child(2n+1):last-child{grid-column:1 / -1}
+}
+/* tablets: 3 per row (6-track grid); 1 or 2 leftovers widen to fill */
+@media (min-width:768px) and (max-width:1023px){
+  .ggrid{gap:14px;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:calc((100cqw - 28px) / 3 * .75)}
+  .ggrid > li{grid-column:span 2}
+  .ggrid > li:nth-child(3n+1):last-child{grid-column:1 / -1}
+  .ggrid > li:nth-child(3n+1):nth-last-child(2),.ggrid > li:nth-child(3n+1):nth-last-child(2) + li{grid-column:span 3}
+}
+@media (min-width:768px){
+  .ggrid .g-tag{left:10px;bottom:10px;font-size:.72rem;padding:3px 10px}
+}
+/* desktop: 4 per row (12-track grid); 1, 2 or 3 leftovers widen to fill */
+@media (min-width:1024px){
+  .ggrid{gap:18px;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:calc((100cqw - 54px) / 4 * .75)}
+  .ggrid > li{grid-column:span 3}
+  .ggrid > li:nth-child(4n+1):last-child{grid-column:1 / -1}
+  .ggrid > li:nth-child(4n+1):nth-last-child(2),.ggrid > li:nth-child(4n+1):nth-last-child(2) + li{grid-column:span 6}
+  .ggrid > li:nth-child(4n+1):nth-last-child(3),.ggrid > li:nth-child(4n+1):nth-last-child(3) ~ li{grid-column:span 4}
+  /* on this page the closing CTA is a normal band, not a full-screen section */
+  .cta-band{min-height:0;padding:clamp(88px,9vw,140px) 0}
+}
+/* ================= SCROLL REVEAL =================
+   Elements marked data-reveal fade in and rise slightly (or slide from a side) once,
+   when ~15% of them is on screen. They are only hidden while <html> has the "js" class
+   (set in <head>), so content still shows if JavaScript fails.
+   Only opacity + transform are animated (no layout shift). */
+.js [data-reveal]{opacity:0;transform:translate3d(0,18px,0);transition:opacity .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),transform .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms)}
+.js [data-reveal="left"]{transform:translate3d(-20px,0,0)}
+.js [data-reveal="right"]{transform:translate3d(20px,0,0)}
+.js [data-reveal="fade"]{transform:none}
+.js [data-reveal].is-revealed{opacity:1;transform:none}
+main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways scrolling (clip keeps sticky elements working) */
+/* split-section photos also settle from a very slight zoom */
+.js .split-media[data-reveal] img,.js .bleed-media[data-reveal] img{transform:scale(1.04);transition:transform .9s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms)}
+.js .split-media[data-reveal].is-revealed img,.js .bleed-media[data-reveal].is-revealed img{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js [data-reveal],.js [data-reveal] img{opacity:1 !important;transform:none !important}
+}
+
+/* ================= PRIVACY POLICY ================= */
+.page-head .updated{margin:0;font-size:.9rem;color:var(--muted)}
+.policy{max-width:720px;margin:0 auto;padding:clamp(32px,5vw,56px) 0 clamp(56px,8vw,96px)}
+.policy > p:first-child{font-size:clamp(1.02rem,.98rem + .2vw,1.12rem);color:var(--muted)}
+.policy h2{font-size:clamp(1.45rem,1.3rem + .6vw,1.85rem);line-height:1.15;margin:2.1em 0 .55em}
+.policy h3{font-family:var(--sans);font-size:1rem;font-weight:600;letter-spacing:0;margin:1.4em 0 .4em;color:var(--charcoal)}
+.policy p,.policy li{font-size:1rem;line-height:1.8;color:var(--ink)}
+.policy p{margin:0 0 1em}
+.policy ul{margin:0 0 1.1em;padding-left:1.25em}
+.policy li{margin-bottom:.35em}
+.policy li::marker{color:var(--gold)}
+.policy a{color:var(--charcoal);font-weight:500;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;overflow-wrap:anywhere}
+.policy a:hover{color:var(--gold-text)}
+.policy address{font-style:normal;line-height:1.8;padding:16px 20px;border-left:3px solid var(--gold);background:var(--warm);border-radius:0 6px 6px 0}
+.policy .ph{background:#FBF3DC;padding:0 4px;border-radius:3px}   /* placeholder highlight; remove the class once filled in */
+</style>
+<!-- Scroll reveal: mark that JS is running so reveal elements can start hidden.
+     Failsafe: if the reveal script has not started within 3s, show everything. -->
+<script>document.documentElement.classList.add("js");setTimeout(function(){var h=document.documentElement;if(!h.classList.contains("reveal-on"))h.classList.remove("js")},3000)</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-swipe" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.2c-.3 0-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.2H7.6V12h2.7v10H14V12h2.8l.4-3.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6z"/></symbol>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="RamFam Builders home">
+      <!-- Logo: logo-transparent.png in this folder. Not lazy-loaded (visible on load). -->
+      <img src="logo-transparent.png" alt="RamFam Builders logo" width="90" height="48" decoding="async" onerror="this.parentNode.classList.add(&#39;no-logo&#39;)">
+      <span class="brand-text" aria-hidden="true">Ram<b>Fam</b> Builders</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#process">Process</a></li>
+        <li><a href="gallery.html">Our Work</a></li>
+        <li><a href="index.html#story">Our Story</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+      <a class="icon-btn" href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+      <a class="btn btn--charcoal btn--sm" href="index.html#contact">Contact Us</a>
+    </div>
+
+    <div class="header-mobile">
+      <a class="icon-btn" href="tel:+15555555555" data-phone-link aria-label="Call RamFam Builders"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-overlay">
+        <svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full-screen mobile menu -->
+<div class="menu-overlay" id="menu-overlay" aria-label="Site menu">
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#process">How It Works</a></li>
+      <li><a href="gallery.html">Our Work</a></li>
+      <li><a href="index.html#story">Our Story</a></li>
+      <li><a href="index.html#reviews">Reviews</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn--gold" href="index.html#contact">Get a Free Estimate</a>
+  <a class="btn btn--ghost" href="tel:+15555555555" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Call <span data-phone-text>(555) 555-5555</span></a>
+  <p class="menu-meta">Family owned · Licensed &amp; insured · Serving <span data-area-text>Eastern North Carolina</span></p>
+</div>
+
+
+<main id="main">
+
+<!-- ================= PAGE HEADER ================= -->
+<section class="page-head" aria-labelledby="page-title">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="index.html">Home</a></li><li aria-current="page">Privacy Policy</li></ol>
+    </nav>
+    <h1 id="page-title">Privacy Policy</h1>
+    <!-- REPLACE: the date you publish or last change this policy -->
+    <p class="updated">Last updated: <time datetime="2026-10-15">October 15, 2026</time></p>
+  </div>
+</section>
+
+<!-- ================= POLICY ================= -->
+<article class="wrap policy" aria-labelledby="page-title">
+  <p>This policy explains, in plain language, what information RamFam Builders collects when you visit our website, request an estimate, or contact us, and how we use and protect it. We're a small, family-owned business, and we treat your information the way we'd want ours treated.</p>
+
+  <h2 id="who-we-are" data-reveal>Who we are</h2>
+  <!-- REPLACE: your legal business name (e.g. "RamFam Builders, LLC") -->
+  <p>This website is operated by <strong><span class="ph">RamFam Builders, LLC</span></strong> ("RamFam Builders," "we," "us," or "our"), a family-owned home builder serving <span data-area-text>Eastern North Carolina</span>. You can reach us at <a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a> or <a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a>.</p>
+  <!-- REPLACE: the date this policy takes effect -->
+  <p>This policy is effective as of <span class="ph">October 15, 2026</span>.</p>
+
+  <h2 id="what-we-collect" data-reveal>Information we collect</h2>
+  <h3>Information you give us</h3>
+  <p>When you fill out our free estimate or contact form, we collect what you enter, which may include:</p>
+  <ul>
+    <li>Your name</li>
+    <li>Phone number and email address</li>
+    <li>The service you're interested in (custom home, remodel, concrete, septic)</li>
+    <li>Project details you choose to share, such as location, timeline, or budget</li>
+  </ul>
+  <p>If you call or text us, we'll have your phone number and anything you tell us during the conversation.</p>
+  <h3>Information collected automatically</h3>
+  <p>Like most websites, our hosting provider may record basic technical information when you visit, such as your browser type, device type, general location based on IP address, the pages you view, and the date and time of your visit. If we add website analytics in the future, they would collect this same kind of information about how the site is used.</p>
+
+  <h2 id="how-we-use" data-reveal>How we use your information</h2>
+  <p>We use the information we collect to:</p>
+  <ul>
+    <li>Respond to your estimate request or question</li>
+    <li>Schedule site visits, consultations, and work</li>
+    <li>Communicate with you about your project by phone, text, or email</li>
+    <li>Keep records needed to run our business, such as estimates and contracts</li>
+    <li>Keep our website working and make it more useful</li>
+  </ul>
+  <p>We won't add you to a marketing list without your permission.</p>
+
+  <h2 id="how-we-share" data-reveal>How we share your information</h2>
+  <p><strong>We do not sell your personal information.</strong> We share it only:</p>
+  <ul>
+    <li><strong>With service providers</strong> who help us run the website and the estimate form, such as our website host and form or email services. They may use your information only to provide those services to us.</li>
+    <li><strong>With people working on your project</strong>, such as subcontractors or suppliers, when they need it to do the work you've hired us for.</li>
+    <li><strong>When required by law</strong>, for example to respond to a valid legal request, or to protect our rights, our customers, or the public.</li>
+  </ul>
+
+  <h2 id="third-parties" data-reveal>Third-party links and services</h2>
+  <p>Our website links to and works with services run by other companies, including Facebook (our page and embedded videos), Google (reviews and maps), and our website hosting provider. When you use those services or follow those links, their own privacy policies apply, not this one. We encourage you to read them.</p>
+
+  <h2 id="cookies" data-reveal>Cookies and analytics</h2>
+  <p>Our website itself does not use cookies to track you. Some embedded content, such as a Facebook video, may set its own cookies when it loads, under that company's policy. You can block or delete cookies in your browser settings.</p>
+  <!-- REPLACE: if you add analytics (e.g. Google Analytics), name the tool here and explain how to opt out -->
+  <p>We don't currently use website analytics. If we add them, we'll update this section to say which tools we use and how you can opt out.</p>
+
+  <h2 id="security" data-reveal>Data security and retention</h2>
+  <p>We use reasonable measures to protect your information, such as secure (HTTPS) connections and limited access to the messages we receive. No method of sending or storing information online is 100% secure, so we can't guarantee absolute security.</p>
+  <p>We keep your information only as long as we need it to respond to you, complete your project, and meet our legal, tax, and warranty obligations. After that, we delete it or keep it in a form that no longer identifies you.</p>
+
+  <h2 id="your-choices" data-reveal>Your choices</h2>
+  <ul>
+    <li><strong>Access, correction, or deletion:</strong> contact us to ask what information we have about you, to correct it, or to delete it. We may need to keep some records the law requires us to keep.</li>
+    <li><strong>Texts:</strong> reply STOP to any text from us to stop receiving texts.</li>
+    <li><strong>Emails:</strong> ask us to stop emailing you, or use the unsubscribe link if an email includes one.</li>
+  </ul>
+
+  <h2 id="children" data-reveal>Children's privacy</h2>
+  <p>Our website is not directed to children under 13, and we do not knowingly collect personal information from them. If you believe a child has sent us information, contact us and we'll delete it.</p>
+
+  <h2 id="changes" data-reveal>Changes to this policy</h2>
+  <p>We may update this policy from time to time. When we do, we'll change the "Last updated" date at the top of this page. Significant changes will be noted here.</p>
+
+  <h2 id="contact" data-reveal>Contact us</h2>
+  <p>If you have questions about this policy or your information, contact us:</p>
+  <!-- REPLACE: legal business name and mailing address -->
+  <address>
+    <strong><span class="ph">RamFam Builders, LLC</span></strong><br>
+    <span class="ph">123 Main Street</span><br>
+    <span class="ph">Greenville, NC 27834</span><br>
+    Phone: <a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a><br>
+    Email: <a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a>
+  </address>
+</article>
+
+</main>
+
+<!-- ================= 11. FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="RamFam Builders home">
+          <img src="logo-transparent.png" alt="RamFam Builders logo" width="105" height="56" loading="lazy" decoding="async">
+          <span class="brand-text" aria-hidden="true">Ram<b>Fam</b> Builders</span>
+        </a>
+        <p>Family-owned custom home builder. Building dream homes across Eastern North Carolina.</p>
+        <div class="social">
+          <a href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+          <a href="#instagram" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+        </div>
+      </div>
+      <nav aria-label="Footer">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#process">How It Works</a></li>
+          <li><a href="gallery.html">Our Work</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="index.html#contact">Free Estimate</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="index.html#services">Custom Homes</a></li>
+          <li><a href="index.html#services">Remodels &amp; Additions</a></li>
+          <li><a href="index.html#services">Concrete</a></li>
+          <li><a href="index.html#services">Septic Installation</a></li>
+          <li><a href="index.html#services">Septic Repair</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a></li>
+          <li><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></li>
+          <li style="padding:6px 0">Serving <span data-area-text>Eastern North Carolina</span></li>
+          <li style="padding:6px 0" data-license-text>NC Licensed General Contractor #00000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> RamFam Builders. All rights reserved. <span class="footer-legal">· <a href="privacy.html" aria-current="page">Privacy Policy</a></span></span>
+      <span>Family Owned · Licensed &amp; Insured</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* =====================================================================
+   SITE_CONFIG: business info (keep in sync with index.html and gallery.html)
+   ===================================================================== */
+const SITE_CONFIG = {
+  phoneDisplay: "(555) 555-5555",          // REPLACE: number as shown on the page
+  phoneLink:    "+15555555555",            // REPLACE: same number for tel: links (+1 then 10 digits)
+  email:        "info@ramfambuilders.com", // REPLACE
+  serviceArea:  "Eastern North Carolina",  // REPLACE
+  license:      "NC Licensed General Contractor #00000", // REPLACE
+  facebook:     "#facebook",               // REPLACE: https://facebook.com/yourpage
+  instagram:    "#instagram",              // REPLACE: https://instagram.com/yourhandle
+};
+
+/* ===================== no edits needed below ===================== */
+(function () {
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const C = SITE_CONFIG;
+
+  /* ---- Business info from SITE_CONFIG ---- */
+  $$("[data-phone-link]").forEach(a => a.href = "tel:" + C.phoneLink);
+  $$("[data-phone-text]").forEach(e => e.textContent = C.phoneDisplay);
+  $$("[data-email-link]").forEach(a => a.href = "mailto:" + C.email);
+  $$("[data-email-text]").forEach(e => e.textContent = C.email);
+  $$("[data-area-text]").forEach(e => e.textContent = C.serviceArea);
+  $$("[data-license-text]").forEach(e => e.textContent = C.license);
+  $$("[data-facebook-link]").forEach(a => a.href = C.facebook);
+  $$("[data-instagram-link]").forEach(a => a.href = C.instagram);
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ---- Header: shadow after scrolling ---- */
+  const header = $("#site-header");
+  const onScroll = () => header.classList.toggle("is-solid", window.scrollY > 24);
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---- Full-screen mobile menu ---- */
+  const toggle = $(".nav-toggle"), overlay = $("#menu-overlay");
+  const setMenu = open => {
+    document.body.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", open);
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    overlay.toggleAttribute("inert", !open);
+  };
+  overlay.setAttribute("inert", "");
+  toggle.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  $$("a", overlay).forEach(a => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && document.body.classList.contains("menu-open")) { setMenu(false); toggle.focus(); } });
+  matchMedia("(min-width:1024px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
+})();
+</script>
+<!-- Scroll reveal (fade + rise once, IntersectionObserver, no libraries) -->
+<script>
+(function () {
+  var html = document.documentElement;
+  var els = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  // stagger grouped items: children of [data-reveal-stagger="ms"] get increasing delays
+  Array.prototype.forEach.call(document.querySelectorAll("[data-reveal-stagger]"), function (group) {
+    var step = +group.getAttribute("data-reveal-stagger") || 90,
+        base = +group.getAttribute("data-reveal-base") || 0,
+        cols = +group.getAttribute("data-reveal-cols") || 0;   // restart the stagger on each row of a grid
+    Array.prototype.filter.call(group.children, function (c) { return c.hasAttribute("data-reveal"); })
+      .forEach(function (el, i) { el.style.setProperty("--reveal-delay", (base + (cols ? i % cols : i) * step) + "ms"); });
+  });
+  html.classList.add("reveal-on");
+  var show = function (el) { el.classList.add("is-revealed"); };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) { els.forEach(show); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
