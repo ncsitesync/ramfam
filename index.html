@@ -39,9 +39,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- hero photo (keep in sync with the hero <picture> below) -->
-<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-mobile.webp" media="(max-width: 767px)">
-<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp" media="(min-width: 768px)"
-      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
+<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
+      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)">
 
 <!-- JSON-LD schema: values are refreshed from SITE_CONFIG by the script at the bottom; these are fallbacks. -->
 <script type="application/ld+json" id="schema">
@@ -53,7 +52,7 @@
   "url": "https://www.ramfambuilders.com/",
   "logo": "https://www.ramfambuilders.com/assets/logo.png",
   "image": "https://www.ramfambuilders.com/images/hero/hero-1920.jpg",
-  "telephone": "+15555555555",
+  "telephone": "+1-910-385-7680",
   "email": "info@ramfambuilders.com",
   "priceRange": "$$$",
   "address": { "@type": "PostalAddress", "addressLocality": "Greenville", "addressRegion": "NC", "postalCode": "27834", "addressCountry": "US" },
@@ -744,21 +743,26 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 @media (min-width:1024px) and (min-aspect-ratio:11/5){ .hero{--hero-pos:50% 20%} }
 
 /* ================= HERO ON PHONES (under 768px only) =================
-   Shorter hero (62svh, min 476px) with its own 4:5 photo (whole house mid-frame: roof ~30% down,
-   base ~67%), compact headline over the sky and a compact button stack over the lawn. */
+   heroimage.png is 2.4:1 and the house spans ~23%-84% of its width, so a tall phone hero could only
+   show ~31% of it. Phones instead get a full-width 16:10 photo band (cover, ~67% of the width:
+   the whole house, porch and stairs) with a small headline over its top edge, then the
+   subheading + buttons on a dark panel right below it. Tablet/desktop are unchanged. */
 @media (max-width:767px){
-  .hero{--hero-h:max(476px, 62svh);--hero-pos:50% 50%}
-  .hero-content{padding:14px 16px 0}
-  .hero-band,.hero .hero-band{width:auto;max-width:100%;padding:10px 16px}
-  .hero h1{font-size:clamp(1.5rem,7vw,1.9rem);letter-spacing:.06em;line-height:1.1}
-  .hero .hero-sub{margin-top:8px;padding:0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
-    font-size:.92rem;font-weight:600;line-height:1.35;max-width:22em;
-    text-shadow:0 0 2px rgba(255,255,255,1),0 0 8px rgba(255,255,255,.95),0 0 16px rgba(255,255,255,.8)}
-  .hero-cta{bottom:14px}
-  .hero .btn{min-height:46px;max-width:320px;padding:10px 22px;font-size:.98rem}
-  .hero-call{min-height:34px;margin-top:6px;padding:0 12px;font-size:.86rem}
-  .hero-call svg{width:14px;height:14px}
-  .hero-note{margin-top:6px;padding:2px 10px;font-size:.74rem}
+  .hero{--hero-pos:61% 50%;height:auto;flex-direction:column;justify-content:flex-start;background:var(--charcoal-deep)}
+  .hero::after{display:none}                                       /* no gradient needed: buttons are off the photo */
+  .hero-media{position:relative;inset:auto;z-index:0;order:1;width:100%;aspect-ratio:16/10}
+  .hero-content{display:contents}                                  /* lets the subheading move below the photo */
+  .hero-band,.hero .hero-band{position:absolute;z-index:1;top:10px;left:50%;transform:translateX(-50%);width:auto;max-width:calc(100% - 24px);padding:7px 14px}
+  .hero h1{font-size:clamp(1.2rem,5.6vw,1.5rem);letter-spacing:.05em;white-space:nowrap}
+  .hero .hero-sub{order:2;align-self:center;max-width:24em;margin:16px 16px 0;padding:0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+    text-shadow:none;color:#F6F3EE;font-size:.95rem;font-weight:500;line-height:1.4}
+  .hero-cta{order:3;position:static;padding:14px 16px 18px}
+  .hero .btn{min-height:46px;max-width:320px;padding:10px 22px}
+  .hero .hero-call{min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;color:#fff;background:none;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .hero .hero-call svg{color:var(--gold)}
+  .hero .hero-call:hover span{border-bottom-color:#fff}
+  .hero .hero-note{margin-top:2px;padding:0;font-size:.78rem;color:rgba(246,243,238,.72);background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .trust-strip{border-top:1px solid rgba(201,162,74,.22)}         /* separates it from the dark hero panel */
 }
 
 /* ================= REDUCED MOTION ================= */
@@ -817,13 +821,13 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     </nav>
 
     <div class="header-actions">
-      <a class="header-phone" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+      <a class="header-phone" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
       <a class="icon-btn" href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
       <a class="btn btn--charcoal btn--sm" href="#contact">Contact Us</a>
     </div>
 
     <div class="header-mobile">
-      <a class="icon-btn" href="tel:+15555555555" data-phone-link aria-label="Call RamFam Builders"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <a class="icon-btn" href="tel:+19103857680" data-phone-link aria-label="Call RamFam Builders"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
       <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-overlay">
         <svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></svg>
         <svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
@@ -846,7 +850,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     </ul>
   </nav>
   <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-  <a class="btn btn--ghost" href="tel:+15555555555" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Call <span data-phone-text>(555) 555-5555</span></a>
+  <a class="btn btn--ghost" href="tel:+19103857680" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Call <span data-phone-text>(910) 385-7680</span></a>
   <p class="menu-meta">Family owned · Licensed &amp; insured · Serving <span data-area-text>Eastern North Carolina</span></p>
 </div>
 
@@ -857,14 +861,10 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <div class="hero-media">
     <!-- Hero photo (full bleed): optimized copies of heroimage.png, WebP first, JPG fallback.
          Keep the <head> preload link in sync. Not lazy-loaded: this is the first thing visitors see.
-         Phones (under 768px) use their own 4:5 photo: this wide photo can't show the whole house on a tall screen. -->
+         Phones (under 768px) show it as a full-width 16:10 band so the whole house fits; the text sits below it. -->
     <picture>
-      <!-- REPLACE: phone hero = 4:5 crop of Havelock-34 (images/hero/hero-mobile.*, made by tools/optimize-photos.js).
-           Swap for a sharper portrait exterior when you have one. -->
-      <source media="(max-width: 767px)" type="image/webp" srcset="images/hero/hero-mobile.webp" width="408" height="510">
-      <source media="(max-width: 767px)" srcset="images/hero/hero-mobile.jpg" width="408" height="510">
-      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)">
-      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="(orientation: portrait) 200vh, max(100vw, 180vh)"
+      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)">
+      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)"
            width="1920" height="800" fetchpriority="high" decoding="async"
            alt="Three-story white coastal home raised on pilings, with a deep covered porch, board-and-batten siding, a side staircase and a green lawn, surrounded by tall pines under a blue sky">
     </picture>
@@ -878,7 +878,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <div class="hero-cta">
     <div class="hero-actions">
       <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-      <a class="hero-call" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(555) 555-5555</span></span></a>
+      <a class="hero-call" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(910) 385-7680</span></span></a>
     </div>
     <p class="hero-note">Free estimates · Typically reply within 24 hours</p>
   </div>
@@ -1056,7 +1056,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
           <h3>Not sure where to start?</h3>
           <p>Tell us about your land and your plans. We'll walk you through options, timeline, and cost, free.</p>
           <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-          <a class="tel" href="tel:+15555555555" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+          <a class="tel" href="tel:+19103857680" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
         </div>
       </li>
     </ul>
@@ -1270,7 +1270,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     <p>Tell us about your project and we'll get back to you with a free, no-pressure estimate.</p>
     <div class="cta-actions">
       <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-      <a class="cta-phone" href="tel:+15555555555" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(555) 555-5555</span></a>
+      <a class="cta-phone" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
     </div>
   </div>
 </section>
@@ -1283,7 +1283,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <h2 id="contact-title">Let's Talk About Your Project</h2>
       <p class="lead">Fill out the form and a member of our family will reach out within one business day. Prefer to talk now? Give us a call.</p>
       <ul class="contact-list">
-        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small>Call or text</small><a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small>Call or text</small><a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small>Email</small><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small>Service area</small><span data-area-text>Eastern North Carolina</span></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small>Hours</small><span data-hours-text>Mon–Fri 7am–6pm · Sat by appointment</span></div></li>
@@ -1344,7 +1344,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <div class="form-success" role="status" aria-live="polite" tabindex="-1">
         <svg aria-hidden="true"><use href="#i-check"/></svg>
         <h3>Thank you!</h3>
-        <p>We received your request and will be in touch within one business day. Need us sooner? Call <a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a>.</p>
+        <p>We received your request and will be in touch within one business day. Need us sooner? Call <a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a>.</p>
       </div>
     </div>
   </div>
@@ -1391,7 +1391,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <div>
         <h3>Contact</h3>
         <ul>
-          <li><a href="tel:+15555555555" data-phone-link><span data-phone-text>(555) 555-5555</span></a></li>
+          <li><a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a></li>
           <li><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></li>
           <li style="padding:6px 0">Serving <span data-area-text>Eastern North Carolina</span></li>
           <li style="padding:6px 0" data-license-text>NC Licensed General Contractor #00000</li>
@@ -1423,8 +1423,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
    ===================================================================== */
 const SITE_CONFIG = {
   businessName:      "RamFam Builders",
-  phoneDisplay:      "(555) 555-5555",          // REPLACE: number as shown on the page
-  phoneLink:         "+15555555555",            // REPLACE: same number for tel: links (+1 then 10 digits)
+  phoneDisplay:      "(910) 385-7680",          // number as shown on the page
+  phoneLink:         "+19103857680",            // same number for tel: links (+1 then 10 digits)
+  phoneSchema:       "+1-910-385-7680",         // same number for Google (JSON-LD)
   email:             "info@ramfambuilders.com", // REPLACE
   serviceArea:       "Eastern North Carolina",  // REPLACE: e.g. "Pitt, Beaufort & Lenoir Counties, NC"
   hours:             "Mon–Fri 7am–6pm · Sat by appointment", // REPLACE
@@ -1471,7 +1472,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     const s = JSON.parse($("#schema").textContent);
     Object.assign(s, {
       name: C.businessName, url: C.website, logo: C.website.replace(/\/$/, "") + "/assets/logo.png",
-      telephone: C.phoneLink, email: C.email, areaServed: C.serviceArea,
+      telephone: C.phoneSchema || C.phoneLink, email: C.email, areaServed: C.serviceArea,
       sameAs: [C.facebook, C.instagram].filter(u => /^https?:/.test(u))
     });
     Object.assign(s.address, { addressLocality: C.city, addressRegion: C.state, postalCode: C.zip });

@@ -80,15 +80,6 @@ if (fs.existsSync(heroSrc)) {
   }
 }
 
-// mobile hero (phones): a 4:5 crop of Havelock-34, where the whole house sits mid-frame.
-// (heroimage.png is 2.4:1, so no portrait crop of it can hold the whole house.)
-const mobSrc = SOURCE_DIRS.map(d => path.join(d, "161 Heron Dr. Havelock-34.jpg")).find(f => fs.existsSync(f));
-if (mobSrc) {
-  const crop = "crop=408:510:186:0";                                   // 408x510 (4:5), centered on the house
-  ff(["-i", mobSrc, "-vf", crop + ",format=yuvj420p", "-q:v", "3", path.join(HERO_OUT, "hero-mobile.jpg")]);
-  ff(["-i", mobSrc, "-vf", crop, "-c:v", "libwebp", "-quality", "85", "-compression_level", "6", path.join(HERO_OUT, "hero-mobile.webp")]);
-}
-
 console.log(JSON.stringify({ photos: report.length, originalsKB: Math.round(inBytes / 1024), optimizedKB: Math.round(outBytes / 1024) }));
 report.forEach(r => console.log(r.name.padEnd(18), `${r.w}x${r.h}`.padEnd(9), r.sizes.map(s => Math.round(s / 1024) + "KB").join(" / "), " <- ", r.from));
 for (const f of fs.readdirSync(HERO_OUT)) {
