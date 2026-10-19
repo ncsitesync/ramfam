@@ -14,8 +14,8 @@
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RamFam Builders | Custom Homes, Septic &amp; Concrete in Eastern NC</title>
-<meta name="description" content="RamFam Builders is a family-owned custom home builder serving Eastern North Carolina. Custom homes, remodels and additions, concrete, and septic installation and repair. Free estimates.">
+<title>RamFam Builders | Custom Homes, Concrete &amp; Septic in Eastern NC</title>
+<meta name="description" content="Custom homes, concrete, and septic installation &amp; repair across Eastern North Carolina. Family-owned NC licensed general contractor (#104768) with 18 years of experience. Free estimates.">
 <!-- REPLACE: your live domain in canonical + og:url -->
 <link rel="canonical" href="https://www.ramfambuilders.com/">
 <meta name="theme-color" content="#2E2B28">
@@ -23,8 +23,8 @@
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RamFam Builders">
-<meta property="og:title" content="RamFam Builders | Building Dream Homes in Eastern NC">
-<meta property="og:description" content="Family-owned custom home builder. Custom homes, remodels, concrete, and septic work across Eastern North Carolina. Free estimates.">
+<meta property="og:title" content="RamFam Builders | Custom Homes, Concrete &amp; Septic in Eastern NC">
+<meta property="og:description" content="Family-owned, NC licensed general contractor. Custom homes, concrete, and septic work across Eastern North Carolina. Free estimates.">
 <meta property="og:url" content="https://www.ramfambuilders.com/">
 <!-- social preview image (absolute URL on the live domain; optimized copy of heroimage.png) -->
 <meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1920.jpg">
@@ -36,7 +36,7 @@
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- hero photo (keep in sync with the hero <picture> below) -->
 <link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
@@ -48,12 +48,19 @@
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   "name": "RamFam Builders",
-  "description": "Family-owned custom home builder serving Eastern North Carolina: custom homes, remodels and additions, concrete, and septic installation and repair.",
+  "description": "Family-owned custom home builder and NC licensed general contractor serving Eastern North Carolina: custom homes, concrete, and septic installation and repair, plus remodels and additions.",
   "url": "https://www.ramfambuilders.com/",
   "logo": "https://www.ramfambuilders.com/assets/logo.png",
   "image": "https://www.ramfambuilders.com/images/hero/hero-1920.jpg",
   "telephone": "+1-910-385-7680",
-  "email": "info@ramfambuilders.com",
+  "email": "ramfambuilders@gmail.com",
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "license",
+    "name": "North Carolina General Contractor License",
+    "identifier": "104768",
+    "recognizedBy": { "@type": "Organization", "name": "North Carolina Licensing Board for General Contractors" }
+  },
   "priceRange": "$$$",
   "address": { "@type": "PostalAddress", "addressLocality": "Greenville", "addressRegion": "NC", "postalCode": "27834", "addressCountry": "US" },
   "areaServed": "Eastern North Carolina",
@@ -204,11 +211,17 @@ p{margin:0 0 1em}
 /* soft shade at the bottom, behind the buttons sitting over the lawn */
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%)}
 .hero-content{width:100%;max-width:792px;display:flex;flex-direction:column;align-items:center;padding:max(28px, calc(var(--hero-h) * .035)) 16px 0}   /* at least 28px below the header */
-.hero-band{width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.6);border-radius:6px;background:rgba(255,255,255,.72)}
-@supports ((-webkit-backdrop-filter:blur(6px)) or (backdrop-filter:blur(6px))){
-  .hero-band{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hero-band{width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.6);border-radius:6px;background:rgba(255,255,255,.84)}
+@supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
+  .hero-band{background:rgba(255,255,255,.68);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 }
 .hero h1{margin:0;color:var(--charcoal-deep);font-size:clamp(2rem,4.2vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:.08em;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 2px rgba(255,255,255,.6)}
+.hero h1 .hero-h1-main{display:block}
+/* the three core services, a second line inside the headline band, gold dot separators */
+.hero-services{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:6px;font-family:var(--sans);font-size:clamp(.66rem,.55rem + .45vw,.92rem);font-weight:800;line-height:1.3;letter-spacing:.16em;color:var(--charcoal-deep);text-shadow:none}
+.hero-services > span{display:inline-flex;align-items:center;gap:10px}
+.hero-services > span + span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-hover);flex:none}
+.hero-sub strong{font-weight:700}
 /* text sitting on the sky is dark, with a soft light glow so it stays crisp over clouds */
 .hero-sub{text-shadow:0 0 3px rgba(255,255,255,.95),0 0 12px rgba(255,255,255,.9)}
 /* call link + helper text get a soft translucent pill so they stay legible over sky or roof */
@@ -222,10 +235,9 @@ p{margin:0 0 1em}
 .hero-cta{position:absolute;left:0;right:0;bottom:18px;display:flex;flex-direction:column;align-items:center;padding:0 16px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
 .hero .btn{border-radius:999px;width:100%;max-width:360px;min-height:48px;padding:12px 24px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
-.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:8px;padding:0 16px;font-size:.92rem;font-weight:600;color:var(--charcoal-deep);text-decoration:none}
-.hero-call svg{width:16px;height:16px;color:var(--charcoal-deep)}
-.hero-call span{border-bottom:2px solid var(--gold);padding-bottom:1px}
-.hero-call:hover span{border-bottom-color:var(--charcoal-deep)}
+.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:8px;padding:0 16px;font-size:.92rem;font-weight:600;color:var(--charcoal-deep);text-decoration:none;transition:color .2s}
+.hero-call svg{width:16px;height:16px;color:var(--charcoal-deep);transition:color .2s}
+.hero-call:hover,.hero-call:hover svg{color:var(--gold-text)}   /* no underline: a color shift on hover instead */
 .hero-note{margin:8px 0 0;padding:3px 12px;font-size:.8rem;white-space:nowrap;font-weight:500;color:#3A3633}   /* ~85% charcoal: keeps WCAG AA on the pill */
 .hero .hero-note{background:rgba(255,255,255,.74)}
 
@@ -253,6 +265,9 @@ p{margin:0 0 1em}
 .stats strong{display:block;font-family:var(--serif);font-size:clamp(2rem,1.6rem + 1.4vw,2.8rem);font-weight:600;line-height:1;color:var(--charcoal)}
 .stats .star{display:inline-block;margin-left:.08em;font-family:var(--sans);font-size:.78em;line-height:1;vertical-align:.1em;color:var(--gold-text)}
 .stats span:not(.star){font-size:.84rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+/* license line under the About stats */
+.license-badge{display:flex;align-items:center;gap:8px;margin:0 0 var(--s-5);font-size:.86rem;font-weight:600;color:var(--charcoal)}
+.license-badge svg{width:18px;height:18px;color:var(--gold-text);flex:none}
 
 /* ================= SERVICES ================= */
 /* base list styles; below 1024px it becomes the snap carousel (SERVICES CAROUSEL block); desktop: grid */
@@ -732,12 +747,14 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 .video-sec .link-arrow svg.fb{width:20px;height:20px;color:var(--gold)}
 /* 9:16 frame for the vertical reel (267:476), never wider than the screen */
 .video-frame{position:relative;width:min(300px,100%);aspect-ratio:267/476;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--charcoal-deep);box-shadow:0 22px 50px -18px rgba(0,0,0,.6),0 0 0 1px rgba(201,162,74,.25)}
-.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;overflow:hidden;z-index:1}
-/* fallback under the iframe: shows while it loads, or if Facebook is blocked */
-.video-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
-.video-fallback svg{width:52px;height:52px;color:var(--gold)}
-.video-watch{display:block;margin-top:12px;text-align:center;font-size:.88rem;color:rgba(255,255,255,.75)}
-.video-watch a{color:var(--gold-light)}
+.video-frame iframe,.video-frame video{position:absolute;inset:0;width:100%;height:100%;border:0;overflow:hidden;z-index:1}
+/* "Video coming soon" placeholder (shown until the real video is added) */
+.video-soon{display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(120% 70% at 50% 42%,#34302C 0%,var(--charcoal-deep) 70%)}
+.video-soon-inner{display:flex;flex-direction:column;align-items:center;padding:0 24px}
+.video-soon-icon{display:flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:18px;border-radius:50%;border:1.5px solid rgba(201,162,74,.55);background:rgba(201,162,74,.08);color:var(--gold)}
+.video-soon-icon svg{width:26px;height:26px;margin-left:4px}
+.video-soon-title{margin:0 0 6px;font-family:var(--serif);font-size:1.6rem;font-weight:600;line-height:1.15;color:#fff}
+.video-soon-text{margin:0;font-size:.9rem;line-height:1.5;color:rgba(255,255,255,.7);text-wrap:balance}
 
 /* hero framing on very wide desktop screens (the hero is much wider than the photo) */
 @media (min-width:1024px) and (min-aspect-ratio:11/5){ .hero{--hero-pos:50% 20%} }
@@ -760,10 +777,39 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   .hero .btn{min-height:46px;max-width:320px;padding:10px 22px}
   .hero .hero-call{min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;color:#fff;background:none;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
   .hero .hero-call svg{color:var(--gold)}
-  .hero .hero-call:hover span{border-bottom-color:#fff}
+  .hero .hero-call:hover{color:var(--gold-light)}
   .hero .hero-note{margin-top:2px;padding:0;font-size:.78rem;color:rgba(246,243,238,.72);background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none}
   .trust-strip{border-top:1px solid rgba(201,162,74,.22)}         /* separates it from the dark hero panel */
 }
+
+/* ================= LOGO INTRO (every page load + back/forward restores) =================
+   Only shown while <html> has .has-intro (set by the small script in <head>), so with
+   JavaScript off, or on later page views, it never appears. The page renders normally
+   underneath and shows faintly through the translucent, blurred charcoal backdrop.
+   The logo is logo-intro.png (cream lettering), since the normal logo's dark lettering
+   disappears on charcoal. */
+.intro{display:none}
+.has-intro,.has-intro body{overflow:hidden}
+.has-intro{scrollbar-gutter:stable}   /* no sideways jump when the scrollbar comes back */
+.has-intro .intro{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:rgba(33,31,29,.92);transition:opacity .6s ease}
+@supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
+  .has-intro .intro{background:rgba(33,31,29,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+}
+.intro-logo{width:min(64vw,300px);filter:drop-shadow(0 6px 24px rgba(0,0,0,.45));opacity:0;transform:scale(.96);animation:introLogo .9s cubic-bezier(.2,.7,.2,1) .1s forwards}
+.intro-logo img{width:100%;height:auto}
+.intro.is-leaving{opacity:0}
+@keyframes introLogo{to{opacity:1;transform:none}}
+
+/* ================= STICKY "GET A FREE ESTIMATE" PILL =================
+   Fixed bottom-right. Hidden while the hero, the estimate form (#contact) or the footer is on
+   screen (JS toggles .is-visible). z-index sits under the mobile menu (150) and the lightbox (400). */
+.cta-pill{position:fixed;z-index:140;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--gold);background:var(--charcoal);color:var(--gold-light);font:600 .95rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 12px 28px -12px rgba(0,0,0,.55);
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s,background-color .2s,color .2s}
+.cta-pill svg{width:18px;height:18px;transition:transform .2s}
+.cta-pill.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .3s ease,transform .3s ease,visibility 0s,background-color .2s,color .2s}
+.cta-pill:hover{background:var(--gold);color:var(--charcoal-deep)}
+.cta-pill:hover svg{transform:translateX(3px)}
+@media (min-width:1024px){ .cta-pill{right:calc(24px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom))} }
 
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion:reduce){
@@ -778,9 +824,18 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <!-- Scroll reveal: mark that JS is running so reveal elements can start hidden.
      Failsafe: if the reveal script has not started within 3s, show everything. -->
 <script>document.documentElement.classList.add("js");setTimeout(function(){var h=document.documentElement;if(!h.classList.contains("reveal-on"))h.classList.remove("js")},3000)</script>
+<!-- Logo intro: plays on every page load (and on back/forward restores, see the script at the bottom),
+     never with reduced motion. Hard failsafe: the overlay is gone after 5s even if that script never runs. -->
+<script>(function(){var h=document.documentElement;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;h.classList.add("has-intro");window.rfIntroFailsafe=setTimeout(function(){h.classList.remove("has-intro")},5000)})()</script>
 </head>
 
 <body>
+<!-- Logo intro overlay (see LOGO INTRO in the styles; removed from the page after it fades out) -->
+<div class="intro" id="intro" aria-hidden="true">
+  <!-- logo-intro.png: copy of logo-transparent.png with the dark "RAMFAM" lettering recolored cream
+       so it reads on the dark overlay (gold unchanged). Regenerate it if the logo changes. -->
+  <div class="intro-logo"><img src="logo-intro.png" alt="" width="640" height="343" decoding="async"></div>
+</div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Icon sprite -->
@@ -871,13 +926,13 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
   <div class="hero-content">
     <div class="hero-band">
-      <h1 id="hero-title">Building Dream Homes</h1>
+      <h1 id="hero-title"><span class="hero-h1-main">Building Dream Homes</span><span class="hero-services"><span>Custom Homes</span><span>Concrete</span><span>Septic</span></span></h1>
     </div>
-    <p class="hero-sub">Custom homes, concrete &amp; septic in Eastern NC.</p>
+    <p class="hero-sub">Family owned &amp; licensed · Serving <strong>Eastern NC</strong></p>
   </div>
   <div class="hero-cta">
     <div class="hero-actions">
-      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
+      <a class="btn btn--gold" href="gallery.html">See Our Work</a>
       <a class="hero-call" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(910) 385-7680</span></span></a>
     </div>
     <p class="hero-note">Free estimates · Typically reply within 24 hours</p>
@@ -915,10 +970,11 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <p>Custom homes, remodels, concrete, and septic, all handled by one trusted crew. That means clear communication, honest pricing, and work we're proud to put our name on.</p>
       <!-- REPLACE: your real numbers -->
       <div class="stats">
-        <div><strong>15+</strong><span>Years building in Eastern NC</span></div>
+        <div><strong>18</strong><span>Years experience</span></div>
         <div><strong>200+</strong><span>Projects completed</span></div>
         <div><strong>5.0<span class="star" aria-hidden="true">★</span></strong><span>Average Google rating</span></div>
       </div>
+      <p class="license-badge"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-license-text>NC General Contractor License #104768</span></p>
       <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
     </div>
   </div>
@@ -938,14 +994,19 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
       </div>
       <div data-reveal="right">
-        <div class="video-frame">
-          <a class="video-fallback" href="https://www.facebook.com/reel/1491935242946406/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M10 8l6 4-6 4z"/></svg>
-            Watch on Facebook
-          </a>
-          <iframe src="https://www.facebook.com/plugins/video.php?height=476&amp;href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1491935242946406%2F&amp;show_text=false&amp;width=267&amp;t=0" width="267" height="476" title="RamFam Builders on the job (Facebook video)" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- ========== REAL VIDEO GOES HERE ==========
+             Replace the .video-soon placeholder below with the real video, keeping the
+             .video-frame wrapper (it sets the 9:16 size and rounded frame), e.g.
+             <div class="video-frame"><video src="videos/walkthrough.mp4" controls playsinline preload="metadata"></video></div>
+             or an embed <iframe> inside the same wrapper. Then remove the .video-soon class. -->
+        <div class="video-frame video-soon">
+          <div class="video-soon-inner">
+            <span class="video-soon-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15l12-7.5z"/></svg></span>
+            <p class="video-soon-title">Video coming soon</p>
+            <p class="video-soon-text">Full project walkthrough coming soon</p>
+          </div>
         </div>
-        <p class="video-watch">Video not loading? <a href="https://www.facebook.com/reel/1491935242946406/" target="_blank" rel="noopener">Watch on Facebook</a></p>
+        <!-- ========== /REAL VIDEO ========== -->
       </div>
     </div>
   </div>
@@ -1284,7 +1345,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <p class="lead">Fill out the form and a member of our family will reach out within one business day. Prefer to talk now? Give us a call.</p>
       <ul class="contact-list">
         <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small>Call or text</small><a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a></div></li>
-        <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small>Email</small><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small>Email</small><a href="mailto:ramfambuilders@gmail.com" data-email-link><span data-email-text>ramfambuilders@gmail.com</span></a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small>Service area</small><span data-area-text>Eastern North Carolina</span></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small>Hours</small><span data-hours-text>Mon–Fri 7am–6pm · Sat by appointment</span></div></li>
       </ul>
@@ -1392,9 +1453,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <h3>Contact</h3>
         <ul>
           <li><a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a></li>
-          <li><a href="mailto:info@ramfambuilders.com" data-email-link><span data-email-text>info@ramfambuilders.com</span></a></li>
+          <li><a href="mailto:ramfambuilders@gmail.com" data-email-link><span data-email-text>ramfambuilders@gmail.com</span></a></li>
           <li style="padding:6px 0">Serving <span data-area-text>Eastern North Carolina</span></li>
-          <li style="padding:6px 0" data-license-text>NC Licensed General Contractor #00000</li>
+          <li style="padding:6px 0" data-license-text>NC General Contractor License #104768</li>
         </ul>
       </div>
     </div>
@@ -1404,6 +1465,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     </div>
   </div>
 </footer>
+
+<!-- Sticky "Get a Free Estimate" pill (shows after the hero, hides at the estimate form and the footer) -->
+<a class="cta-pill" id="cta-pill" href="#contact">Get a Free Estimate<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo viewer">
@@ -1426,13 +1490,14 @@ const SITE_CONFIG = {
   phoneDisplay:      "(910) 385-7680",          // number as shown on the page
   phoneLink:         "+19103857680",            // same number for tel: links (+1 then 10 digits)
   phoneSchema:       "+1-910-385-7680",         // same number for Google (JSON-LD)
-  email:             "info@ramfambuilders.com", // REPLACE
+  email:             "ramfambuilders@gmail.com", // every mailto link + the schema use this
   serviceArea:       "Eastern North Carolina",  // REPLACE: e.g. "Pitt, Beaufort & Lenoir Counties, NC"
   hours:             "Mon–Fri 7am–6pm · Sat by appointment", // REPLACE
   city:              "Greenville",              // REPLACE: base city (Google schema)
   state:             "NC",
   zip:               "27834",                   // REPLACE
-  license:           "NC Licensed General Contractor #00000", // REPLACE
+  license:           "NC General Contractor License #104768",
+  licenseNumber:     "104768",                  // also used in the JSON-LD schema
   website:           "https://www.ramfambuilders.com/",       // REPLACE: live domain
   facebook:          "#facebook",               // REPLACE: https://facebook.com/yourpage
   instagram:         "#instagram",              // REPLACE: https://instagram.com/yourhandle
@@ -1476,6 +1541,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
       sameAs: [C.facebook, C.instagram].filter(u => /^https?:/.test(u))
     });
     Object.assign(s.address, { addressLocality: C.city, addressRegion: C.state, postalCode: C.zip });
+    if (s.hasCredential && C.licenseNumber) s.hasCredential.identifier = C.licenseNumber;
     Object.assign(s.aggregateRating, { ratingValue: C.googleRating, reviewCount: C.googleReviewCount });
     $("#schema").textContent = JSON.stringify(s);
   } catch (e) {}
@@ -1723,6 +1789,55 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<!-- Logo intro + sticky "See our work" pill -->
+<script>
+(function () {
+  /* ---- Logo intro: hold until window "load" (at least ~1.8s on screen, so the logo rests
+     ~0.8s after its 1s fade-in), fade out over 0.6s, then remove it. The fade-out starts
+     by 4s at the latest, even if something is slow to load. ---- */
+  var html = document.documentElement, intro = document.getElementById("intro");
+  var timers = [];
+  // t0 = when this showing started, on the performance.now() clock (0 = the page started loading)
+  var playIntro = function (t0) {
+    var done = false;
+    var hide = function () {
+      if (done) return; done = true;
+      intro.classList.add("is-leaving");
+      timers.push(setTimeout(function () { intro.remove(); html.classList.remove("has-intro"); }, 600));
+    };
+    var ready = function () { timers.push(setTimeout(hide, Math.max(0, t0 + 1800 - performance.now()))); };
+    if (document.readyState === "complete") ready(); else addEventListener("load", ready, { once: true });
+    timers.push(setTimeout(hide, Math.max(0, t0 + 4000 - performance.now())));
+  };
+  if (intro) {
+    if (!html.classList.contains("has-intro")) intro.remove();
+    else playIntro(0);
+    // Back/forward restore: the browser shows the cached page without reloading it, so
+    // put the overlay back and run the same fade-in, hold, fade-out sequence again.
+    addEventListener("pageshow", function (e) {
+      if (!e.persisted || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      timers.forEach(clearTimeout); timers = [];
+      clearTimeout(window.rfIntroFailsafe);
+      intro.classList.remove("is-leaving");
+      html.classList.add("has-intro");
+      document.body.prepend(intro);   // re-inserting it restarts the logo's CSS fade-in
+      playIntro(performance.now());
+    });
+  }
+
+  /* ---- Sticky "Get a Free Estimate" pill: visible only when none of the hero, the estimate
+     form section (#contact, where it links to) or the footer is on screen ---- */
+  var pill = document.getElementById("cta-pill");
+  var watched = [document.getElementById("top"), document.getElementById("contact"), document.querySelector(".site-footer")];
+  if (!pill || watched.indexOf(null) > -1 || !("IntersectionObserver" in window)) return;
+  var inView = [true, false, false];   // the page starts at the hero
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { inView[watched.indexOf(e.target)] = e.isIntersecting; });
+    pill.classList.toggle("is-visible", inView.indexOf(true) === -1);
+  });
+  watched.forEach(function (el) { io.observe(el); });
 })();
 </script>
 
