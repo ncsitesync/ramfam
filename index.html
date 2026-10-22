@@ -2086,13 +2086,45 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
      by 4s at the latest, even if something is slow to load. ---- */
   var html = document.documentElement, intro = document.getElementById("intro");
   var timers = [];
+
+  /* ---- Scroll hint: once the intro is gone, slowly scroll (~1.8s, easeInOutCubic) until the
+     "BUILDING DREAM HOMES" headline sits at ~72% of the screen height. Skipped when the page is
+     not at the very top, has a #hash, reduced motion is on, or the headline already sits in the
+     top 75% of the screen. Any wheel, touch, key, click or outside scroll stops it
+     at once and leaves the page where the user put it. ---- */
+  var nudge = function () {
+    var h1 = document.getElementById("hero-title");
+    if (!h1 || window.scrollY !== 0 || location.hash || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var vh = innerHeight, top = h1.getBoundingClientRect().top;
+    if (top <= vh * 0.75) return;   // headline already comfortably in view (e.g. most phones)
+    var dist = Math.round(Math.min(Math.max(top - vh * 0.72, 80), vh * 0.45));
+    var stops = ["wheel", "touchstart", "keydown", "mousedown"], start = null, last = 0, raf;
+    var stop = function () {
+      cancelAnimationFrame(raf);
+      stops.forEach(function (t) { removeEventListener(t, stop, { passive: true }); });
+    };
+    stops.forEach(function (t) { addEventListener(t, stop, { passive: true }); });
+    var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    var step = function (now) {
+      if (start === null) start = now;
+      if (Math.abs(window.scrollY - last) > 2) return stop();   // something else scrolled the page: hand it back
+      var t = Math.min((now - start) / 1800, 1);
+      last = Math.round(dist * ease(t));
+      scrollTo({ top: last, behavior: "instant" });   // instant: html has scroll-behavior:smooth
+      if (t < 1) raf = requestAnimationFrame(step); else stop();
+    };
+    raf = requestAnimationFrame(step);
+  };
   // t0 = when this showing started, on the performance.now() clock (0 = the page started loading)
   var playIntro = function (t0) {
     var done = false;
     var hide = function () {
       if (done) return; done = true;
       intro.classList.add("is-leaving");
-      timers.push(setTimeout(function () { intro.remove(); html.classList.remove("has-intro"); }, 600));
+      timers.push(setTimeout(function () {
+        intro.remove(); html.classList.remove("has-intro");
+        timers.push(setTimeout(nudge, 400));   // then the gentle scroll hint
+      }, 600));
     };
     var ready = function () { timers.push(setTimeout(hide, Math.max(0, t0 + 1800 - performance.now()))); };
     if (document.readyState === "complete") ready(); else addEventListener("load", ready, { once: true });
