@@ -61,6 +61,7 @@
     "identifier": "104768",
     "recognizedBy": { "@type": "Organization", "name": "North Carolina Licensing Board for General Contractors" }
   },
+  "founder": { "@type": "Person", "name": "Robert Ramirez", "alternateName": "Eddie Ramirez", "jobTitle": "Owner" },
   "priceRange": "$$$",
   "address": { "@type": "PostalAddress", "addressLocality": "Greenville", "addressRegion": "NC", "postalCode": "27834", "addressCountry": "US" },
   "areaServed": "Eastern North Carolina",
@@ -221,20 +222,31 @@ p{margin:0 0 1em}
 .hero-services{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:6px;font-family:var(--sans);font-size:clamp(.66rem,.55rem + .45vw,.92rem);font-weight:800;line-height:1.3;letter-spacing:.16em;color:var(--charcoal-deep);text-shadow:none}
 .hero-services > span{display:inline-flex;align-items:center;gap:10px}
 .hero-services > span + span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-hover);flex:none}
-.hero-sub strong{font-weight:700}
-/* text sitting on the sky is dark, with a soft light glow so it stays crisp over clouds */
-.hero-sub{text-shadow:0 0 3px rgba(255,255,255,.95),0 0 12px rgba(255,255,255,.9)}
+/* service area: a small third line in the band (the trust strip carries the family owned / licensed / free estimate badges) */
+.hero-area{margin:6px 0 0;font-size:clamp(.72rem,.62rem + .3vw,.9rem);font-weight:500;line-height:1.3;letter-spacing:.04em;color:#3A3633}
 /* call link + helper text get a soft translucent pill so they stay legible over sky or roof */
-.hero-sub,.hero-call,.hero-note{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.55);border-radius:999px}
+.hero-call,.hero-note{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.55);border-radius:999px}
 @supports ((-webkit-backdrop-filter:blur(6px)) or (backdrop-filter:blur(6px))){
-  .hero-sub,.hero-call,.hero-note{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .hero-call,.hero-note{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 }
-.hero-sub{margin:16px 0 0;padding:5px 16px;font-size:.95rem;font-weight:500;line-height:1.4;color:var(--charcoal-deep);text-wrap:balance}
-.hero .hero-sub{background:rgba(255,255,255,.7)}   /* the roof can sit behind it, so a slightly firmer pill */
 /* buttons + helper text: one centered group low in the hero, over the lawn */
 .hero-cta{position:absolute;left:0;right:0;bottom:18px;display:flex;flex-direction:column;align-items:center;padding:0 16px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
 .hero .btn{border-radius:999px;width:100%;max-width:360px;min-height:48px;padding:12px 24px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
+/* "See Our Work" only: a slow soft gold glow pulse + a faint sheen every few seconds (box-shadow/transform only, no layout shift) */
+.hero .hero-btn{position:relative;overflow:hidden;isolation:isolate;animation:heroGlow 3s ease-in-out infinite}
+.hero .hero-btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.32) 50%,rgba(255,255,255,0) 100%);transform:translateX(-110%);animation:heroSheen 6s ease-in-out 2s infinite}
+.hero .hero-btn:hover,.hero .hero-btn:focus-visible{transform:translateY(-2px);animation-name:heroGlowStrong}
+.hero .hero-btn:active{transform:translateY(1px)}
+@keyframes heroGlow{
+  0%{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 0 rgba(201,162,74,.35)}
+  100%{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 12px rgba(201,162,74,0)}
+}
+@keyframes heroGlowStrong{
+  0%{box-shadow:0 14px 28px -12px rgba(0,0,0,.5),0 0 0 0 rgba(201,162,74,.5)}
+  100%{box-shadow:0 14px 28px -12px rgba(0,0,0,.5),0 0 0 14px rgba(201,162,74,0)}
+}
+@keyframes heroSheen{0%{transform:translateX(-110%)}18%,100%{transform:translateX(260%)}}
 .hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:8px;padding:0 16px;font-size:.92rem;font-weight:600;color:var(--charcoal-deep);text-decoration:none;transition:color .2s}
 .hero-call svg{width:16px;height:16px;color:var(--charcoal-deep);transition:color .2s}
 .hero-call:hover,.hero-call:hover svg{color:var(--gold-text)}   /* no underline: a color shift on hover instead */
@@ -268,6 +280,15 @@ p{margin:0 0 1em}
 /* license line under the About stats */
 .license-badge{display:flex;align-items:center;gap:8px;margin:0 0 var(--s-5);font-size:.86rem;font-weight:600;color:var(--charcoal)}
 .license-badge svg{width:18px;height:18px;color:var(--gold-text);flex:none}
+/* Meet the Builder (Our Story): role line, signature, small highlight row */
+/* (.split prefix so the ≥1024px ".split p" font size doesn't override these) */
+.split .builder-role{margin:-.15em 0 var(--s-5);font-size:.78rem;font-weight:600;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.split .builder-sign{margin:.1em 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.75rem;line-height:1.1;color:var(--gold-text)}
+.builder-points{display:flex;flex-direction:column;gap:10px;list-style:none;margin:var(--s-5) 0 var(--s-4);padding:var(--s-4) 0 0;border-top:1px solid var(--line);font-size:.86rem;font-weight:600;line-height:1.3;color:var(--charcoal)}
+.builder-points li{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.builder-points svg{width:17px;height:17px;color:var(--gold-text);flex:none}
+.split .builder-license{font-size:.86rem;font-weight:500;color:var(--muted)}
+@media (min-width:600px){ .builder-points{flex-direction:row;flex-wrap:wrap;gap:10px 20px} }
 
 /* ================= SERVICES ================= */
 /* base list styles; below 1024px it becomes the snap carousel (SERVICES CAROUSEL block); desktop: grid */
@@ -413,10 +434,89 @@ p{margin:0 0 1em}
 .form-legal a{color:var(--charcoal);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:2px}
 .form-legal a:hover{color:var(--gold-text)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form-success{display:none;text-align:center;padding:var(--s-6) var(--s-2)}
-.form-success svg{width:60px;height:60px;color:var(--gold);margin:0 auto var(--s-4)}
-.form-card.sent form,.form-card.sent > h3,.form-card.sent > p{display:none}
-.form-card.sent .form-success{display:block}
+
+/* ---- Multi-step estimate form (one step visible at a time) ---- */
+.est-head > p{color:var(--muted);font-size:.95rem;margin:0 0 var(--s-4)}
+.est-progress{margin:0 0 var(--s-5)}
+.est-progress-text{display:flex;justify-content:space-between;gap:12px;margin:0 0 8px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.est-progress-text #est-step-label{color:var(--gold-text)}
+.est-bar{height:4px;border-radius:2px;background:#EEE8DE;overflow:hidden}
+.est-bar span{display:block;height:100%;background:var(--gold);transform:scaleX(.25);transform-origin:left;transition:transform .25s ease}
+.est-step[hidden],.est-q[hidden]{display:none}
+.est-step.is-entering{animation:estIn .25s ease both}
+.est-step.is-back{--est-dx:-14px}
+@keyframes estIn{from{opacity:0;transform:translateX(var(--est-dx,14px))}to{opacity:1;transform:none}}
+.est-title{margin:0 0 var(--s-4);font-family:var(--serif);font-size:1.6rem;font-weight:600;line-height:1.1;color:var(--charcoal)}
+.est-title:focus{outline:none}   /* focus moves here for screen readers; the heading isn't interactive */
+.est-title .opt{font-family:var(--sans);font-size:.85rem;font-weight:400;color:var(--muted)}
+.est .field input{min-height:52px}
+/* tap-to-select tiles (real buttons with aria-pressed) */
+.est-q{margin:0 0 var(--s-5)}
+.est-q-label{margin:0 0 10px;font-size:.95rem;font-weight:600;color:var(--charcoal)}
+.est-q-label .opt{margin-left:4px;font-size:.84rem;font-weight:400;color:var(--muted)}
+.est-q.invalid .error,.est-check.invalid .error{display:block}
+.tiles{display:grid;gap:10px}
+.tile{position:relative;display:flex;align-items:center;gap:10px;min-height:52px;padding:12px 34px 12px 14px;font:600 .95rem/1.25 var(--sans);color:var(--charcoal);text-align:left;background:#fff;border:1.5px solid #D8D0C4;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background-color .2s,box-shadow .2s}
+.tile svg{width:20px;height:20px;color:var(--gold-text);flex:none}
+.tile:hover{border-color:var(--gold)}
+.tile[aria-pressed="true"]{border-color:var(--gold);background:#FBF6EA;box-shadow:inset 0 0 0 1px var(--gold)}
+.tile[aria-pressed="true"]::after{content:"";position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23211F1D' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat}
+.est-q.invalid .tile{border-color:#C9A79E}
+/* service tiles: one column of rows on narrow phones (2 columns would wrap "Septic Installation"),
+   2 columns of icon-on-top tiles from 480px, 3 columns from 600px */
+@media (min-width:480px){
+  .tiles--icons{grid-template-columns:1fr 1fr}
+  .tiles--icons .tile{flex-direction:column;justify-content:center;gap:8px;min-height:92px;padding:14px 10px;text-align:center}
+  .tiles--icons .tile svg{width:24px;height:24px}
+}
+@media (min-width:600px){
+  .tiles--icons{grid-template-columns:repeat(3,1fr)}
+  .tiles--rows{grid-template-columns:1fr 1fr}
+  .tiles--3{grid-template-columns:repeat(3,1fr)}
+}
+/* step navigation */
+.est-nav{display:flex;align-items:center;gap:8px;margin-top:var(--s-5)}
+.est .est-nav .btn{flex:1;width:auto}
+.est-back,.est-skip{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 12px;background:none;border:0;border-radius:var(--radius-sm);font:600 .95rem/1 var(--sans);color:var(--charcoal);cursor:pointer}
+.est-back{padding-left:4px}
+.est-back svg{width:16px;height:16px;transform:rotate(180deg)}
+.est-back:hover,.est-skip:hover{color:var(--gold-text)}
+.est-skip{color:var(--muted);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+/* review */
+.est-summary{margin:0 0 var(--s-4);border:1px solid var(--line);border-radius:8px}
+.est-sum-sec{padding:10px 14px 12px}
+.est-sum-sec + .est-sum-sec{border-top:1px solid var(--line)}
+.est-sum-head{display:flex;justify-content:space-between;align-items:center}
+.est-sum-head h5{margin:0;font:600 .72rem/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.est-edit{min-width:44px;min-height:44px;margin:-10px -10px -8px 0;padding:0 10px;background:none;border:0;font:600 .88rem/1 var(--sans);color:var(--gold-text);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.est-edit:hover{color:var(--charcoal)}
+.est-summary dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:0;font-size:.92rem;line-height:1.4}
+.est-summary dt{color:var(--muted)}
+.est-summary dd{margin:0;font-weight:500;color:var(--charcoal);overflow-wrap:anywhere;white-space:pre-line}
+.est-sum-empty{margin:0;font-size:.92rem;color:var(--muted)}
+.est-consent{display:flex;align-items:flex-start;gap:10px;padding:4px 0;font-size:.92rem;line-height:1.45;color:var(--charcoal);cursor:pointer}
+.est-consent input{flex:none;width:22px;height:22px;margin:0;accent-color:var(--gold-hover);cursor:pointer}
+.est-check.invalid .est-consent input{outline:2px solid #A0341F;outline-offset:1px}
+.est-check .error{margin-left:32px}
+.form-note a{color:inherit;white-space:nowrap}
+.btn.is-loading::before{content:"";width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:estSpin .7s linear infinite}
+.btn:disabled{cursor:progress;opacity:.85}
+@keyframes estSpin{to{transform:rotate(360deg)}}
+/* thank-you screen */
+.est-done{display:none;flex-direction:column;align-items:center;text-align:center;padding:var(--s-4) 0 var(--s-2)}
+.form-card.sent form,.form-card.sent .est-head{display:none}
+.form-card.sent .est-done{display:flex}
+.est-done-logo{width:120px;height:auto;margin:0 0 var(--s-4)}
+.est-done-check{width:56px;height:56px;margin:0 0 var(--s-4);fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.est-done-check circle{stroke-dasharray:151;animation:estDraw .6s ease-out both .15s;--est-len:151}
+.est-done-check path{stroke-width:3.2;stroke-dasharray:36;animation:estDraw .35s ease-out both .65s;--est-len:36}
+@keyframes estDraw{from{stroke-dashoffset:var(--est-len)}to{stroke-dashoffset:0}}
+.est-done h3{margin:0 0 6px;font-size:clamp(1.6rem,1.4rem + .6vw,2rem)}
+.est-done h3:focus{outline:none}
+.est-done > p{margin:0 0 var(--s-5);color:var(--muted)}
+.est-done .btn{max-width:340px}
+.est-done .nowrap{white-space:nowrap}
+.est-done .link-arrow{align-self:center;margin-top:var(--s-2)}
 
 /* ================= FOOTER ================= */
 .site-footer{background:var(--charcoal-deep);color:rgba(255,255,255,.72);padding:var(--s-9) 0 var(--s-6);font-size:.95rem}
@@ -453,7 +553,6 @@ p{margin:0 0 1em}
   .hero-cta{bottom:28px}
   .hero-band{width:max-content;max-width:calc(100vw - 2 * var(--gutter));padding:16px 32px}   /* hugs the headline */
   .hero h1{white-space:nowrap}
-  .hero-sub{margin-top:18px;font-size:1.1rem}
   .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px 16px}
   .hero-call{margin-top:0}
   .hero .btn{width:auto;min-width:250px}
@@ -503,7 +602,6 @@ p{margin:0 0 1em}
   .hero-content{padding-top:22px}
   .hero-band{padding:10px 28px}
   .hero h1{font-size:clamp(2rem,3.2vw,3rem)}
-  .hero-sub{margin-top:10px;font-size:1rem}
   /* button, call pill and helper text in one row, ~28px above the trust strip */
   .hero-cta{bottom:28px;flex-direction:row;justify-content:center;align-items:center;gap:16px}
   .hero-actions{width:auto;flex-wrap:nowrap}
@@ -641,7 +739,18 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .contact-list{margin-top:clamp(16px,3vh,32px)}
   .contact-list li{padding:clamp(8px,1.4vh,16px) 0}
   .form-card{padding:clamp(20px,3.5vh,40px) clamp(24px,3vw,40px)}
-  .form-card > p{margin-bottom:clamp(12px,2vh,24px)}
+  .est-head > p{margin-bottom:clamp(10px,1.6vh,16px)}
+  .est-progress{margin-bottom:clamp(14px,2.4vh,24px)}
+  /* compact steps so the tallest one (step 2 with the land question) fits one screen */
+  .est-title{margin-bottom:clamp(8px,1.4vh,14px);font-size:1.45rem}
+  .est .field input{min-height:48px}
+  .est-q{margin-bottom:clamp(10px,1.6vh,18px)}
+  .est-q-label{margin-bottom:8px}
+  .tiles{gap:8px}
+  .tile{min-height:44px;padding-top:8px;padding-bottom:8px}
+  .tiles--icons .tile{min-height:clamp(62px,7.6vh,84px);gap:6px;padding:8px}
+  .tiles--icons .tile svg{width:22px;height:22px}
+  .est-nav{margin-top:clamp(12px,2vh,20px)}
   .field{margin-bottom:clamp(8px,1.6vh,16px)}
   .field label{margin-bottom:4px;font-size:.88rem}
   .field input,.field select{min-height:44px;padding:10px 12px}
@@ -762,18 +871,21 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 /* ================= HERO ON PHONES (under 768px only) =================
    heroimage.png is 2.4:1 and the house spans ~23%-84% of its width, so a tall phone hero could only
    show ~31% of it. Phones instead get a full-width 16:10 photo band (cover, ~67% of the width:
-   the whole house, porch and stairs) with a small headline over its top edge, then the
-   subheading + buttons on a dark panel right below it. Tablet/desktop are unchanged. */
+   the whole house, porch and stairs) with nothing over it, then the headline block (no frosted
+   box) + buttons on a dark panel right below it. Tablet/desktop are unchanged. */
 @media (max-width:767px){
   .hero{--hero-pos:61% 50%;height:auto;flex-direction:column;justify-content:flex-start;background:var(--charcoal-deep)}
   .hero::after{display:none}                                       /* no gradient needed: buttons are off the photo */
   .hero-media{position:relative;inset:auto;z-index:0;order:1;width:100%;aspect-ratio:16/10}
-  .hero-content{display:contents}                                  /* lets the subheading move below the photo */
-  .hero-band,.hero .hero-band{position:absolute;z-index:1;top:10px;left:50%;transform:translateX(-50%);width:auto;max-width:calc(100% - 24px);padding:7px 14px}
-  .hero h1{font-size:clamp(1.2rem,5.6vw,1.5rem);letter-spacing:.05em;white-space:nowrap}
-  .hero .hero-sub{order:2;align-self:center;max-width:24em;margin:16px 16px 0;padding:0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
-    text-shadow:none;color:#F6F3EE;font-size:.95rem;font-weight:500;line-height:1.4}
-  .hero-cta{order:3;position:static;padding:14px 16px 18px}
+  .hero-content{display:contents}                                  /* lets the headline block move below the photo */
+  .hero-band,.hero .hero-band{order:2;width:100%;padding:20px 16px 0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+    animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
+  .hero h1{font-size:clamp(1.25rem,6.2vw,1.65rem);letter-spacing:.05em;white-space:nowrap;color:#F6F3EE;text-shadow:none}
+  .hero-services{gap:9px;margin-top:8px;font-size:clamp(.62rem,2.9vw,.74rem);letter-spacing:.14em;color:var(--gold)}
+  .hero-services > span{gap:9px}
+  .hero-services > span + span::before{width:5px;height:5px;background:var(--gold)}
+  .hero-area{margin-top:6px;font-size:.78rem;color:rgba(246,243,238,.72)}
+  .hero-cta{order:3;position:static;padding:16px 16px 18px}
   .hero .btn{min-height:46px;max-width:320px;padding:10px 22px}
   .hero .hero-call{min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;color:#fff;background:none;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
   .hero .hero-call svg{color:var(--gold)}
@@ -815,6 +927,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
+  /* "See Our Work": no pulse or sheen, just a static soft glow */
+  .hero .hero-btn{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,74,.18),0 0 18px rgba(201,162,74,.3)}
+  .hero .hero-btn::after{display:none}
   /* gallery carousel becomes two swipeable/scrollable rows (no duplicates are built) */
   .marquee-row{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
   .marquee-item{scroll-snap-align:start}
@@ -846,6 +961,15 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></g></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></g></symbol>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17.6 15 22 10.6"/><path d="m20.9 11.7-1.2-1.2a3.2 3.2 0 0 1-.9-2.3v-.9L16 4.6A5.6 5.6 0 0 0 12.1 3H9l.9.8A6.2 6.2 0 0 1 12 8.4V10l2 2h2.5l2.3 1.9"/></g></symbol>
+  <symbol id="i-slab" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></g></symbol>
+  <symbol id="i-tank" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></g></symbol>
+  <symbol id="i-question" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></g></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></g></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></g></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></g></symbol>
   <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></g></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -927,15 +1051,15 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <div class="hero-content">
     <div class="hero-band">
       <h1 id="hero-title"><span class="hero-h1-main">Building Dream Homes</span><span class="hero-services"><span>Custom Homes</span><span>Concrete</span><span>Septic</span></span></h1>
+      <p class="hero-area">Serving Eastern NC</p>
     </div>
-    <p class="hero-sub">Family owned &amp; licensed · Serving <strong>Eastern NC</strong></p>
   </div>
   <div class="hero-cta">
     <div class="hero-actions">
-      <a class="btn btn--gold" href="gallery.html">See Our Work</a>
+      <a class="btn btn--gold hero-btn" href="gallery.html">See Our Work</a>
       <a class="hero-call" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(910) 385-7680</span></span></a>
     </div>
-    <p class="hero-note">Free estimates · Typically reply within 24 hours</p>
+    <p class="hero-note">Typically reply within 24 hours</p>
   </div>
 </section>
 
@@ -1262,7 +1386,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <section class="section" id="story" aria-labelledby="story-title">
   <div class="wrap split split--flip">
     <div class="split-media framed" data-reveal="right">
-      <!-- REPLACE: swap for a better photo later (ideally the owner or the family on a job site) -->
+      <!-- Eddie photo here: swap this job site photo for a photo of Eddie (keep the width/height attributes in sync and update the alt text) -->
       <picture>
         <source type="image/webp" srcset="images/gallery/septic-02-full.webp">
         <img src="images/gallery/septic-02-full.jpg" loading="lazy" decoding="async" width="1200" height="1600"
@@ -1270,13 +1394,18 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       </picture>
     </div>
     <div data-reveal="left">
-      <p class="eyebrow">Our Story</p>
-      <h2 id="story-title">A Family Name on Every Job</h2>
-      <!-- REPLACE: owner's story -->
-      <p class="lead">RamFam Builders started with one truck, a few tools, and a simple promise: build every home like our own family would live in it.</p>
-      <p>[Owner name] grew up in Eastern North Carolina working alongside [family member], learning the trade from the ground up, from digging footings and setting septic tanks to framing and finish work. That experience became RamFam Builders, a company where the whole family is still part of the work.</p>
-      <p>Today we're proud to help neighbors across [towns/counties] build the homes they've dreamed about, and we still answer the phone ourselves.</p>
-      <!-- /REPLACE: owner's story -->
+      <p class="eyebrow">Meet the Builder</p>
+      <h2 id="story-title">Robert &ldquo;Eddie&rdquo; Ramirez</h2>
+      <p class="builder-role">Owner · RamFam Builders · Eastern NC</p>
+      <p class="lead">Eddie has spent 18 years building across Eastern North Carolina, including his time with Goldsboro Builders. Years on real jobsites taught him the products, the methods, and how to solve problems before they cost a homeowner time or money.</p>
+      <p>He's still learning: new materials, better methods, current codes. RamFam is a family business, and every custom home, concrete slab, and septic system gets built the way Eddie would build it for his own.</p>
+      <p class="builder-sign" aria-hidden="true">Eddie Ramirez</p>
+      <ul class="builder-points">
+        <li><svg aria-hidden="true"><use href="#i-clock"/></svg>18 years building</li>
+        <li><svg aria-hidden="true"><use href="#i-tool"/></svg>Goldsboro Builders background</li>
+        <li><svg aria-hidden="true"><use href="#i-book"/></svg>Always learning</li>
+      </ul>
+      <p class="license-badge builder-license"><svg aria-hidden="true"><use href="#i-shield"/></svg><span>NC Licensed General Contractor #104768</span></p>
       <a class="btn btn--dark" href="#contact">Work With Our Family</a>
     </div>
   </div>
@@ -1351,16 +1480,27 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       </ul>
     </div>
 
-    <div class="form-card" id="form-card" data-reveal>
-      <h3>Request a Free Estimate</h3>
-      <p>Takes about a minute. No obligation.</p>
+    <div class="form-card est" id="form-card" data-reveal>
+      <div class="est-head">
+        <h3>Request a Free Estimate</h3>
+        <p>Takes about a minute. No obligation.</p>
+        <div class="est-progress">
+          <p class="est-progress-text" aria-live="polite"><span id="est-step-label">Step 1 of 4</span><span id="est-step-name">Your info</span></p>
+          <div class="est-bar" role="progressbar" aria-label="Form progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-valuetext="Step 1 of 4: Your info"><span></span></div>
+        </div>
+      </div>
       <!--
         FORM ENDPOINT: set SITE_CONFIG.formEndpoint in the script below to your form service URL,
         e.g. Formspree "https://formspree.io/f/xxxxxxx", Basin, Getform, or a Vercel function "/api/estimate".
-        While it's empty, the form validates and shows the success message but DOES NOT send data anywhere.
+        While it's empty, the form validates and shows the thank-you screen but DOES NOT send data anywhere.
+        One step shows at a time, but it's still one <form>: every step's fields (including the hidden
+        inputs the tiles fill in) are posted together as FormData. No file upload: add one only if the
+        form service you pick accepts files.
       -->
       <form id="estimate-form" action="#" method="POST" novalidate>
-        <div class="form-row">
+        <!-- Step 1: contact info -->
+        <div class="est-step" data-step="1" role="group" aria-labelledby="est-t1">
+          <h4 class="est-title" id="est-t1" tabindex="-1">Your info</h4>
           <div class="field">
             <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
             <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
@@ -1368,44 +1508,106 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
           </div>
           <div class="field">
             <label for="f-phone">Phone <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone">
-            <p class="error" id="e-phone">Please enter a valid 10-digit phone number.</p>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(910) 555-0123" required aria-describedby="e-phone">
+            <p class="error" id="e-phone">Please enter a 10-digit phone number.</p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
+            <p class="error" id="e-email">Please enter a valid email address.</p>
+          </div>
+          <div class="est-nav">
+            <button class="btn btn--gold" type="button" data-next>Continue</button>
           </div>
         </div>
-        <div class="form-row">
-        <div class="field">
-          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
-          <p class="error" id="e-email">Please enter a valid email address.</p>
+
+        <!-- Step 2: project (tiles write into the hidden inputs below) -->
+        <div class="est-step" data-step="2" role="group" aria-labelledby="est-t2" hidden>
+          <h4 class="est-title" id="est-t2" tabindex="-1">Your project</h4>
+          <div class="est-q" id="q-service" role="group" aria-labelledby="q-service-label" aria-describedby="e-service">
+            <p class="est-q-label" id="q-service-label">What do you need? <span class="opt">Select all that apply</span></p>
+            <div class="tiles tiles--icons">
+              <button class="tile" type="button" data-group="service" data-value="Custom Home" aria-pressed="false"><svg aria-hidden="true"><use href="#i-home"/></svg><span>Custom Home</span></button>
+              <button class="tile" type="button" data-group="service" data-value="Remodel / Addition" aria-pressed="false"><svg aria-hidden="true"><use href="#i-hammer"/></svg><span>Remodel / Addition</span></button>
+              <button class="tile" type="button" data-group="service" data-value="Concrete" aria-pressed="false"><svg aria-hidden="true"><use href="#i-slab"/></svg><span>Concrete</span></button>
+              <button class="tile" type="button" data-group="service" data-value="Septic Installation" aria-pressed="false"><svg aria-hidden="true"><use href="#i-tank"/></svg><span>Septic Installation</span></button>
+              <button class="tile" type="button" data-group="service" data-value="Septic Repair" aria-pressed="false"><svg aria-hidden="true"><use href="#i-tool"/></svg><span>Septic Repair</span></button>
+              <button class="tile" type="button" data-group="service" data-value="Not sure yet" aria-pressed="false"><svg aria-hidden="true"><use href="#i-question"/></svg><span>Not sure yet</span></button>
+            </div>
+            <p class="error" id="e-service">Please choose at least one service.</p>
+          </div>
+          <div class="est-q" id="q-timeline" role="group" aria-labelledby="q-timeline-label" aria-describedby="e-timeline">
+            <p class="est-q-label" id="q-timeline-label">When are you hoping to start?</p>
+            <div class="tiles tiles--rows">
+              <button class="tile" type="button" data-group="timeline" data-value="As soon as possible" aria-pressed="false"><svg aria-hidden="true"><use href="#i-bolt"/></svg><span>As soon as possible</span></button>
+              <button class="tile" type="button" data-group="timeline" data-value="1–3 months" aria-pressed="false"><svg aria-hidden="true"><use href="#i-calendar"/></svg><span>1–3 months</span></button>
+              <button class="tile" type="button" data-group="timeline" data-value="3–6 months" aria-pressed="false"><svg aria-hidden="true"><use href="#i-calendar"/></svg><span>3–6 months</span></button>
+              <button class="tile" type="button" data-group="timeline" data-value="6+ months / just planning" aria-pressed="false"><svg aria-hidden="true"><use href="#i-clock"/></svg><span>6+ months / just planning</span></button>
+            </div>
+            <p class="error" id="e-timeline">Please choose a timeline.</p>
+          </div>
+          <div class="est-q" id="q-land" role="group" aria-labelledby="q-land-label" hidden>
+            <p class="est-q-label" id="q-land-label">Do you already have land or a lot?</p>
+            <div class="tiles tiles--3">
+              <button class="tile" type="button" data-group="land" data-value="Yes" aria-pressed="false"><svg aria-hidden="true"><use href="#i-check"/></svg><span>Yes</span></button>
+              <button class="tile" type="button" data-group="land" data-value="Not yet" aria-pressed="false"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>Not yet</span></button>
+              <button class="tile" type="button" data-group="land" data-value="Not applicable" aria-pressed="false"><svg aria-hidden="true"><use href="#i-minus"/></svg><span>Not applicable</span></button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-location">Project location <span class="opt">(town or county)</span></label>
+            <input id="f-location" name="location" type="text" autocomplete="address-level2" placeholder="e.g. Goldsboro, Wayne County">
+          </div>
+          <input type="hidden" name="service">
+          <input type="hidden" name="timeline">
+          <input type="hidden" name="land" disabled>
+          <div class="est-nav">
+            <button class="est-back" type="button" data-back><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back</button>
+            <button class="btn btn--gold" type="button" data-next>Continue</button>
+          </div>
         </div>
-        <div class="field">
-          <label for="f-service">Service needed <span class="req" aria-hidden="true">*</span></label>
-          <select id="f-service" name="service" required aria-describedby="e-service">
-            <option value="">Select a service…</option>
-            <option>Custom Homes</option>
-            <option>Remodels &amp; Additions</option>
-            <option>Concrete</option>
-            <option>Septic Installation</option>
-            <option>Septic Repair</option>
-            <option>Other / Not sure</option>
-          </select>
-          <p class="error" id="e-service">Please choose a service.</p>
+
+        <!-- Step 3: optional details -->
+        <div class="est-step" data-step="3" role="group" aria-labelledby="est-t3" hidden>
+          <h4 class="est-title" id="est-t3" tabindex="-1">More details <span class="opt">(optional)</span></h4>
+          <div class="field">
+            <label for="f-details">Anything else we should know?</label>
+            <textarea id="f-details" name="details" placeholder="Size, style, budget range, questions…"></textarea>
+          </div>
+          <div class="est-nav">
+            <button class="est-back" type="button" data-back><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back</button>
+            <button class="est-skip" type="button" data-goto="4">Skip</button>
+            <button class="btn btn--gold" type="button" data-next>Continue</button>
+          </div>
         </div>
+
+        <!-- Step 4: review + consent + submit -->
+        <div class="est-step" data-step="4" role="group" aria-labelledby="est-t4" hidden>
+          <h4 class="est-title" id="est-t4" tabindex="-1">Review &amp; submit</h4>
+          <div class="est-summary" id="est-summary"></div>
+          <div class="est-check">
+            <label class="est-consent"><input type="checkbox" name="consent" value="Yes" required aria-describedby="e-consent"><span>I agree to be contacted by RamFam Builders by phone, text, or email about my request.</span></label>
+            <p class="error" id="e-consent">Please check this box so we can reach you.</p>
+          </div>
+          <!-- spam honeypot: keep hidden -->
+          <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="est-nav">
+            <button class="est-back" type="button" data-back><svg aria-hidden="true"><use href="#i-arrow"/></svg>Back</button>
+            <button class="btn btn--gold" type="submit"><span class="btn-label">Request My Free Estimate</span></button>
+          </div>
+          <p class="form-note" role="status">We never share your information.</p>
+          <p class="form-legal">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>.</p>
         </div>
-        <div class="field">
-          <label for="f-details">Project details <span class="opt">(optional)</span></label>
-          <textarea id="f-details" name="details" placeholder="Location, timeline, size of project, anything we should know…"></textarea>
-        </div>
-        <!-- spam honeypot: keep hidden -->
-        <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
-        <button class="btn btn--gold" type="submit">Request My Free Estimate</button>
-        <p class="form-note" role="status">We never share your information.</p>
-        <p class="form-legal">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>.</p>
       </form>
-      <div class="form-success" role="status" aria-live="polite" tabindex="-1">
-        <svg aria-hidden="true"><use href="#i-check"/></svg>
-        <h3>Thank you!</h3>
-        <p>We received your request and will be in touch within one business day. Need us sooner? Call <a href="tel:+19103857680" data-phone-link><span data-phone-text>(910) 385-7680</span></a>.</p>
+
+      <!-- Thank-you screen: replaces the form after a successful submit -->
+      <div class="est-done">
+        <img class="est-done-logo" src="logo-transparent.png" alt="RamFam Builders" width="1586" height="850" loading="lazy" decoding="async">
+        <svg class="est-done-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="m15 27 7 7 15-16"/></svg>
+        <h3 id="est-done-title" tabindex="-1">Thanks, <span data-first-name>neighbor</span>!</h3>
+        <p>Eddie will reach out within 24 hours.</p>
+        <a class="btn btn--gold" href="tel:+19103857680" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span class="nowrap">Call now: <span data-phone-text>(910) 385-7680</span></span></a>
+        <a class="link-arrow" href="gallery.html"><span>See Our Work</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </div>
@@ -1726,45 +1928,151 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     tx = ty = null;
   });
 
-  /* ---- Estimate form ---- */
-  const form = $("#estimate-form"), card = $("#form-card"), note = $(".form-note", form);
+  /* ---- Estimate form: 4 steps in one card. Still a single <form> posted as FormData to
+     C.formEndpoint; the tiles fill hidden inputs (service, timeline, land). ---- */
+  const form = $("#estimate-form"), card = $("#form-card"), note = $(".form-note", form), F = form.elements;
+  const steps = $$(".est-step", form), NAMES = ["Your info", "Your project", "More details", "Review & submit"];
+  const bar = $(".est-bar", card), noteText = note.textContent;
+  const smooth = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  let cur = 1, sending = false;
+  // after a step change: keep the card's top below the sticky header, and show the whole card when it fits
+  const reveal = () => {
+    const r = card.getBoundingClientRect(), header = $(".site-header").offsetHeight;
+    let dy = 0;
+    if (r.top < header) dy = r.top - header - 12;
+    else if (r.bottom > innerHeight && r.height <= innerHeight - header) dy = Math.min(r.bottom - innerHeight + 12, r.top - header - 12);
+    if (dy) scrollTo({ top: scrollY + dy, behavior: smooth() });
+  };
+
+  // phone: (xxx) xxx-xxxx while typing; a leading 1 country code is dropped
+  const phoneDigits = v => { const d = v.replace(/\D/g, ""); return d.length > 10 && d[0] === "1" ? d.slice(1) : d; };
+  F.phone.addEventListener("input", () => {
+    const d = phoneDigits(F.phone.value).slice(0, 10);
+    F.phone.value = d.length > 6 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : d.length > 3 ? `(${d.slice(0, 3)}) ${d.slice(3)}` : d ? "(" + d : "";
+  });
+
   const rules = {
-    name:    v => v.trim().length >= 2,
-    phone:   v => v.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "").length === 10,
-    email:   v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
-    service: v => v !== ""
+    name:  v => v.trim().length >= 2,
+    phone: v => phoneDigits(v).length === 10,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
   };
-  const check = el => {
-    const ok = rules[el.name](el.value);
-    el.closest(".field").classList.toggle("invalid", !ok);
-    el.setAttribute("aria-invalid", String(!ok));
-    return ok;
-  };
+  const mark = (box, bad, el) => { box.classList.toggle("invalid", bad); if (el) el.setAttribute("aria-invalid", String(bad)); return !bad; };
+  const check = el => mark(el.closest(".field"), !rules[el.name](el.value), el);
   Object.keys(rules).forEach(n => {
-    const el = form.elements[n];
+    const el = F[n];
     el.addEventListener("blur", () => { if (el.value) check(el); });
-    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => { if (el.closest(".field").classList.contains("invalid")) check(el); });
+    el.addEventListener("input", () => { if (el.closest(".field").classList.contains("invalid")) check(el); });
+  });
+
+  // tiles: service is multi-select, timeline + land are single-select
+  const picked = g => $$(`.tile[data-group="${g}"][aria-pressed="true"]`, form).map(t => t.dataset.value);
+  const syncTiles = () => {
+    F.service.value = picked("service").join(", ");
+    F.timeline.value = picked("timeline")[0] || "";
+    const land = picked("service").includes("Custom Home");   // the land question only applies to custom homes
+    $("#q-land").hidden = !land;
+    F.land.disabled = !land;   // disabled = left out of the payload
+    F.land.value = land ? picked("land")[0] || "" : "";
+  };
+  $$(".tile", form).forEach(t => t.addEventListener("click", () => {
+    const g = t.dataset.group, on = t.getAttribute("aria-pressed") === "true";
+    if (g === "service") t.setAttribute("aria-pressed", String(!on));
+    else $$(`.tile[data-group="${g}"]`, form).forEach(o => o.setAttribute("aria-pressed", String(o === t)));
+    syncTiles();
+    const q = t.closest(".est-q");
+    if (q.classList.contains("invalid")) mark(q, !(g === "service" ? F.service.value : F.timeline.value));
+  }));
+  F.consent.addEventListener("change", () => { if (F.consent.checked) mark($(".est-check", form), false, F.consent); });
+
+  const valid = n => {
+    if (n === 1) {
+      const bad = ["name", "phone", "email"].map(k => F[k]).filter(el => !check(el));
+      if (bad.length) bad[0].focus();
+      return !bad.length;
+    }
+    if (n === 2) {
+      const ok = [mark($("#q-service"), !F.service.value), mark($("#q-timeline"), !F.timeline.value)];
+      if (ok.includes(false)) $(".est-q.invalid .tile", form).focus();
+      return !ok.includes(false);
+    }
+    if (n === 4) {
+      const ok = mark($(".est-check", form), !F.consent.checked, F.consent);
+      if (!ok) F.consent.focus();
+      return ok;
+    }
+    return true;
+  };
+
+  const summary = () => {
+    const rows = pairs => pairs.filter(p => p[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+    const secs = [
+      [1, "Your info", rows([["Name", F.name.value.trim()], ["Phone", F.phone.value], ["Email", F.email.value.trim()]])],
+      [2, "Your project", rows([["Services", F.service.value], ["Start", F.timeline.value], ["Land", F.land.disabled ? "" : F.land.value], ["Location", F.location.value.trim()]])],
+      [3, "Details", rows([["Notes", F.details.value.trim()]])]
+    ];
+    $("#est-summary").innerHTML = secs.map(([n, title, body]) =>
+      `<div class="est-sum-sec"><div class="est-sum-head"><h5>${title}</h5><button class="est-edit" type="button" data-goto="${n}" aria-label="Edit ${title.toLowerCase()}">Edit</button></div>` +
+      (body ? `<dl>${body}</dl>` : `<p class="est-sum-empty">None added</p>`) + `</div>`).join("");
+  };
+
+  const go = n => {
+    const back = n < cur;
+    cur = n;
+    steps.forEach(s => {
+      const on = +s.dataset.step === n;
+      s.hidden = !on;
+      s.classList.remove("is-entering", "is-back");
+      if (on) { void s.offsetWidth; s.classList.add("is-entering"); s.classList.toggle("is-back", back); }
+    });
+    $("#est-step-label").textContent = `Step ${n} of 4`;
+    $("#est-step-name").textContent = NAMES[n - 1];
+    bar.setAttribute("aria-valuenow", n);
+    bar.setAttribute("aria-valuetext", `Step ${n} of 4: ${NAMES[n - 1]}`);
+    $("span", bar).style.transform = `scaleX(${n / 4})`;
+    if (n === 4) summary();
+    reveal();
+    $(".est-title", steps[n - 1]).focus({ preventScroll: true });
+  };
+
+  form.addEventListener("click", e => {
+    const b = e.target.closest("[data-next],[data-back],[data-goto]");
+    if (!b) return;
+    if (b.hasAttribute("data-next")) { if (valid(cur)) go(cur + 1); }
+    else if (b.hasAttribute("data-back")) go(cur - 1);
+    else go(+b.dataset.goto);
+  });
+  // Enter in a text field moves forward instead of submitting early
+  form.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.target.tagName !== "INPUT" || e.target.type === "checkbox" || cur === 4) return;
+    e.preventDefault();
+    $("[data-next]", steps[cur - 1]).click();
   });
 
   form.addEventListener("submit", async e => {
     e.preventDefault();
-    const bad = Object.keys(rules).map(n => form.elements[n]).filter(el => !check(el));
-    if (bad.length) { bad[0].focus(); return; }
-    if (form.elements.company.value) return; // bot filled the honeypot
+    if (cur < 4) { $("[data-next]", steps[cur - 1]).click(); return; }
+    if (sending || !valid(4)) return;
+    if (F.company.value) return; // bot filled the honeypot
 
-    const btn = $("button[type=submit]", form), label = btn.textContent;
-    btn.disabled = true; btn.textContent = "Sending…";
+    const btn = $("button[type=submit]", form), label = $(".btn-label", btn), text = label.textContent;
+    sending = true;
+    btn.disabled = true; btn.classList.add("is-loading"); btn.setAttribute("aria-busy", "true"); label.textContent = "Sending…";
+    note.classList.remove("is-error"); note.textContent = noteText;
     try {
       if (C.formEndpoint) {
         const res = await fetch(C.formEndpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
         if (!res.ok) throw new Error("Request failed");
       }
+      $("[data-first-name]", card).textContent = F.name.value.trim().split(/\s+/)[0];
       card.classList.add("sent");
-      $(".form-success", card).focus();
+      reveal();
+      $("#est-done-title").focus({ preventScroll: true });
     } catch (err) {
-      btn.disabled = false; btn.textContent = label;
+      // stay on the review step with every answer kept
+      sending = false;
+      btn.disabled = false; btn.classList.remove("is-loading"); btn.removeAttribute("aria-busy"); label.textContent = text;
       note.classList.add("is-error");
-      note.textContent = "Sorry, something went wrong. Please call us at " + C.phoneDisplay + ".";
+      note.innerHTML = `Sorry, your request didn't go through. Your answers are saved, so you can try again, or call us at <a href="tel:${esc(C.phoneLink)}">${esc(C.phoneDisplay)}</a>.`;
     }
   });
 })();
