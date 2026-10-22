@@ -40,7 +40,7 @@
 
 <!-- hero photo (keep in sync with the hero <picture> below) -->
 <link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
-      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)">
+      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="100vw">
 
 <!-- JSON-LD schema: values are refreshed from SITE_CONFIG by the script at the bottom; these are fallbacks. -->
 <script type="application/ld+json" id="schema">
@@ -192,47 +192,35 @@ p{margin:0 0 1em}
 /* sticky mobile call bar */
 
 /* ================= HERO ================= */
-/* Bright full-width photo with ONE compact, centered content stack up in the sky area.
-   Sized so header + hero + trust strip (+ the mobile call bar) fill exactly one screen. */
+/* Same layout at every width: the photo full-width with nothing over it, then the headline
+   block + buttons centered on a dark charcoal panel right below it, then the trust strip.
+   Phones get a 16:10 photo band; ≥768 / ≥1024 only scale things up. */
 :root{--trust-h:84px}                                     /* trust strip height: 2x2 grid on phones */
 @media (min-width:768px){ :root{--trust-h:68px} }       /* 1 row */
-.hero{--hero-pos:40% 50%;--hero-h:max(520px, calc(100svh - var(--header-h) - var(--trust-h)));position:relative;height:var(--hero-h);display:flex;justify-content:center;text-align:center;background:#AFC2D2;isolation:isolate;overflow:hidden}
-.hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:var(--charcoal-deep);isolation:isolate}
+.hero-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#AFC2D2}
 .hero-media picture,.split-media picture,.bleed-media picture,.card-media picture,.cta-band > picture,.marquee-item picture{display:contents}
 /* Photo framing for the hero (heroimage.png → images/hero/hero-1920 / hero-1024; 1942x809, 2.4:1).
    The roof touches the top edge, the house base is ~93% down, and the house spans ~23%-84% across
-   (porch + front doors ~25%-55%). Every screen is narrower than 2.4:1, so the photo's full height
-   always shows and only the sides are cropped: --hero-pos x picks the part of the house in view.
-   - phones (<768): 40% 50%, the covered porch, columns and front doors
-   - tablets (768-1023): 46% 50%, porch + front doors + the start of the stairs
-   - desktop (≥1024): 54% 50%, the whole house, centered
-   - very wide screens (aspect ≥ 2.2:1): the hero gets wider than the photo, so y matters: 50% 20%
+   (porch + front doors ~25%-55%). While the photo band is narrower than 2.4:1 its full height
+   shows and only the sides are cropped: --hero-pos x picks the part of the house in view.
+   - phones (<768): 61% 50%, the whole house in a 16:10 band
+   - tablet/desktop (≥769): no crop at all, the photo shows at its natural ratio (see the 769px block)
    REPLACE: if you swap the hero photo, re-tune the --hero-pos values. */
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border-radius:0;object-fit:cover;object-position:var(--hero-pos)}
-/* soft shade at the bottom, behind the buttons sitting over the lawn */
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%)}
-.hero-content{width:100%;max-width:792px;display:flex;flex-direction:column;align-items:center;padding:max(28px, calc(var(--hero-h) * .035)) 16px 0}   /* at least 28px below the header */
-.hero-band{width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.6);border-radius:6px;background:rgba(255,255,255,.84)}
-@supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
-  .hero-band{background:rgba(255,255,255,.68);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-}
-.hero h1{margin:0;color:var(--charcoal-deep);font-size:clamp(2rem,4.2vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:.08em;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 2px rgba(255,255,255,.6)}
+.hero-content{width:100%;max-width:900px;margin-inline:auto;padding:20px 16px 0}
+.hero h1{margin:0;color:#F6F3EE;font-size:clamp(1.25rem,6.2vw,1.65rem);font-weight:700;line-height:1.1;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
 .hero h1 .hero-h1-main{display:block}
-/* the three core services, a second line inside the headline band, gold dot separators */
-.hero-services{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:6px;font-family:var(--sans);font-size:clamp(.66rem,.55rem + .45vw,.92rem);font-weight:800;line-height:1.3;letter-spacing:.16em;color:var(--charcoal-deep);text-shadow:none}
-.hero-services > span{display:inline-flex;align-items:center;gap:10px}
-.hero-services > span + span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-hover);flex:none}
-/* service area: a small third line in the band (the trust strip carries the family owned / licensed / free estimate badges) */
-.hero-area{margin:6px 0 0;font-size:clamp(.72rem,.62rem + .3vw,.9rem);font-weight:500;line-height:1.3;letter-spacing:.04em;color:#3A3633}
-/* call link + helper text get a soft translucent pill so they stay legible over sky or roof */
-.hero-call,.hero-note{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.55);border-radius:999px}
-@supports ((-webkit-backdrop-filter:blur(6px)) or (backdrop-filter:blur(6px))){
-  .hero-call,.hero-note{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-}
-/* buttons + helper text: one centered group low in the hero, over the lawn */
-.hero-cta{position:absolute;left:0;right:0;bottom:18px;display:flex;flex-direction:column;align-items:center;padding:0 16px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
+/* the three core services, a second line inside the headline, gold dot separators */
+.hero-services{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:8px;font-family:var(--sans);font-size:clamp(.62rem,2.9vw,.74rem);font-weight:800;line-height:1.3;letter-spacing:.14em;color:var(--gold)}
+.hero-services > span{display:inline-flex;align-items:center;gap:9px}
+.hero-services > span + span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:none}
+/* service area: a small third line (the trust strip carries the family owned / licensed / free estimate badges) */
+.hero-area{margin:6px 0 0;font-size:.78rem;font-weight:500;line-height:1.3;letter-spacing:.04em;color:rgba(246,243,238,.72)}
+/* buttons + helper text, centered under the headline */
+.hero-cta{width:100%;max-width:900px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;padding:16px 16px 18px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
-.hero .btn{border-radius:999px;width:100%;max-width:360px;min-height:48px;padding:12px 24px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
+.hero .btn{border-radius:999px;width:100%;max-width:320px;min-height:46px;padding:10px 22px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
 /* "See Our Work" only: a slow soft gold glow pulse + a faint sheen every few seconds (box-shadow/transform only, no layout shift) */
 .hero .hero-btn{position:relative;overflow:hidden;isolation:isolate;animation:heroGlow 3s ease-in-out infinite}
 .hero .hero-btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.32) 50%,rgba(255,255,255,0) 100%);transform:translateX(-110%);animation:heroSheen 6s ease-in-out 2s infinite}
@@ -247,11 +235,10 @@ p{margin:0 0 1em}
   100%{box-shadow:0 14px 28px -12px rgba(0,0,0,.5),0 0 0 14px rgba(201,162,74,0)}
 }
 @keyframes heroSheen{0%{transform:translateX(-110%)}18%,100%{transform:translateX(260%)}}
-.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:8px;padding:0 16px;font-size:.92rem;font-weight:600;color:var(--charcoal-deep);text-decoration:none;transition:color .2s}
-.hero-call svg{width:16px;height:16px;color:var(--charcoal-deep);transition:color .2s}
-.hero-call:hover,.hero-call:hover svg{color:var(--gold-text)}   /* no underline: a color shift on hover instead */
-.hero-note{margin:8px 0 0;padding:3px 12px;font-size:.8rem;white-space:nowrap;font-weight:500;color:#3A3633}   /* ~85% charcoal: keeps WCAG AA on the pill */
-.hero .hero-note{background:rgba(255,255,255,.74)}
+.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;font-weight:600;color:#fff;text-decoration:none;transition:color .2s,border-color .2s}
+.hero-call svg{width:16px;height:16px;color:var(--gold)}
+.hero-call:hover{color:var(--gold-light)}   /* no underline: a color shift on hover instead */
+.hero-note{margin:2px 0 0;font-size:.78rem;white-space:nowrap;font-weight:500;color:rgba(246,243,238,.72)}
 
 /* trust strip: charcoal band right under the hero, at an exact height (--trust-h) */
 .trust-strip{height:var(--trust-h);display:flex;align-items:center;background:var(--charcoal);color:#F6F3EE;border-bottom:1px solid rgba(201,162,74,.22)}
@@ -262,6 +249,7 @@ p{margin:0 0 1em}
 .trust .stars{color:var(--gold);letter-spacing:1px;font-size:.82rem}
 .trust-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-bottom:1px solid rgba(201,162,74,.55);padding-bottom:1px}
 .trust-link:hover{color:var(--gold-light);border-bottom-color:var(--gold)}
+.hero + .trust-strip{border-top:1px solid rgba(201,162,74,.22)}   /* separates it from the dark hero panel */
 
 /* the one load-in animation on the page */
 @keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -548,15 +536,6 @@ p{margin:0 0 1em}
 /* ================= ≥768px (tablet) ================= */
 @media (min-width:768px){
   .services{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,1fr);gap:var(--s-5);overflow:visible;margin:0;padding:0}
-  .hero{--hero-pos:46% 50%}   /* tablets */
-  .hero-content{padding-top:max(24px, calc(var(--hero-h) * .04))}   /* text kept compact so the house can be larger */
-  .hero-cta{bottom:28px}
-  .hero-band{width:max-content;max-width:calc(100vw - 2 * var(--gutter));padding:16px 32px}   /* hugs the headline */
-  .hero h1{white-space:nowrap}
-  .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px 16px}
-  .hero-call{margin-top:0}
-  .hero .btn{width:auto;min-width:250px}
-  .hero-note{margin-top:13px;font-size:.9rem}
   .trust{display:flex;flex-wrap:nowrap;gap:0;font-size:.92rem}
   .trust li{padding:0 16px}
   .trust li + li{border-left:1px solid rgba(201,162,74,.3)}   /* thin gold dividers */
@@ -597,16 +576,6 @@ p{margin:0 0 1em}
   .header-phone:hover{color:var(--charcoal)}
   .main-nav a,.brand-text,.header-actions .btn{white-space:nowrap}
 
-  /* compact top + bottom content so they cover as little of the house as possible */
-  .hero{--hero-pos:54% 50%}
-  .hero-content{padding-top:22px}
-  .hero-band{padding:10px 28px}
-  .hero h1{font-size:clamp(2rem,3.2vw,3rem)}
-  /* button, call pill and helper text in one row, ~28px above the trust strip */
-  .hero-cta{bottom:28px;flex-direction:row;justify-content:center;align-items:center;gap:16px}
-  .hero-actions{width:auto;flex-wrap:nowrap}
-  .hero .btn{min-width:220px;min-height:48px;padding:12px 26px}
-  .hero-note{margin-top:0}
   .trust{font-size:1rem}
   .trust li{padding:0 32px}
   .trust svg{width:24px;height:24px}
@@ -865,33 +834,43 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 .video-soon-title{margin:0 0 6px;font-family:var(--serif);font-size:1.6rem;font-weight:600;line-height:1.15;color:#fff}
 .video-soon-text{margin:0;font-size:.9rem;line-height:1.5;color:rgba(255,255,255,.7);text-wrap:balance}
 
-/* hero framing on very wide desktop screens (the hero is much wider than the photo) */
-@media (min-width:1024px) and (min-aspect-ratio:11/5){ .hero{--hero-pos:50% 20%} }
-
-/* ================= HERO ON PHONES (under 768px only) =================
-   heroimage.png is 2.4:1 and the house spans ~23%-84% of its width, so a tall phone hero could only
-   show ~31% of it. Phones instead get a full-width 16:10 photo band (cover, ~67% of the width:
-   the whole house, porch and stairs) with nothing over it, then the headline block (no frosted
-   box) + buttons on a dark panel right below it. Tablet/desktop are unchanged. */
-@media (max-width:767px){
-  .hero{--hero-pos:61% 50%;height:auto;flex-direction:column;justify-content:flex-start;background:var(--charcoal-deep)}
-  .hero::after{display:none}                                       /* no gradient needed: buttons are off the photo */
-  .hero-media{position:relative;inset:auto;z-index:0;order:1;width:100%;aspect-ratio:16/10}
-  .hero-content{display:contents}                                  /* lets the headline block move below the photo */
-  .hero-band,.hero .hero-band{order:2;width:100%;padding:20px 16px 0;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;
-    animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
-  .hero h1{font-size:clamp(1.25rem,6.2vw,1.65rem);letter-spacing:.05em;white-space:nowrap;color:#F6F3EE;text-shadow:none}
-  .hero-services{gap:9px;margin-top:8px;font-size:clamp(.62rem,2.9vw,.74rem);letter-spacing:.14em;color:var(--gold)}
-  .hero-services > span{gap:9px}
-  .hero-services > span + span::before{width:5px;height:5px;background:var(--gold)}
-  .hero-area{margin-top:6px;font-size:.78rem;color:rgba(246,243,238,.72)}
-  .hero-cta{order:3;position:static;padding:16px 16px 18px}
-  .hero .btn{min-height:46px;max-width:320px;padding:10px 22px}
-  .hero .hero-call{min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;color:#fff;background:none;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
-  .hero .hero-call svg{color:var(--gold)}
-  .hero .hero-call:hover{color:var(--gold-light)}
-  .hero .hero-note{margin-top:2px;padding:0;font-size:.78rem;color:rgba(246,243,238,.72);background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none}
-  .trust-strip{border-top:1px solid rgba(201,162,74,.22)}         /* separates it from the dark hero panel */
+/* ================= HERO ON TABLET + DESKTOP (769px and up) =================
+   Phones (≤768) keep the base hero above. Here the whole photo shows at its natural 2.4:1 ratio
+   (roofline to lawn, no crop), full-bleed edge to edge right under the header, and the text block
+   below is kept compact. */
+@media (min-width:769px){
+  .hero-media{width:100%;margin:0;aspect-ratio:auto;border-radius:0;box-shadow:none}   /* full-bleed, directly under the header */
+  .hero-media img{position:static;display:block;width:100%;height:auto;aspect-ratio:1920/800;object-fit:fill}
+  .hero-content{padding:32px 32px 0}
+  .hero-content::before{content:"";display:block;width:32px;height:1px;margin:0 auto 14px;background:var(--gold);opacity:.75}   /* small gold hairline */
+  .hero h1{font-size:clamp(2rem,1rem + 1.75vw,2.4rem);line-height:1.05;letter-spacing:.04em}
+  .hero-services{gap:10px;margin-top:8px;font-size:.8rem;letter-spacing:.18em}
+  .hero-services > span{gap:10px}
+  .hero-services > span + span::before{width:5px;height:5px}
+  .hero-area{margin-top:4px;font-size:.82rem}
+  .hero-cta{padding:20px 32px 32px}
+  .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:12px}
+  .hero .btn,.hero .hero-call{box-sizing:border-box;width:auto;max-width:none;min-width:208px;height:46px;min-height:46px;margin:0;padding:0 26px;font-size:.95rem;border-radius:999px}
+  .hero .hero-call{justify-content:center;border:1.5px solid rgba(246,243,238,.3)}
+  .hero .hero-call:hover{border-color:var(--gold)}
+  /* softer glow at rest on the dark panel (hover keeps the stronger pulse) */
+  .hero .btn{box-shadow:0 8px 20px -12px rgba(0,0,0,.5)}
+  .hero .hero-btn{animation-name:heroGlowSoft}
+  .hero-note{margin-top:10px;font-size:.8rem}
+  /* trust strip: ~20% less vertical padding, slightly smaller icons + text */
+  :root{--trust-h:58px}
+  .trust{font-size:.88rem}
+  .trust svg{width:20px;height:20px}
+}
+@media (min-width:1024px){
+  .trust{font-size:.94rem}
+  .trust li{padding:0 28px}
+  .trust svg{width:22px;height:22px}
+  .trust .stars{font-size:.84rem}
+}
+@keyframes heroGlowSoft{
+  0%{box-shadow:0 8px 20px -12px rgba(0,0,0,.5),0 0 0 0 rgba(201,162,74,.22)}
+  100%{box-shadow:0 8px 20px -12px rgba(0,0,0,.5),0 0 0 10px rgba(201,162,74,0)}
 }
 
 /* ================= LOGO INTRO (every page load + back/forward restores) =================
@@ -1040,10 +1019,10 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   <div class="hero-media">
     <!-- Hero photo (full bleed): optimized copies of heroimage.png, WebP first, JPG fallback.
          Keep the <head> preload link in sync. Not lazy-loaded: this is the first thing visitors see.
-         Phones (under 768px) show it as a full-width 16:10 band so the whole house fits; the text sits below it. -->
+         Shown as a clean full-width band at every width; the headline and buttons sit below it. -->
     <picture>
-      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)">
-      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="(max-width: 767px) 100vw, (orientation: portrait) 200vh, max(100vw, 180vh)"
+      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="100vw">
+      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="100vw"
            width="1920" height="800" fetchpriority="high" decoding="async"
            alt="Three-story white coastal home raised on pilings, with a deep covered porch, board-and-batten siding, a side staircase and a green lawn, surrounded by tall pines under a blue sky">
     </picture>
