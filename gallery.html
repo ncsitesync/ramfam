@@ -22,7 +22,7 @@
 <meta property="og:description" content="Custom homes, remodels, concrete and septic projects by a family-owned builder in Eastern NC.">
 <meta property="og:url" content="https://www.ramfambuilders.com/gallery.html">
 <!-- REPLACE: a real 1200x630 photo of one of your projects -->
-<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1920.jpg">
+<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="assets/logo.png">
@@ -451,9 +451,10 @@ p{margin:0 0 1em}
   .footer-grid > :last-child{grid-column:auto}
 }
 @media (min-width:1024px) and (max-width:1279px){
-  .main-nav ul{gap:20px}
+  .main-nav ul{gap:14px}
   .main-nav a{font-size:.9rem}
   .header-phone{display:none}   /* too tight for the phone at this width; it returns at 1280px+ */
+  .header-actions{gap:8px}      /* room for the Facebook + Instagram buttons */
 }
 @media (min-width:1440px){
   .services{gap:var(--s-7)}
@@ -720,6 +721,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     <div class="header-actions">
       <a class="header-phone" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
       <a class="icon-btn" href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+      <a class="icon-btn" href="https://www.instagram.com/ramfambuilders/" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
       <a class="btn btn--charcoal btn--sm" href="index.html#contact">Contact Us</a>
     </div>
 
@@ -772,6 +774,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <div class="filters" role="group" aria-label="Filter by category">
         <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
         <button class="filter-btn" type="button" data-filter="homes" aria-pressed="false">Custom Homes</button>
+        <button class="filter-btn" type="button" data-filter="interiors" aria-pressed="false">Interiors</button>
         <button class="filter-btn" type="button" data-filter="remodels" aria-pressed="false">Remodels</button>
         <button class="filter-btn" type="button" data-filter="concrete" aria-pressed="false">Concrete</button>
         <button class="filter-btn" type="button" data-filter="septic" aria-pressed="false">Septic</button>
@@ -813,7 +816,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <p>Family-owned custom home builder. Building dream homes across Eastern North Carolina.</p>
         <div class="social">
           <a href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
-          <a href="#instagram" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+          <a href="https://www.instagram.com/ramfambuilders/" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
         </div>
       </div>
       <nav aria-label="Footer">
@@ -885,7 +888,7 @@ const SITE_CONFIG = {
   license:           "NC General Contractor License #104768",
   website:           "https://www.ramfambuilders.com/",       // REPLACE: live domain
   facebook:          "#facebook",               // REPLACE: https://facebook.com/yourpage
-  instagram:         "#instagram",              // REPLACE: https://instagram.com/yourhandle
+  instagram:         "https://www.instagram.com/ramfambuilders/",
   googleReview:      "#google-review-link",     // REPLACE: your Google "write a review" link
   googleRating:      "5.0",                     // REPLACE
   googleReviewCount: "25",                      // REPLACE
@@ -898,6 +901,7 @@ const PHOTOS = window.RAMFAM_PHOTOS || [];
 /* Category order, headings and tags */
 const CATEGORIES = [
   { key: "homes",    label: "Custom Homes", tag: "Home" },
+  { key: "interiors", label: "Interiors",   tag: "Interior" },
   { key: "remodels", label: "Remodels",     tag: "Remodel" },
   { key: "concrete", label: "Concrete",     tag: "Concrete" },
   { key: "septic",   label: "Septic",       tag: "Septic" },

@@ -2,14 +2,17 @@
    RamFam Builders: photo optimizer (not part of the website; excluded
    from Vercel by .vercelignore). Run from the ramfamv2 folder:
 
-       node tools/optimize-photos.js
+       node tools/optimize-photos.js                  (everything)
+       node tools/optimize-photos.js ranch-home hero  (only names containing "ranch-home", plus the hero)
 
-   - Copies each source photo to images/gallery/<clean-name>.jpg
    - Makes <name>-full.(webp|jpg)  : fits within 1600px (lightbox)
            <name>-thumb.(webp|jpg) : fits within 800px  (cards, carousel, grid)
      Photos are never enlarged: smaller sources keep their own size.
-   - Makes the hero sizes from heroimage.png: images/hero/hero-1920 and hero-1024 (webp + jpg)
-   Originals are only read, never changed.
+   - Makes the hero sizes from heroclear.png: images/hero/hero-<width> (webp + jpg) for 640/1280/1920/2400
+     plus the source's own width when it is under 2400 (never enlarged; index.html srcsets must
+     list the ones that exist)
+   Originals stay in _originals/ (not deployed) and are only read, never changed or copied
+   into images/.
 
    To use full-size originals later: point SOURCE_DIRS at their folder
    (same file names) and run again; every size is regenerated.
@@ -32,6 +35,13 @@ const PHOTOS = {};
   .forEach(n => PHOTOS[`161 Heron Dr. Havelock-${n}.jpg`] = `havelock-home-${n}`);
 ["8322277747808902329", "1000122119", "2135329255709405975", "3823369407361073406", "3927392219399870220", "8005751767233815085"]
   .forEach((n, k) => PHOTOS[`${n}.jpeg`] = `septic-0${k + 1}`);
+// blue-gray ranch home (exteriors image3/4 are PNG)
+["2", "3", "4", "6", "9", "10", "11", "12", "13", "14", "15", "16"]
+  .forEach(n => PHOTOS[`image${n}.${n === "3" || n === "4" ? "png" : "jpeg"}`] = `ranch-home-${n.padStart(2, "0")}`);
+
+// optional filters from the command line (see the top)
+const ONLY = process.argv.slice(2);
+const want = name => !ONLY.length || ONLY.some(o => name.includes(o));
 
 const OUT = path.join(SITE, "images", "gallery");
 const HERO_OUT = path.join(SITE, "images", "hero");
@@ -42,6 +52,7 @@ const ff = args => execFileSync(FFMPEG, ["-hide_banner", "-loglevel", "error", "
 const fit = max => `scale='min(${max},iw)':'min(${max},ih)':force_original_aspect_ratio=decrease:flags=lanczos`;
 function jpegSize(file) {
   const b = fs.readFileSync(file); let i = 2;
+  if (b[0] === 0x89) return [b.readUInt32BE(16), b.readUInt32BE(20)];   // PNG
   while (i < b.length) {
     if (b[i] !== 0xFF) { i++; continue; }
     const m = b[i + 1];
@@ -57,11 +68,10 @@ function variants(src, base, max) {
 let inBytes = 0, outBytes = 0;
 const report = [];
 for (const [orig, name] of Object.entries(PHOTOS)) {
+  if (!want(name)) continue;
   const dir = SOURCE_DIRS.find(d => fs.existsSync(path.join(d, orig)));
   if (!dir) { console.warn("MISSING:", orig); continue; }
   const src = path.join(dir, orig);
-  const copy = path.join(OUT, `${name}.jpg`);
-  fs.copyFileSync(src, copy);
   inBytes += fs.statSync(src).size;
   variants(src, path.join(OUT, `${name}-full`), 1600);
   variants(src, path.join(OUT, `${name}-thumb`), 800);
@@ -72,11 +82,14 @@ for (const [orig, name] of Object.entries(PHOTOS)) {
 }
 
 // hero
-const heroSrc = path.join(SITE, "heroimage.png");
-if (fs.existsSync(heroSrc)) {
-  for (const w of [1920, 1024]) {
-    ff(["-i", heroSrc, "-vf", `scale=${w}:-2:flags=lanczos,format=yuvj420p`, "-q:v", "4", path.join(HERO_OUT, `hero-${w}.jpg`)]);
-    ff(["-i", heroSrc, "-vf", `scale=${w}:-2:flags=lanczos`, "-c:v", "libwebp", "-quality", "80", "-compression_level", "6", path.join(HERO_OUT, `hero-${w}.webp`)]);
+const heroSrc = SOURCE_DIRS.map(d => path.join(d, "heroclear.png")).find(f => fs.existsSync(f));
+if (heroSrc && want("hero")) {
+  const srcW = jpegSize(heroSrc)[0];
+  const widths = [640, 1280, 1920, 2400].filter(w => w < srcW);
+  if (srcW < 2400) widths.push(srcW);
+  for (const w of widths) {   // -q:v 3 / WebP 84: a little above the gallery's 80 so the big photo stays crisp
+    ff(["-i", heroSrc, "-vf", `scale=${w}:-2:flags=lanczos,format=yuvj420p`, "-q:v", "3", path.join(HERO_OUT, `hero-${w}.jpg`)]);
+    ff(["-i", heroSrc, "-vf", `scale=${w}:-2:flags=lanczos`, "-c:v", "libwebp", "-quality", "84", "-compression_level", "6", path.join(HERO_OUT, `hero-${w}.webp`)]);
   }
 }
 

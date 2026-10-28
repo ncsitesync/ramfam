@@ -26,10 +26,10 @@
 <meta property="og:title" content="RamFam Builders | Custom Homes, Concrete &amp; Septic in Eastern NC">
 <meta property="og:description" content="Family-owned, NC licensed general contractor. Custom homes, concrete, and septic work across Eastern North Carolina. Free estimates.">
 <meta property="og:url" content="https://www.ramfambuilders.com/">
-<!-- social preview image (absolute URL on the live domain; optimized copy of heroimage.png) -->
-<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1920.jpg">
-<meta property="og:image:width" content="1920">
-<meta property="og:image:height" content="800">
+<!-- social preview image (absolute URL on the live domain; the hero photo, from heroclear.png) -->
+<meta property="og:image" content="https://www.ramfambuilders.com/images/hero/hero-1280.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="574">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="assets/logo.png">
@@ -39,8 +39,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- hero photo (keep in sync with the hero <picture> below) -->
-<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1920.webp"
-      imagesrcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" imagesizes="100vw">
+<link rel="preload" as="image" fetchpriority="high" type="image/webp" href="images/hero/hero-1467.webp"
+      imagesrcset="images/hero/hero-640.webp 640w, images/hero/hero-1280.webp 1280w, images/hero/hero-1467.webp 1467w" imagesizes="100vw">
 
 <!-- JSON-LD schema: values are refreshed from SITE_CONFIG by the script at the bottom; these are fallbacks. -->
 <script type="application/ld+json" id="schema">
@@ -51,7 +51,7 @@
   "description": "Family-owned custom home builder and NC licensed general contractor serving Eastern North Carolina: custom homes, concrete, and septic installation and repair, plus remodels and additions.",
   "url": "https://www.ramfambuilders.com/",
   "logo": "https://www.ramfambuilders.com/assets/logo.png",
-  "image": "https://www.ramfambuilders.com/images/hero/hero-1920.jpg",
+  "image": "https://www.ramfambuilders.com/images/hero/hero-1280.jpg",
   "telephone": "+1-910-385-7680",
   "email": "ramfambuilders@gmail.com",
   "hasCredential": {
@@ -67,7 +67,7 @@
   "areaServed": "Eastern North Carolina",
   "openingHours": "Mo-Fr 07:00-18:00",
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "25" },
-  "sameAs": []
+  "sameAs": ["https://www.instagram.com/ramfambuilders/"]
 }
 </script>
 
@@ -200,11 +200,11 @@ p{margin:0 0 1em}
 .hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:var(--charcoal-deep);isolation:isolate}
 .hero-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#AFC2D2}
 .hero-media picture,.split-media picture,.bleed-media picture,.card-media picture,.cta-band > picture,.marquee-item picture{display:contents}
-/* Photo framing for the hero (heroimage.png → images/hero/hero-1920 / hero-1024; 1942x809, 2.4:1).
-   The roof touches the top edge, the house base is ~93% down, and the house spans ~23%-84% across
-   (porch + front doors ~25%-55%). While the photo band is narrower than 2.4:1 its full height
-   shows and only the sides are cropped: --hero-pos x picks the part of the house in view.
-   - phones (<768): 61% 50%, the whole house in a 16:10 band
+/* Photo framing for the hero (heroclear.png → images/hero/hero-640 / 1280 / 1467; 1467x659, ~2.23:1).
+   The roof peak is ~2% down, the house base ~93% down, and the house spans ~32%-88% across
+   (stairs on the right). In the phones' 16:10 band the full height shows and only the sides
+   are cropped (~72% of the width stays): --hero-pos x picks the part in view.
+   - phones (≤768): 61% 50%, the whole house in a 16:10 band
    - tablet/desktop (≥769): no crop at all, the photo shows at its natural ratio (see the 769px block)
    REPLACE: if you swap the hero photo, re-tune the --hero-pos values. */
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border-radius:0;object-fit:cover;object-position:var(--hero-pos)}
@@ -239,6 +239,20 @@ p{margin:0 0 1em}
 .hero-call svg{width:16px;height:16px;color:var(--gold)}
 .hero-call:hover{color:var(--gold-light)}   /* no underline: a color shift on hover instead */
 .hero-note{margin:2px 0 0;font-size:.78rem;white-space:nowrap;font-weight:500;color:rgba(246,243,238,.72)}
+/* "Follow us on [Instagram]": a frosted charcoal pill in the photo's bottom-right corner, over the lawn
+   (phone sizing here, tablet/desktop sizing in the 769px block) */
+.hero-ig{display:none;position:absolute;z-index:1;right:12px;bottom:12px;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(246,243,238,.2);background:rgba(46,43,40,.78);color:#F6F3EE;font:600 .75rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);transition:transform .2s,background-color .2s}
+@supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
+  .hero-ig{background:rgba(46,43,40,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+}
+.hero-ig svg{width:15px;height:15px;color:var(--gold);transition:color .2s}
+.hero-ig:hover,.hero-ig:focus-visible{transform:translateY(-2px);background-color:rgba(46,43,40,.7)}
+.hero-ig:hover svg,.hero-ig:focus-visible svg{color:var(--gold-light)}
+@media (max-width:768px){
+  .hero-ig{display:inline-flex;min-height:0;padding:6px 12px}
+  .hero-ig svg{width:14px;height:14px}
+  .hero-ig::before{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:44px;transform:translateY(-50%)}   /* tap area */
+}
 
 /* trust strip: charcoal band right under the hero, at an exact height (--trust-h) */
 .trust-strip{height:var(--trust-h);display:flex;align-items:center;background:var(--charcoal);color:#F6F3EE;border-bottom:1px solid rgba(201,162,74,.22)}
@@ -606,9 +620,10 @@ p{margin:0 0 1em}
   .footer-grid > :last-child{grid-column:auto}
 }
 @media (min-width:1024px) and (max-width:1279px){
-  .main-nav ul{gap:20px}
+  .main-nav ul{gap:14px}
   .main-nav a{font-size:.9rem}
   .header-phone{display:none}   /* too tight for the phone at this width; it returns at 1280px+ */
+  .header-actions{gap:8px}      /* room for the Facebook + Instagram buttons */
 }
 @media (min-width:1440px){
   .services{gap:var(--s-7)}
@@ -840,7 +855,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
    below is kept compact. */
 @media (min-width:769px){
   .hero-media{width:100%;margin:0;aspect-ratio:auto;border-radius:0;box-shadow:none}   /* full-bleed, directly under the header */
-  .hero-media img{position:static;display:block;width:100%;height:auto;aspect-ratio:1920/800;object-fit:fill}
+  .hero-media img{position:static;display:block;width:100%;height:auto;object-fit:initial}   /* the whole photo at its natural ratio (from the width/height attributes): nothing cropped */
   .hero-content{padding:32px 32px 0}
   .hero-content::before{content:"";display:block;width:32px;height:1px;margin:0 auto 14px;background:var(--gold);opacity:.75}   /* small gold hairline */
   .hero h1{font-size:clamp(2rem,1rem + 1.75vw,2.4rem);line-height:1.05;letter-spacing:.04em}
@@ -857,6 +872,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   .hero .btn{box-shadow:0 8px 20px -12px rgba(0,0,0,.5)}
   .hero .hero-btn{animation-name:heroGlowSoft}
   .hero-note{margin-top:10px;font-size:.8rem}
+  .hero-ig{display:inline-flex;right:clamp(20px,1.7vw,24px);bottom:clamp(20px,1.7vw,24px);gap:8px;min-height:40px;padding:0 16px;font-size:.85rem}
+  .hero-ig svg{width:18px;height:18px}
   /* trust strip: ~20% less vertical padding, slightly smaller icons + text */
   :root{--trust-h:58px}
   .trust{font-size:.88rem}
@@ -981,6 +998,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     <div class="header-actions">
       <a class="header-phone" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
       <a class="icon-btn" href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+      <a class="icon-btn" href="https://www.instagram.com/ramfambuilders/" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
       <a class="btn btn--charcoal btn--sm" href="#contact">Contact Us</a>
     </div>
 
@@ -1017,15 +1035,16 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <!-- ================= 1. HERO ================= -->
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="hero-media">
-    <!-- Hero photo (full bleed): optimized copies of heroimage.png, WebP first, JPG fallback.
+    <!-- Hero photo (full bleed): heroclear.png (original in _originals/) at 640 / 1280 / 1467px, WebP first, JPG fallback.
          Keep the <head> preload link in sync. Not lazy-loaded: this is the first thing visitors see.
          Shown as a clean full-width band at every width; the headline and buttons sit below it. -->
     <picture>
-      <source type="image/webp" srcset="images/hero/hero-1024.webp 1024w, images/hero/hero-1920.webp 1920w" sizes="100vw">
-      <img src="images/hero/hero-1920.jpg" srcset="images/hero/hero-1024.jpg 1024w, images/hero/hero-1920.jpg 1920w" sizes="100vw"
-           width="1920" height="800" fetchpriority="high" decoding="async"
-           alt="Three-story white coastal home raised on pilings, with a deep covered porch, board-and-batten siding, a side staircase and a green lawn, surrounded by tall pines under a blue sky">
+      <source type="image/webp" srcset="images/hero/hero-640.webp 640w, images/hero/hero-1280.webp 1280w, images/hero/hero-1467.webp 1467w" sizes="100vw">
+      <img src="images/hero/hero-1467.jpg" srcset="images/hero/hero-640.jpg 640w, images/hero/hero-1280.jpg 1280w, images/hero/hero-1467.jpg 1467w" sizes="100vw"
+           width="1467" height="659" fetchpriority="high" decoding="async"
+           alt="White two-story coastal-style home raised on columns, with a covered front porch and ceiling fans, wreaths on the wood double front doors, black-framed windows and a side staircase, set among tall pines with a concrete driveway and green lawn">
     </picture>
+    <a class="hero-ig" href="https://www.instagram.com/ramfambuilders/" data-instagram-link target="_blank" rel="noopener" aria-label="Follow RamFam Builders on Instagram"><span>Follow us on</span><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
   </div>
   <div class="hero-content">
     <div class="hero-band">
@@ -1606,7 +1625,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <p>Family-owned custom home builder. Building dream homes across Eastern North Carolina.</p>
         <div class="social">
           <a href="#facebook" data-facebook-link aria-label="RamFam Builders on Facebook" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
-          <a href="#instagram" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+          <a href="https://www.instagram.com/ramfambuilders/" data-instagram-link aria-label="RamFam Builders on Instagram" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
         </div>
       </div>
       <nav aria-label="Footer">
@@ -1681,7 +1700,7 @@ const SITE_CONFIG = {
   licenseNumber:     "104768",                  // also used in the JSON-LD schema
   website:           "https://www.ramfambuilders.com/",       // REPLACE: live domain
   facebook:          "#facebook",               // REPLACE: https://facebook.com/yourpage
-  instagram:         "#instagram",              // REPLACE: https://instagram.com/yourhandle
+  instagram:         "https://www.instagram.com/ramfambuilders/",
   googleReview:      "#google-review-link",     // REPLACE: your Google "write a review" link
   googleRating:      "5.0",                     // REPLACE
   googleReviewCount: "25",                      // REPLACE
@@ -1753,7 +1772,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   $$("[data-service]").forEach(a => a.addEventListener("click", () => { $("#f-service").value = a.dataset.service; }));
 
   /* ---- Gallery: single-row project carousel ---- */
-  const LABELS = { homes: "Custom Home", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card
+  const LABELS = { homes: "Custom Home", interiors: "Interior", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card
   const PROJECTS = window.RAMFAM_PROJECTS || {};
   const webp = src => src.replace(/\.jpe?g$/i, ".webp");
   const grid = $("#gallery-grid");                 // carousel container (the lightbox listens for clicks here)
@@ -2087,17 +2106,24 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   var html = document.documentElement, intro = document.getElementById("intro");
   var timers = [];
 
-  /* ---- Scroll hint: once the intro is gone, slowly scroll (~1.8s, easeInOutCubic) until the
-     "BUILDING DREAM HOMES" headline sits at ~72% of the screen height. Skipped when the page is
-     not at the very top, has a #hash, reduced motion is on, or the headline already sits in the
-     top 75% of the screen. Any wheel, touch, key, click or outside scroll stops it
-     at once and leaves the page where the user put it. ---- */
+  /* ---- Scroll hint: once the intro is gone, slowly scroll (2s, easeInOutCubic) so the
+     "BUILDING DREAM HOMES" headline sits at ~72% of the screen height (at least 80px, at most
+     60% of the screen). Measured after the hero photo has decoded, so its height is real.
+     Skipped when the page is not at the very top, has a #hash, or reduced motion is on.
+     Any wheel, touch, key, click or outside scroll stops it at once and leaves the page where
+     the user put it. ---- */
+  var skipNudge = function () {
+    return window.scrollY !== 0 || location.hash || matchMedia("(prefers-reduced-motion: reduce)").matches;
+  };
   var nudge = function () {
-    var h1 = document.getElementById("hero-title");
-    if (!h1 || window.scrollY !== 0 || location.hash || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var h1 = document.getElementById("hero-title"), img = document.querySelector(".hero-media img");
+    if (!h1 || skipNudge()) return;
+    var ready = img && img.decode ? img.decode().catch(function () {}) : Promise.resolve();
+    ready.then(function () { if (!skipNudge()) glide(h1); });
+  };
+  var glide = function (h1) {
     var vh = innerHeight, top = h1.getBoundingClientRect().top;
-    if (top <= vh * 0.75) return;   // headline already comfortably in view (e.g. most phones)
-    var dist = Math.round(Math.min(Math.max(top - vh * 0.72, 80), vh * 0.45));
+    var dist = Math.round(Math.min(Math.max(top - vh * 0.72, 80), vh * 0.6));
     var stops = ["wheel", "touchstart", "keydown", "mousedown"], start = null, last = 0, raf;
     var stop = function () {
       cancelAnimationFrame(raf);
@@ -2108,7 +2134,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     var step = function (now) {
       if (start === null) start = now;
       if (Math.abs(window.scrollY - last) > 2) return stop();   // something else scrolled the page: hand it back
-      var t = Math.min((now - start) / 1800, 1);
+      var t = Math.min((now - start) / 2000, 1);
       last = Math.round(dist * ease(t));
       scrollTo({ top: last, behavior: "instant" });   // instant: html has scroll-behavior:smooth
       if (t < 1) raf = requestAnimationFrame(step); else stop();

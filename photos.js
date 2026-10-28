@@ -8,7 +8,7 @@
      thumb    : smaller photo for cards/grids  (images/gallery/<name>-thumb.jpg)
                 A .webp twin of each file is used automatically where supported.
      w, h     : pixel size of the full photo (prevents layout jumps)
-     category : "homes", "remodels", "concrete" or "septic"
+     category : "homes", "interiors", "remodels", "concrete" or "septic"
                 (a category with no photos is hidden everywhere until you add some)
      project  : which project it belongs to (see RAMFAM_PROJECTS below)
      alt      : what the photo shows (for screen readers and Google)
@@ -25,6 +25,8 @@ window.RAMFAM_PROJECTS = {
   havelock: "Havelock, NC",
   // REPLACE: rename this project (e.g. "New Bern, NC" or "3-Bed Ranch, Jacksonville NC")
   "custom-home-2": "Custom Home Project",
+  // REPLACE: rename this project too (blue-gray ranch home, image2-16 photos)
+  "ranch-home": "Ranch Home Project",
   "septic-work": "Septic Work",
 };
 
@@ -65,6 +67,22 @@ window.RAMFAM_PHOTOS = (function () {
     p("project-8691", 640, 428, "homes", "custom-home-2", "Kitchen island and sink under a window, with white cabinets and a gray subway tile backsplash", "Island and sink wall"),
     p("project-8692", 427, 640, "homes", "custom-home-2", "Stainless range and microwave set in white shaker cabinets with gray subway tile", "Range and cabinets"),
     p("project-8696", 640, 428, "homes", "custom-home-2", "Undermount sink and chrome faucet on a white quartz countertop with gray subway tile", "Quartz countertop detail"),
+
+    // ---- Custom Homes · Ranch Home Project (exteriors) ----
+    p("ranch-home-03", 640, 427, "homes", "ranch-home", "New single-story home with blue-gray siding, black shutters, a covered front porch and a brick foundation on a wide lawn", "Front elevation"),
+    p("ranch-home-04", 640, 391, "homes", "ranch-home", "Back of a blue-gray ranch home with a gabled porch on white columns, a ceiling fan and brick steps", "Covered back porch"),
+
+    // ---- Interiors · Ranch Home Project ----
+    p("ranch-home-11", 427, 640, "interiors", "ranch-home", "White kitchen with a large island, glass globe pendant lights, a farmhouse sink under the window and gray wood-look floors", "Kitchen with island and farmhouse sink"),
+    p("ranch-home-06", 427, 640, "interiors", "ranch-home", "Gas range under a white shaker range hood with a marble-look slab backsplash and brass cabinet pulls", "Range wall with marble-look backsplash"),
+    p("ranch-home-13", 428, 640, "interiors", "ranch-home", "Kitchen with white shaker cabinets, a stainless gas range and pendant lights, looking down to the back door", "Kitchen toward the back door"),
+    p("ranch-home-12", 640, 427, "interiors", "ranch-home", "Open living room and kitchen with a fireplace wall, a woven pendant light and a back door with a window", "Open living room and kitchen"),
+    p("ranch-home-15", 427, 640, "interiors", "ranch-home", "Living area under a woven drum chandelier, with the fireplace wall and a kitchen island under glass pendants", "Living area under the woven chandelier"),
+    p("ranch-home-09", 427, 640, "interiors", "ranch-home", "Board-and-batten feature wall with a linear electric fireplace, a wood beam mantel and a ceiling fan above", "Fireplace feature wall"),
+    p("ranch-home-14", 427, 640, "interiors", "ranch-home", "Woven rattan drum chandelier with brass hardware hanging from a white ceiling", "Woven drum chandelier"),
+    p("ranch-home-02", 427, 640, "interiors", "ranch-home", "Bathroom double vanity with white shaker cabinets, a quartz top, arched black mirrors, brushed-gold faucets and a sconce", "Double vanity with brass fixtures"),
+    p("ranch-home-16", 427, 640, "interiors", "ranch-home", "Walk-in shower with large marble-look wall panels, a brushed-gold shower head and a handheld wand", "Marble-look walk-in shower"),
+    p("ranch-home-10", 427, 640, "interiors", "ranch-home", "Hallway with tall white shaker pantry cabinets beside a doorway, on gray wood-look floors", "Built-in hall cabinets"),
 
     // ---- Septic · Septic Work ----
     p("septic-03", 1200, 1600, "septic", "septic-work", "Long drain field trench with a newly installed black plastic chamber system and distribution box, beside a golf course", "New drain field chamber install", 5),
