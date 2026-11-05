@@ -282,16 +282,6 @@ p{margin:0 0 1em}
 /* license line under the About stats */
 .license-badge{display:flex;align-items:center;gap:8px;margin:0 0 var(--s-5);font-size:.86rem;font-weight:600;color:var(--charcoal)}
 .license-badge svg{width:18px;height:18px;color:var(--gold-text);flex:none}
-/* Meet the Builder (Our Story): role line, signature, small highlight row */
-/* (.split prefix so the ≥1024px ".split p" font size doesn't override these) */
-.split .builder-role{margin:-.15em 0 var(--s-5);font-size:.78rem;font-weight:600;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.split .builder-sign{margin:.1em 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.75rem;line-height:1.1;color:var(--gold-text)}
-.builder-points{display:flex;flex-direction:column;gap:10px;list-style:none;margin:var(--s-5) 0 var(--s-4);padding:var(--s-4) 0 0;border-top:1px solid var(--line);font-size:.86rem;font-weight:600;line-height:1.3;color:var(--charcoal)}
-.builder-points li{display:flex;align-items:center;gap:7px;white-space:nowrap}
-.builder-points svg{width:17px;height:17px;color:var(--gold-text);flex:none}
-.split .builder-license{font-size:.86rem;font-weight:500;color:var(--muted)}
-@media (min-width:600px){ .builder-points{flex-direction:row;flex-wrap:wrap;gap:10px 20px} }
-
 /* ================= SERVICES ================= */
 /* base list styles; below 1024px it becomes the snap carousel (SERVICES CAROUSEL block); desktop: grid */
 .services{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:var(--s-4);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--gutter)*-1);padding:var(--s-1) var(--gutter) var(--s-5);scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch;scrollbar-width:none;list-style:none}
@@ -598,8 +588,6 @@ p{margin:0 0 1em}
 
   /* asymmetric splits */
   .split{grid-template-columns:7fr 5fr}
-  .split--flip{grid-template-columns:5fr 7fr}
-  .split--flip .split-media{order:2}
   .split-media img{aspect-ratio:5/4}
 
   .services{grid-template-columns:repeat(3,1fr);gap:var(--s-6)}
@@ -666,10 +654,9 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .section .lead{font-size:clamp(1rem,.85rem + .35vh,1.15rem)}
 
   /* About + Our Story: side by side, image capped at ~70vh */
-  .split,.split--flip{grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
+  .split{grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
   .split-media img{aspect-ratio:auto;height:min(70vh, var(--fit-inner))}
   .split > div:not(.split-media){max-width:34rem}
-  .split--flip > div:not(.split-media){justify-self:end}
   .split p{font-size:.96rem;line-height:1.65}
   .split .lead{font-size:clamp(1rem,.9rem + .25vh,1.1rem)}
   .stats{margin:clamp(14px,2.5vh,28px) 0;padding-top:clamp(12px,2vh,20px)}
@@ -677,8 +664,7 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
 
   /* Services: one compact row of five; the extra "Not sure where to start?" tile
      is hidden here because the section heading already has a quote button */
-  .services{grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,1.4vw,24px)}
-  .services > li:last-child{display:none}
+  .services{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.4vw,24px)}   /* 3 services + the "Not sure where to start?" tile */
   .card img{aspect-ratio:auto;height:clamp(120px,18vh,180px)}
   .card-body{padding:16px 18px 8px}
   .card-body h3{font-size:clamp(1.2rem,.75rem + .5vw + .5vh,1.5rem)}
@@ -711,10 +697,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .review blockquote{font-size:clamp(1.15rem,.75rem + 1vh,1.4rem);margin-bottom:clamp(14px,2.5vh,24px)}
   .review figcaption{padding-top:clamp(10px,1.8vh,16px)}
 
-  /* Facebook video: text left, reel right, whole section fits one screen */
-  .video-sec.section{min-height:0;padding:clamp(32px,5vh,56px) 0}
-  .video-grid{--video-w:clamp(280px, calc((100svh - var(--header-h) - 2 * clamp(32px,5vh,56px) - 48px) * 267 / 476), 320px);grid-template-columns:minmax(0,1fr) var(--video-w);align-items:center}
-  .video-frame{width:var(--video-w)}
 
   /* CTA band */
 
@@ -826,28 +808,6 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 @media (prefers-reduced-motion:reduce){
   .js [data-reveal],.js [data-reveal] img{opacity:1 !important;transform:none !important}
 }
-
-/* ================= FACEBOOK VIDEO ================= */
-/* compact charcoal band between About (white) and Services (warm) */
-.video-sec{background:var(--charcoal);color:rgba(255,255,255,.82)}
-.video-grid{display:grid;gap:clamp(28px,4vw,48px);max-width:1000px;margin:0 auto}
-.video-sec h2{color:#fff}
-.video-sec .eyebrow{color:var(--gold-light)}
-.video-sec .lead{color:rgba(255,255,255,.8)}
-.video-text .btn{margin-top:8px}
-.video-links{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-.video-sec .link-arrow{color:#fff}
-.video-sec .link-arrow svg.fb{width:20px;height:20px;color:var(--gold)}
-/* 9:16 frame for the vertical reel (267:476), never wider than the screen */
-.video-frame{position:relative;width:min(300px,100%);aspect-ratio:267/476;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--charcoal-deep);box-shadow:0 22px 50px -18px rgba(0,0,0,.6),0 0 0 1px rgba(201,162,74,.25)}
-.video-frame iframe,.video-frame video{position:absolute;inset:0;width:100%;height:100%;border:0;overflow:hidden;z-index:1}
-/* "Video coming soon" placeholder (shown until the real video is added) */
-.video-soon{display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(120% 70% at 50% 42%,#34302C 0%,var(--charcoal-deep) 70%)}
-.video-soon-inner{display:flex;flex-direction:column;align-items:center;padding:0 24px}
-.video-soon-icon{display:flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:18px;border-radius:50%;border:1.5px solid rgba(201,162,74,.55);background:rgba(201,162,74,.08);color:var(--gold)}
-.video-soon-icon svg{width:26px;height:26px;margin-left:4px}
-.video-soon-title{margin:0 0 6px;font-family:var(--serif);font-size:1.6rem;font-weight:600;line-height:1.15;color:#fff}
-.video-soon-text{margin:0;font-size:.9rem;line-height:1.5;color:rgba(255,255,255,.7);text-wrap:balance}
 
 /* ================= HERO ON TABLET + DESKTOP (769px and up) =================
    Phones (≤768) keep the base hero above. Here the whole photo shows at its natural 2.4:1 ratio
@@ -988,9 +948,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#gallery">Our Work</a></li>
+        <li><a href="gallery.html">Our Work</a></li>
         <li><a href="#process">Process</a></li>
-        <li><a href="#story">Our Story</a></li>
+        <li><a href="story.html">Our Story</a></li>
         <li><a href="#reviews">Reviews</a></li>
       </ul>
     </nav>
@@ -1018,9 +978,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#gallery">Our Work</a></li>
+      <li><a href="gallery.html">Our Work</a></li>
       <li><a href="#process">How It Works</a></li>
-      <li><a href="#story">Our Story</a></li>
+      <li><a href="story.html">Our Story</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -1089,7 +1049,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <p class="eyebrow">About RamFam</p>
       <h2 id="about-title">Built on Family. Built on Trust.</h2>
       <p class="lead">RamFam Builders is a family-owned company that builds every project like it's going up next door to our own. You work directly with the family that owns the business, from the first walk of your lot to the day we hand you the keys.</p>
-      <p>Custom homes, remodels, concrete, and septic, all handled by one trusted crew. That means clear communication, honest pricing, and work we're proud to put our name on.</p>
+      <p>Custom homes, concrete, and septic, all handled by one trusted crew. That means clear communication, honest pricing, and work we're proud to put our name on.</p>
       <!-- REPLACE: your real numbers -->
       <div class="stats">
         <div><strong>18</strong><span>Years experience</span></div>
@@ -1098,38 +1058,6 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       </div>
       <p class="license-badge"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-license-text>NC General Contractor License #104768</span></p>
       <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FACEBOOK VIDEO ================= -->
-<section class="section video-sec" id="video" aria-labelledby="video-title">
-  <div class="wrap">
-    <div class="video-grid">
-      <div class="video-text" data-reveal="left">
-        <p class="eyebrow">On the Job</p>
-        <h2 id="video-title">See Us on the Job</h2>
-        <p class="lead">Watch our crew at work, from pouring footings to the final walkthrough. Real projects, real people, the same family-run team that will build yours.</p>
-        <div class="video-links">
-          <a class="link-arrow" href="#facebook" data-facebook-link target="_blank" rel="noopener"><svg class="fb" aria-hidden="true"><use href="#i-fb"/></svg><span>Follow Us on Facebook</span></a>
-        </div>
-        <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-      </div>
-      <div data-reveal="right">
-        <!-- ========== REAL VIDEO GOES HERE ==========
-             Replace the .video-soon placeholder below with the real video, keeping the
-             .video-frame wrapper (it sets the 9:16 size and rounded frame), e.g.
-             <div class="video-frame"><video src="videos/walkthrough.mp4" controls playsinline preload="metadata"></video></div>
-             or an embed <iframe> inside the same wrapper. Then remove the .video-soon class. -->
-        <div class="video-frame video-soon">
-          <div class="video-soon-inner">
-            <span class="video-soon-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15l12-7.5z"/></svg></span>
-            <p class="video-soon-title">Video coming soon</p>
-            <p class="video-soon-text">Full project walkthrough coming soon</p>
-          </div>
-        </div>
-        <!-- ========== /REAL VIDEO ========== -->
-      </div>
     </div>
   </div>
 </section>
@@ -1162,25 +1090,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
             <p class="card-tag">Design + Build</p>
             <h3>Custom Homes</h3>
             <p>Your plans, your style, built right, from lot prep and foundation to finish carpentry and final walkthrough.</p>
-            <a class="link-arrow" href="#contact" data-service="Custom Homes"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
-      </li>
-      <li data-reveal>
-        <article class="card">
-          <div class="card-media">
-            <!-- Real photo: Havelock, NC project (primary bath). REPLACE with a remodel job photo when you have one -->
-            <picture>
-              <source type="image/webp" srcset="images/gallery/havelock-home-09-full.webp">
-              <img src="images/gallery/havelock-home-09-full.jpg" loading="lazy" decoding="async" width="640" height="428"
-                   alt="Bathroom with a walnut double vanity, arched wood mirrors, brass fixtures and a blue shiplap wall">
-            </picture>
-          </div>
-          <div class="card-body">
-            <p class="card-tag">Renovation</p>
-            <h3>Remodels &amp; Additions</h3>
-            <p>Kitchens, baths, and room additions that blend seamlessly with your home and add lasting value.</p>
-            <a class="link-arrow" href="#contact" data-service="Remodels & Additions"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow" href="#contact" data-service="Custom Home"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
       </li>
@@ -1209,28 +1119,10 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
             </picture>
           </div>
           <div class="card-body">
-            <p class="card-tag">New Systems</p>
-            <h3>Septic Installation</h3>
-            <p>Permitted, inspected septic systems for new builds and replacements, done right the first time.</p>
-            <a class="link-arrow" href="#contact" data-service="Septic Installation"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
-      </li>
-      <li data-reveal>
-        <article class="card">
-          <div class="card-media">
-            <!-- Real photo: septic work -->
-            <picture>
-              <source type="image/webp" srcset="images/gallery/septic-01-thumb.webp">
-              <img src="images/gallery/septic-01-thumb.jpg" loading="lazy" decoding="async" width="600" height="800"
-                   alt="New effluent filter cartridge inside a concrete septic tank, seen through the riser opening">
-            </picture>
-          </div>
-          <div class="card-body">
-            <p class="card-tag">Diagnose + Fix</p>
-            <h3>Septic Repair</h3>
-            <p>Drain field problems, backups, and failing tanks diagnosed honestly and fixed fast.</p>
-            <a class="link-arrow" href="#contact" data-service="Septic Repair"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <p class="card-tag">New Systems · Diagnose + Fix</p>
+            <h3>Septic Installation &amp; Repair</h3>
+            <p>Permitted, inspected systems for new builds and replacements, plus honest diagnosis and fast fixes for backups, drain field problems, and failing tanks.</p>
+            <a class="link-arrow" href="#contact"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
       </li>
@@ -1259,7 +1151,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   var track = document.querySelector(".svc-track"), list = track.querySelector(".services");
   var dotsBox = document.querySelector(".svc-dots"), prev = document.querySelector(".svc-prev"), next = document.querySelector(".svc-next");
   var mq = matchMedia("(max-width:1023px)"), reduce = matchMedia("(prefers-reduced-motion: reduce)");
-  var cards = Array.prototype.filter.call(list.children, function (li) { return !li.querySelector(".card--cta"); });   // the 5 services
+  var cards = Array.prototype.filter.call(list.children, function (li) { return !li.querySelector(".card--cta"); });   // the service cards
   var dots = cards.map(function (li, i) {
     var b = document.createElement("button");
     b.type = "button"; b.className = "svc-dot";
@@ -1319,7 +1211,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <h2 id="gallery-title">Recent Projects</h2>
       </div>
       <a class="btn btn--dark btn-all" href="gallery.html">See All Our Work</a>
-      <p class="lead">Homes, concrete, and septic jobs we've completed around Eastern North Carolina.</p>
+      <p class="lead">Custom homes we've completed around Eastern North Carolina.</p>
     </div>
   </div>
   <!-- Project carousel: one row built from the GALLERY array in the <script> below. -->
@@ -1377,35 +1269,6 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <li class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><h3>Walkthrough &amp; Handoff</h3><p>We walk every detail with you and don't call it done until you're thrilled.</p></li>
     </ol>
     <div class="center" data-reveal><a class="btn btn--gold" href="#contact">Book Your Free Consultation</a></div>
-  </div>
-</section>
-
-<!-- ================= 7. OUR STORY ================= -->
-<section class="section" id="story" aria-labelledby="story-title">
-  <div class="wrap split split--flip">
-    <div class="split-media framed" data-reveal="right">
-      <!-- Eddie photo here: swap this job site photo for a photo of Eddie (keep the width/height attributes in sync and update the alt text) -->
-      <picture>
-        <source type="image/webp" srcset="images/gallery/septic-02-full.webp">
-        <img src="images/gallery/septic-02-full.jpg" loading="lazy" decoding="async" width="1200" height="1600"
-             alt="RamFam Builders crew member on a job site as a boom truck delivers a precast concrete septic tank to a fresh excavation">
-      </picture>
-    </div>
-    <div data-reveal="left">
-      <p class="eyebrow">Meet the Builder</p>
-      <h2 id="story-title">Robert &ldquo;Eddie&rdquo; Ramirez</h2>
-      <p class="builder-role">Owner · RamFam Builders · Eastern NC</p>
-      <p class="lead">Eddie has spent 18 years building across Eastern North Carolina, including his time with Goldsboro Builders. Years on real jobsites taught him the products, the methods, and how to solve problems before they cost a homeowner time or money.</p>
-      <p>He's still learning: new materials, better methods, current codes. RamFam is a family business, and every custom home, concrete slab, and septic system gets built the way Eddie would build it for his own.</p>
-      <p class="builder-sign" aria-hidden="true">Eddie Ramirez</p>
-      <ul class="builder-points">
-        <li><svg aria-hidden="true"><use href="#i-clock"/></svg>18 years building</li>
-        <li><svg aria-hidden="true"><use href="#i-tool"/></svg>Goldsboro Builders background</li>
-        <li><svg aria-hidden="true"><use href="#i-book"/></svg>Always learning</li>
-      </ul>
-      <p class="license-badge builder-license"><svg aria-hidden="true"><use href="#i-shield"/></svg><span>NC Licensed General Contractor #104768</span></p>
-      <a class="btn btn--dark" href="#contact">Work With Our Family</a>
-    </div>
   </div>
 </section>
 
@@ -1632,9 +1495,9 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <h3>Explore</h3>
         <ul>
           <li><a href="#about">About</a></li>
-          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="gallery.html">Our Work</a></li>
           <li><a href="#process">How It Works</a></li>
-          <li><a href="#story">Our Story</a></li>
+          <li><a href="story.html">Our Story</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Free Estimate</a></li>
         </ul>
@@ -1643,10 +1506,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <h3>Services</h3>
         <ul>
           <li><a href="#services">Custom Homes</a></li>
-          <li><a href="#services">Remodels &amp; Additions</a></li>
           <li><a href="#services">Concrete</a></li>
-          <li><a href="#services">Septic Installation</a></li>
-          <li><a href="#services">Septic Repair</a></li>
+          <li><a href="#services">Septic Installation &amp; Repair</a></li>
         </ul>
       </div>
       <div>
@@ -1769,7 +1630,10 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   matchMedia("(min-width:1024px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
 
   /* ---- "Request a Quote" links pre-select the service ---- */
-  $$("[data-service]").forEach(a => a.addEventListener("click", () => { $("#f-service").value = a.dataset.service; }));
+  $$("[data-service]").forEach(a => a.addEventListener("click", () => {
+    const tile = $(`.tile[data-group="service"][data-value="${a.dataset.service}"]`);
+    if (tile && tile.getAttribute("aria-pressed") !== "true") tile.click();
+  }));
 
   /* ---- Gallery: single-row project carousel ---- */
   const LABELS = { homes: "Custom Home", interiors: "Interior", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card

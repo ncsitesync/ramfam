@@ -15,6 +15,7 @@
      caption  : short note shown in the lightbox
      featured : a number (1, 2, 3…) → ALSO show it in the home-page "Recent Projects"
                 carousel, in that order (about 8). Leave it off to show it only in the gallery.
+                The carousel shows custom homes only, so don't mark septic photos as featured.
 
    To add photos: put the originals in this folder, add them to the list at the top of
    tools/optimize-photos.js, run "node tools/optimize-photos.js", then add lines below.
@@ -85,8 +86,8 @@ window.RAMFAM_PHOTOS = (function () {
     p("ranch-home-10", 427, 640, "interiors", "ranch-home", "Hallway with tall white shaker pantry cabinets beside a doorway, on gray wood-look floors", "Built-in hall cabinets"),
 
     // ---- Septic · Septic Work ----
-    p("septic-03", 1200, 1600, "septic", "septic-work", "Long drain field trench with a newly installed black plastic chamber system and distribution box, beside a golf course", "New drain field chamber install", 5),
-    p("septic-02", 1200, 1600, "septic", "septic-work", "Freshly dug tank excavation in red clay with a boom truck carrying a precast concrete septic tank across a field", "Tank delivery to the excavation", 9),
+    p("septic-03", 1200, 1600, "septic", "septic-work", "Long drain field trench with a newly installed black plastic chamber system and distribution box, beside a golf course", "New drain field chamber install"),
+    p("septic-02", 1200, 1600, "septic", "septic-work", "Freshly dug tank excavation in red clay with a boom truck carrying a precast concrete septic tank across a field", "Tank delivery to the excavation"),
     p("septic-04", 1200, 1600, "septic", "septic-work", "Concrete septic tank lid and distribution box set in red clay, with the drain field line running toward the trench", "Tank and distribution box set"),
     p("septic-06", 1200, 1600, "septic", "septic-work", "Open riser on a concrete septic tank lid showing a new effluent filter, with a white PVC inlet pipe", "Tank riser with new effluent filter"),
     p("septic-01", 1200, 1600, "septic", "septic-work", "Looking into a concrete septic tank through the riser opening at a new red-capped effluent filter cartridge", "Effluent filter replacement"),
