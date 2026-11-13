@@ -199,7 +199,7 @@ p{margin:0 0 1em}
 @media (min-width:768px){ :root{--trust-h:68px} }       /* 1 row */
 .hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:var(--charcoal-deep);isolation:isolate}
 .hero-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#AFC2D2}
-.hero-media picture,.split-media picture,.bleed-media picture,.card-media picture,.cta-band > picture,.marquee-item picture{display:contents}
+.hero-media picture,.split-media picture,.bleed-media picture,.cta-band > picture,.marquee-item picture{display:contents}
 /* Photo framing for the hero (heroclear.png → images/hero/hero-640 / 1280 / 1467; 1467x659, ~2.23:1).
    The roof peak is ~2% down, the house base ~93% down, and the house spans ~32%-88% across
    (stairs on the right). In the phones' 16:10 band the full height shows and only the sides
@@ -282,23 +282,6 @@ p{margin:0 0 1em}
 /* license line under the About stats */
 .license-badge{display:flex;align-items:center;gap:8px;margin:0 0 var(--s-5);font-size:.86rem;font-weight:600;color:var(--charcoal)}
 .license-badge svg{width:18px;height:18px;color:var(--gold-text);flex:none}
-/* ================= SERVICES ================= */
-/* base list styles; below 1024px it becomes the snap carousel (SERVICES CAROUSEL block); desktop: grid */
-.services{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:var(--s-4);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--gutter)*-1);padding:var(--s-1) var(--gutter) var(--s-5);scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch;scrollbar-width:none;list-style:none}
-.services::-webkit-scrollbar{display:none}
-.services > li{scroll-snap-align:start;display:flex}
-.card{background:#fff;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;width:100%;box-shadow:var(--shadow-sm);border:1px solid var(--line)}
-.card-media{overflow:hidden}
-.card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s ease}
-.card:hover img{transform:scale(1.04)}
-.card-body{padding:var(--s-5) var(--s-5) var(--s-4);display:flex;flex-direction:column;flex:1}
-.card-body h3{margin-bottom:var(--s-2)}
-.card-body p{color:var(--muted);flex:1;font-size:.98rem}
-.card-body .card-tag{flex:none;font-size:.72rem;line-height:1.4;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text);margin-bottom:var(--s-2)}
-.card--cta{background:var(--charcoal);color:rgba(255,255,255,.85);border-color:var(--charcoal);justify-content:center;padding:var(--s-6) var(--s-5)}
-.card--cta h3{color:#fff}
-.card--cta .btn{margin-top:var(--s-3)}
-.card--cta a.tel{color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;margin-top:var(--s-2)}
 
 /* ================= CRAFTSMANSHIP (full-bleed split) ================= */
 .bleed{display:grid;background:var(--charcoal);color:rgba(255,255,255,.86)}
@@ -371,17 +354,6 @@ p{margin:0 0 1em}
 .lb-prev{left:calc(50% - 60px)}
 .lb-next{right:calc(50% - 60px)}
 
-/* ================= REVIEWS ================= */
-.reviews{display:grid;gap:var(--s-4);margin-bottom:var(--s-7)}
-.review{background:#fff;border-radius:var(--radius);padding:var(--s-6) var(--s-5);margin:0;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
-.review .stars{color:var(--gold);letter-spacing:3px;margin-bottom:var(--s-4)}
-.review blockquote{margin:0 0 var(--s-5);font-family:var(--serif);font-size:clamp(1.3rem,1.2rem + .4vw,1.5rem);line-height:1.4;color:var(--charcoal);flex:1}
-.review figcaption{display:flex;align-items:center;gap:var(--s-3);font-size:.9rem;color:var(--muted);padding-top:var(--s-4);border-top:1px solid var(--line)}
-.review figcaption strong{display:block;color:var(--charcoal)}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--warm);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--gold-text);flex:none}
-.rating-badge{display:inline-flex;align-items:center;gap:var(--s-3);padding:10px 18px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:.95rem}
-.rating-badge .stars{color:var(--gold);letter-spacing:2px}
-.rating-badge svg{width:18px;height:18px}
 
 /* ================= CTA BAND ================= */
 /* compact band (not a full-screen section): ~320-380px desktop, ~280-340px phones */
@@ -539,7 +511,6 @@ p{margin:0 0 1em}
 
 /* ================= ≥768px (tablet) ================= */
 @media (min-width:768px){
-  .services{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,1fr);gap:var(--s-5);overflow:visible;margin:0;padding:0}
   .trust{display:flex;flex-wrap:nowrap;gap:0;font-size:.92rem}
   .trust li{padding:0 16px}
   .trust li + li{border-left:1px solid rgba(201,162,74,.3)}   /* thin gold dividers */
@@ -550,7 +521,6 @@ p{margin:0 0 1em}
   .gallery-head{grid-template-columns:1fr auto;grid-template-areas:"title all" "lead lead";column-gap:var(--s-6)}
   .gallery-head .btn-all{width:auto;align-self:center;justify-self:end;margin:0 0 .45em}
   .steps{grid-template-columns:repeat(2,1fr);gap:0 var(--s-6)}
-  .reviews{max-width:720px;margin-inline:auto;gap:var(--s-5)}
   .form-card{padding:var(--s-7) var(--s-7)}
   .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
   .footer-grid > :last-child{grid-column:1 / -1}
@@ -590,14 +560,12 @@ p{margin:0 0 1em}
   .split{grid-template-columns:7fr 5fr}
   .split-media img{aspect-ratio:5/4}
 
-  .services{grid-template-columns:repeat(3,1fr);gap:var(--s-6)}
 
   .bleed{grid-template-columns:1fr 1fr;min-height:640px}
   .bleed-media img{aspect-ratio:auto}
   .bleed-text{align-self:center;padding:var(--s-9) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--s-9) clamp(48px,6vw,112px);max-width:none}
 
   .steps{grid-template-columns:repeat(4,1fr)}
-  .reviews{grid-template-columns:repeat(3,1fr);max-width:none}
   .step{padding:var(--s-7) 0 0;border-top:2px solid var(--line)}
   .step::before{content:"";position:absolute;top:-2px;left:0;width:56px;height:2px;background:var(--gold)}
   .step-num{position:static;display:block;margin-bottom:var(--s-4);font-size:3.4rem}
@@ -612,9 +580,6 @@ p{margin:0 0 1em}
   .main-nav a{font-size:.9rem}
   .header-phone{display:none}   /* too tight for the phone at this width; it returns at 1280px+ */
   .header-actions{gap:8px}      /* room for the Facebook + Instagram buttons */
-}
-@media (min-width:1440px){
-  .services{gap:var(--s-7)}
 }
 
 /* =====================================================================
@@ -632,12 +597,11 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
 @media (max-width:1023px){
   .section-head{margin-bottom:clamp(24px,5vw,40px)}
   .split{gap:28px}
-  .split-media img,.card img{max-height:45svh}
+  .split-media img{max-height:45svh}
   .bleed-media img{min-height:0;max-height:45svh}
   .bleed-text{padding:var(--section-y) var(--gutter)}
   .stats{margin:var(--s-5) 0}
   .steps{margin-bottom:var(--s-6)}
-  .reviews{margin-bottom:var(--s-6)}
   .contact-grid{gap:36px}
 }
 
@@ -662,15 +626,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .stats{margin:clamp(14px,2.5vh,28px) 0;padding-top:clamp(12px,2vh,20px)}
   .stats strong{font-size:clamp(1.8rem,1rem + 2vh,2.5rem)}
 
-  /* Services: one compact row of five; the extra "Not sure where to start?" tile
-     is hidden here because the section heading already has a quote button */
-  .services{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.4vw,24px)}   /* 3 services + the "Not sure where to start?" tile */
-  .card img{aspect-ratio:auto;height:clamp(120px,18vh,180px)}
-  .card-body{padding:16px 18px 8px}
-  .card-body h3{font-size:clamp(1.2rem,.75rem + .5vw + .5vh,1.5rem)}
-  .card-body p{font-size:.9rem;line-height:1.55;margin-bottom:6px}
-  .card-body .card-tag{font-size:.66rem;letter-spacing:.12em}
-
   /* Craftsmanship: image and text side by side at exactly one screen tall */
   .bleed{min-height:0;height:var(--fit-h);max-height:1000px}
   .bleed-media{height:100%;overflow:hidden}
@@ -690,12 +645,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   #gallery.section{min-height:0;padding-top:clamp(32px,5vh,56px);padding-bottom:clamp(48px,6vh,64px)}
   .gallery-head .lead{margin:0}
 
-  /* Reviews */
-  .reviews{margin-bottom:clamp(20px,3.5vh,40px)}
-  .review{padding:clamp(20px,3vh,32px) 24px}
-  .review .stars{margin-bottom:clamp(8px,1.5vh,16px)}
-  .review blockquote{font-size:clamp(1.15rem,.75rem + 1vh,1.4rem);margin-bottom:clamp(14px,2.5vh,24px)}
-  .review figcaption{padding-top:clamp(10px,1.8vh,16px)}
 
 
   /* CTA band */
@@ -724,73 +673,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .form-card .btn{min-height:48px}
   .form-note{margin-top:8px}
 }
-/* tablets: services in 3 compact columns (2 rows) instead of 3 tall rows */
-@media (min-width:768px) and (max-width:1023px){
-  .services{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
-  .card img{aspect-ratio:16/10}
-  .card-body{padding:16px 16px 6px}
-  .card-body p{font-size:.9rem;line-height:1.55}
-  .card .link-arrow{font-size:.92rem;white-space:nowrap}
-}
-/* small laptops: five service cards are narrow, so trim them further */
-@media (min-width:1024px) and (max-width:1279px){
-  .services{gap:12px}
-  .card-body{padding:14px 14px 6px}
-  .card-body .card-tag{display:none}
-  .card-body p{font-size:.86rem;line-height:1.5}
-  .card .link-arrow{font-size:.9rem;white-space:nowrap}
-}
-
-/* ================= SERVICES CAROUSEL (below 1024px only; desktop keeps the 5-card grid) ================= */
-.svc-controls,.svc-cta{display:none}
-@media (max-width:1023px){
-  .svc-head-btn{display:none}                              /* the quote button moves to the bottom of the section */
-  #services .section-head{margin-bottom:20px}
-  /* native scroll-snap track, full-bleed so cards can center; scrollbar hidden but still scrollable */
-  .svc-track{position:relative;container-type:inline-size;margin:0 calc(var(--gutter) * -1);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .svc-track::-webkit-scrollbar{display:none}
-  .svc-track:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-  .svc-track .services{display:flex;grid-template-columns:none;gap:16px;margin:0;padding:4px 0 18px 9cqw;overflow:visible;scroll-snap-type:none}
-  /* end spacer (scroll containers drop trailing padding), so the last card can center too */
-  .svc-track .services::after{content:"";flex:0 0 calc(9cqw - 16px)}
-  .services > li{flex:0 0 82cqw;scroll-snap-align:center;display:flex}
-  .services > li:last-child{display:none}                  /* "Not sure where to start?" tile: the bottom button covers it */
-  /* cards: equal height, quote link pinned to the bottom */
-  .services .card{height:100%}
-  .services .card img{aspect-ratio:auto;height:190px;max-height:none}
-  .services .card-body{padding:16px 18px 10px}
-  .services .card-body .card-tag{display:block;font-size:.68rem;letter-spacing:.12em;line-height:1.4;min-height:2.8em;margin-bottom:6px}   /* room for 2 lines on every card, so titles line up */
-  .services .card-body h3{font-size:1.45rem}
-  .services .card-body p{font-size:.94rem;line-height:1.55}
-  .services .card .link-arrow{margin-top:auto;white-space:nowrap}
-  /* no per-card animation here: the carousel shows as one piece */
-  .js .services > li[data-reveal]{opacity:1;transform:none;transition:none}
-  /* dots + arrows */
-  .svc-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px}
-  .svc-arrow{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;border-radius:50%;border:1.5px solid var(--charcoal);background:transparent;color:var(--charcoal);cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}
-  .svc-arrow svg{width:20px;height:20px}
-  .svc-arrow:hover:not(:disabled){background:var(--charcoal);color:#fff}
-  .svc-arrow:disabled{opacity:.3;cursor:default}
-  .svc-dots{display:flex;align-items:center;gap:2px}
-  .svc-dot{width:24px;height:44px;padding:0;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-  .svc-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:#BDB5A9;transition:background-color .2s,transform .2s}
-  .svc-dot.is-active::before{background:var(--gold);transform:scale(1.25)}
-  .svc-dot:focus-visible,.svc-arrow:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  .svc-cta{display:flex;justify-content:center;margin-top:18px}
-  .svc-cta .btn{width:100%;max-width:360px}
-}
-/* tablets: ~45% cards, two in view plus a peek, snapping card by card from the left edge */
-@media (min-width:768px) and (max-width:1023px){
-  .svc-track{scroll-padding-inline:var(--gutter)}
-  .svc-track .services{padding-left:var(--gutter)}
-  .svc-track .services::after{flex-basis:max(1px, calc(var(--gutter) - 16px))}
-  .services > li{flex-basis:45cqw;scroll-snap-align:start}
-  .services .card img{height:200px}
-}
-@media (max-width:1023px) and (prefers-reduced-motion:reduce){
-  .svc-track{scroll-behavior:auto}
-}
-
 /* ================= SCROLL REVEAL =================
    Elements marked data-reveal fade in and rise slightly (or slide from a side) once,
    when ~15% of them is on screen. They are only hidden while <html> has the "js" class
@@ -891,6 +773,48 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   .marquee-item{scroll-snap-align:start}
   .marquee-toggle{display:none}
 }
+/* ===== NAV DROPDOWN (synced by tools/sync-nav.js; edit it there) ===== */
+/* current page in the nav */
+.menu-overlay a[aria-current="page"],.m-dd-toggle[data-current]{color:var(--gold-light)}
+/* phone menu: "Services" expands its list in place */
+.m-dd-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:60px;padding:0;margin:0;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.1);color:inherit;font-family:var(--serif);font-size:clamp(1.8rem,7vw,2.4rem);font-weight:500;line-height:1.2;text-align:left;cursor:pointer}
+@media (hover:hover){ .m-dd-toggle:hover{color:var(--gold-light)} }
+.m-dd-icon{width:8px;height:8px;margin-right:2px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);transform:rotate(135deg);transition:transform .3s ease}
+.m-dd.is-open .m-dd-icon{transform:rotate(-45deg)}
+.m-dd-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .3s ease,visibility 0s linear .3s}
+.m-dd.is-open .m-dd-panel{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.menu-overlay .m-dd-panel ul{min-height:0;overflow:hidden;margin:0;padding:0 0 0 18px;border-left:2px solid rgba(201,162,74,.45)}
+.menu-overlay .m-dd-panel li a{min-height:52px;font-family:var(--sans);font-size:1.08rem;font-weight:500;color:rgba(255,255,255,.88)}
+.menu-overlay .m-dd-panel li a::after{width:6px;height:6px}
+.menu-overlay .m-dd-panel li a[aria-current="page"]{color:var(--gold-light)}
+@media (min-width:1024px){
+  /* desktop: current page keeps its gold underline */
+  .main-nav a[aria-current]{color:var(--charcoal-deep);font-weight:600}
+  .main-nav a[aria-current]::after{transform:scaleX(1)}
+  /* Services dropdown: opens on hover or keyboard focus, closes with Esc */
+  .nav-dd{position:relative}
+  .nav-caret{width:14px;height:14px;margin-left:4px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
+  .nav-dd:hover .nav-caret,.nav-dd:focus-within .nav-caret{transform:rotate(180deg)}
+  .nav-dd-panel{position:absolute;z-index:210;top:100%;left:50%;width:300px;padding-top:calc((var(--header-h) - 44px) / 2);opacity:0;visibility:hidden;transform:translate(-50%,8px);transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s}
+  .nav-dd:hover .nav-dd-panel,.nav-dd:focus-within .nav-dd-panel{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+  .nav-dd.is-dismissed .nav-dd-panel{opacity:0;visibility:hidden;transform:translate(-50%,8px)}
+  .nav-dd.is-dismissed .nav-caret{transform:none}
+  .main-nav .nav-dd-panel ul{display:block;margin:0;padding:8px;list-style:none;background:var(--charcoal-deep);border-top:2px solid var(--gold);border-radius:0 0 var(--radius) var(--radius);box-shadow:0 22px 44px -16px rgba(33,31,29,.5)}
+  .main-nav .nav-dd-panel a{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:0;padding:11px 14px;border-radius:6px;color:#fff;white-space:normal;transition:background-color .2s}
+  .main-nav .nav-dd-panel a::after{display:none}
+  .nav-dd-panel strong{font-family:var(--serif);font-size:1.22rem;font-weight:600;line-height:1.15}
+  .nav-dd-panel span{font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.66)}
+  .main-nav .nav-dd-panel a:hover,.main-nav .nav-dd-panel a:focus-visible{background:rgba(201,162,74,.16)}
+  .main-nav .nav-dd-panel a:hover strong,.main-nav .nav-dd-panel a:focus-visible strong,.main-nav .nav-dd-panel a[aria-current] strong{color:var(--gold-light)}
+  .main-nav .nav-dd-panel a:focus-visible{outline-offset:-3px}
+  .main-nav .nav-dd-all{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.12)}
+  .main-nav .nav-dd-all a{flex-direction:row;align-items:center;gap:8px}
+  .main-nav .nav-dd-all strong{font-family:var(--sans);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-light)}
+  .main-nav .nav-dd-all svg{width:16px;height:16px;color:var(--gold);transition:transform .2s}
+  .main-nav .nav-dd-all a:hover svg{transform:translateX(3px)}
+}
+@media (prefers-reduced-motion:reduce){ .nav-dd-panel,.m-dd-panel{transition:none !important} }
+/* ===== END NAV DROPDOWN ===== */
 </style>
 <!-- Scroll reveal: mark that JS is running so reveal elements can start hidden.
      Failsafe: if the reveal script has not started within 3s, show everything. -->
@@ -946,12 +870,21 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 
     <nav class="main-nav" aria-label="Primary">
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="gallery.html">Our Work</a></li>
-        <li><a href="#process">Process</a></li>
+        <li><a href="#top" aria-current="page">Home</a></li>
+        <li class="nav-dd">
+          <a class="nav-dd-link" href="services.html" aria-expanded="false" aria-controls="nav-dd-services">Services<svg class="nav-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="nav-dd-panel" id="nav-dd-services">
+            <ul>
+              <li><a href="service-custom-homes.html"><strong>Custom Homes</strong><span>Design + build, start to finish</span></a></li>
+              <li><a href="service-concrete.html"><strong>Concrete</strong><span>Driveways, slabs, patios, foundations</span></a></li>
+              <li><a href="service-septic.html"><strong>Septic Installation &amp; Repair</strong><span>New systems, diagnosis and fixes</span></a></li>
+              <li class="nav-dd-all"><a href="services.html"><strong>All Services</strong><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="story.html">Our Story</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
       </ul>
     </nav>
 
@@ -976,12 +909,21 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <div class="menu-overlay" id="menu-overlay" aria-label="Site menu">
   <nav aria-label="Mobile">
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="gallery.html">Our Work</a></li>
-      <li><a href="#process">How It Works</a></li>
+      <li><a href="#top" aria-current="page">Home</a></li>
+      <li class="m-dd">
+        <button class="m-dd-toggle" type="button" aria-expanded="false" aria-controls="m-dd-services">Services<span class="m-dd-icon" aria-hidden="true"></span></button>
+        <div class="m-dd-panel" id="m-dd-services">
+          <ul>
+            <li><a href="services.html">All Services</a></li>
+            <li><a href="service-custom-homes.html">Custom Homes</a></li>
+            <li><a href="service-concrete.html">Concrete</a></li>
+            <li><a href="service-septic.html">Septic Installation &amp; Repair</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="gallery.html">Gallery</a></li>
       <li><a href="story.html">Our Story</a></li>
-      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -1062,146 +1004,48 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
 </section>
 
-<!-- ================= 3. SERVICES ================= -->
-<section class="section section--warm" id="services" aria-labelledby="services-title">
-  <div class="wrap">
-    <div class="section-head section-head--row" data-reveal>
-      <div>
-        <p class="eyebrow">What We Do</p>
-        <h2 id="services-title">Services</h2>
-        <p class="lead">From the ground up and everything underneath it. One family-run crew handles it all.</p>
-      </div>
-      <a class="btn btn--dark svc-head-btn" href="#contact">Request a Quote</a>
-    </div>
-    <!-- below 1024px this is a scroll-snap carousel (dots + arrows added by the script after this section) -->
-    <div class="svc-track" role="region" aria-label="Services">
-    <ul class="services" data-reveal-stagger="90">
-      <li data-reveal>
-        <article class="card">
-          <div class="card-media">
-            <!-- Real photo: Havelock, NC project -->
-            <picture>
-              <source type="image/webp" srcset="images/gallery/havelock-home-61-full.webp">
-              <img src="images/gallery/havelock-home-61-full.jpg" loading="lazy" decoding="async" width="640" height="428"
-                   alt="Raised white custom home with board-and-batten siding, a two-level porch and a long wooden staircase">
-            </picture>
-          </div>
-          <div class="card-body">
-            <p class="card-tag">Design + Build</p>
-            <h3>Custom Homes</h3>
-            <p>Your plans, your style, built right, from lot prep and foundation to finish carpentry and final walkthrough.</p>
-            <a class="link-arrow" href="#contact" data-service="Custom Home"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
-      </li>
-      <li data-reveal>
-        <article class="card">
-          <div class="card-media">
-            <!-- REPLACE: real job photo -->
-            <img src="https://images.unsplash.com/photo-1692133188474-8c5591e6a6a8?w=800&q=70&auto=format" loading="lazy" decoding="async" width="800" height="600" alt="Wide new concrete driveway leading to a two-car garage">
-          </div>
-          <div class="card-body">
-            <p class="card-tag">Driveways · Slabs · Patios · Foundations</p>
-            <h3>Concrete</h3>
-            <p>Properly formed, reinforced, and finished concrete that stands up to Eastern NC weather for decades.</p>
-            <a class="link-arrow" href="#contact" data-service="Concrete"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
-      </li>
-      <li data-reveal>
-        <article class="card">
-          <div class="card-media">
-            <!-- Real photo: septic work -->
-            <picture>
-              <source type="image/webp" srcset="images/gallery/septic-03-thumb.webp">
-              <img src="images/gallery/septic-03-thumb.jpg" loading="lazy" decoding="async" width="600" height="800"
-                   alt="Drain field trench with a newly installed black plastic chamber system and distribution box">
-            </picture>
-          </div>
-          <div class="card-body">
-            <p class="card-tag">New Systems · Diagnose + Fix</p>
-            <h3>Septic Installation &amp; Repair</h3>
-            <p>Permitted, inspected systems for new builds and replacements, plus honest diagnosis and fast fixes for backups, drain field problems, and failing tanks.</p>
-            <a class="link-arrow" href="#contact"><span>Request a Quote</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
-      </li>
-      <li data-reveal>
-        <div class="card card--cta">
-          <h3>Not sure where to start?</h3>
-          <p>Tell us about your land and your plans. We'll walk you through options, timeline, and cost, free.</p>
-          <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-          <a class="tel" href="tel:+19103857680" data-phone-link><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>(910) 385-7680</span></a>
-        </div>
-      </li>
+<!-- ================= 3. CRAFTSMANSHIP (full-bleed split) ================= -->
+<section class="bleed" aria-labelledby="craft-title">
+  <div class="bleed-media" data-reveal="fade">
+    <!-- Real photo: Havelock, NC project (kitchen) -->
+    <picture>
+      <source type="image/webp" srcset="images/gallery/havelock-home-18-full.webp">
+      <img src="images/gallery/havelock-home-18-full.jpg" loading="lazy" decoding="async" width="427" height="640"
+           alt="Gas range under a custom wood range hood, white shaker cabinets and a window over the sink in a RamFam-built kitchen">
+    </picture>
+  </div>
+  <div class="bleed-text" data-reveal="right">
+    <p class="eyebrow">Our Standard</p>
+    <h2 id="craft-title">Craftsmanship Inside and Out</h2>
+    <p class="lead">A great home starts underground and shows in every detail you touch. We sweat the parts you'll never see as much as the ones you will.</p>
+    <ul class="checklist">
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Solid foundations and properly installed septic from day one</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quality materials, clean job sites, and tight finish work</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Clear schedules and a straight answer whenever you call</li>
     </ul>
-    </div>
-    <!-- carousel controls + bottom quote button (phones/tablets only) -->
-    <div class="svc-controls" data-reveal>
-      <button class="svc-arrow svc-prev" type="button" aria-label="Previous service" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
-      <div class="svc-dots" role="group" aria-label="Choose a service"></div>
-      <button class="svc-arrow svc-next" type="button" aria-label="Next service"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
-    </div>
-    <div class="svc-cta" data-reveal><a class="btn btn--dark" href="#contact">Request a Quote</a></div>
+    <a class="btn btn--gold" href="#contact">Start the Process</a>
   </div>
 </section>
-<script>
-/* Services carousel (below 1024px): dots + prev/next for the native scroll-snap track. No autoplay. */
-(function () {
-  var track = document.querySelector(".svc-track"), list = track.querySelector(".services");
-  var dotsBox = document.querySelector(".svc-dots"), prev = document.querySelector(".svc-prev"), next = document.querySelector(".svc-next");
-  var mq = matchMedia("(max-width:1023px)"), reduce = matchMedia("(prefers-reduced-motion: reduce)");
-  var cards = Array.prototype.filter.call(list.children, function (li) { return !li.querySelector(".card--cta"); });   // the service cards
-  var dots = cards.map(function (li, i) {
-    var b = document.createElement("button");
-    b.type = "button"; b.className = "svc-dot";
-    b.setAttribute("aria-label", "Show " + li.querySelector("h3").textContent + " (" + (i + 1) + " of " + cards.length + ")");
-    b.addEventListener("click", function () { go(i); });
-    dotsBox.appendChild(b); return b;
-  });
-  // scroll position at which card i is snapped (center on phones, start on tablets)
-  function target(i) {
-    var li = cards[i], align = getComputedStyle(li).scrollSnapAlign;
-    var t = /center/.test(align) ? li.offsetLeft + li.offsetWidth / 2 - track.clientWidth / 2
-                                 : li.offsetLeft - (parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0);
-    return Math.max(0, Math.min(t, track.scrollWidth - track.clientWidth));
-  }
-  var current = -1;
-  function update() {
-    if (!mq.matches) return;
-    var x = track.scrollLeft, max = track.scrollWidth - track.clientWidth, best = 0, bestD = Infinity;
-    cards.forEach(function (li, i) { var d = Math.abs(target(i) - x); if (d < bestD - 1) { bestD = d; best = i; } });
-    if (x >= max - 2) best = cards.length - 1;               // at the end: last card is fully in view
-    if (best === current) return;
-    current = best;
-    dots.forEach(function (d, i) { d.classList.toggle("is-active", i === best); if (i === best) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
-    prev.disabled = best === 0;
-    next.disabled = best === cards.length - 1;
-  }
-  function go(i) {
-    i = Math.max(0, Math.min(cards.length - 1, i));
-    track.scrollTo({ left: target(i), behavior: reduce.matches ? "auto" : "smooth" });
-  }
-  // arrows move to the nearest snap point that actually changes the scroll position
-  // (on tablets two cards show at the end, so several cards share the last position)
-  function step(dir) {
-    var x = track.scrollLeft, i;
-    if (dir > 0) { for (i = 0; i < cards.length; i++) if (target(i) > x + 2) return go(i); }
-    else { for (i = cards.length - 1; i >= 0; i--) if (target(i) < x - 2) return go(i); }
-  }
-  prev.addEventListener("click", function () { step(-1); });
-  next.addEventListener("click", function () { step(1); });
-  var raf = 0;
-  track.addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; update(); }); }, { passive: true });
-  // the track is a keyboard-scrollable tab stop only while it is a carousel
-  function setMode() { if (mq.matches) track.setAttribute("tabindex", "0"); else track.removeAttribute("tabindex"); }
-  addEventListener("resize", function () { current = -1; setMode(); update(); });
-  setMode();
-  update();
-})();
-</script>
 
-<!-- ================= 4. GALLERY (Recent Projects) ================= -->
+<!-- ================= 4. HOW IT WORKS ================= -->
+<section class="section section--warm" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">How It Works</p>
+      <h2 id="process-title">Four Simple Steps</h2>
+      <p class="lead">No surprises. Here's exactly what working with RamFam looks like.</p>
+    </div>
+    <ol class="steps" data-reveal-stagger="90">
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">01</span><h3>Consultation</h3><p>We meet at your property, listen to your goals, and walk the site together, free of charge.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">02</span><h3>Design &amp; Estimate</h3><p>You get a clear plan and a detailed, honest estimate with no hidden costs.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">03</span><h3>Build</h3><p>Our family crew gets to work and keeps you updated at every milestone.</p></li>
+      <li class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><h3>Walkthrough &amp; Handoff</h3><p>We walk every detail with you and don't call it done until you're thrilled.</p></li>
+    </ol>
+    <div class="center" data-reveal><a class="btn btn--gold" href="#contact">Book Your Free Consultation</a></div>
+  </div>
+</section>
+
+<!-- ================= 5. GALLERY (Recent Projects) ================= -->
 <!-- Photos are generated from the GALLERY array in the <script> at the bottom of this file. -->
 <section class="section" id="gallery" aria-labelledby="gallery-title">
   <div class="wrap">
@@ -1231,85 +1075,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
 </section>
 
-<!-- ================= 5. CRAFTSMANSHIP (full-bleed split) ================= -->
-<section class="bleed" aria-labelledby="craft-title">
-  <div class="bleed-media" data-reveal="fade">
-    <!-- Real photo: Havelock, NC project (kitchen) -->
-    <picture>
-      <source type="image/webp" srcset="images/gallery/havelock-home-18-full.webp">
-      <img src="images/gallery/havelock-home-18-full.jpg" loading="lazy" decoding="async" width="427" height="640"
-           alt="Gas range under a custom wood range hood, white shaker cabinets and a window over the sink in a RamFam-built kitchen">
-    </picture>
-  </div>
-  <div class="bleed-text" data-reveal="right">
-    <p class="eyebrow">Our Standard</p>
-    <h2 id="craft-title">Craftsmanship Inside and Out</h2>
-    <p class="lead">A great home starts underground and shows in every detail you touch. We sweat the parts you'll never see as much as the ones you will.</p>
-    <ul class="checklist">
-      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Solid foundations and properly installed septic from day one</li>
-      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quality materials, clean job sites, and tight finish work</li>
-      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Clear schedules and a straight answer whenever you call</li>
-    </ul>
-    <a class="btn btn--gold" href="#contact">Start the Process</a>
-  </div>
-</section>
-
-<!-- ================= 6. HOW IT WORKS ================= -->
-<section class="section section--warm" id="process" aria-labelledby="process-title">
-  <div class="wrap">
-    <div class="section-head section-head--center" data-reveal>
-      <p class="eyebrow">How It Works</p>
-      <h2 id="process-title">Four Simple Steps</h2>
-      <p class="lead">No surprises. Here's exactly what working with RamFam looks like.</p>
-    </div>
-    <ol class="steps" data-reveal-stagger="90">
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">01</span><h3>Consultation</h3><p>We meet at your property, listen to your goals, and walk the site together, free of charge.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">02</span><h3>Design &amp; Estimate</h3><p>You get a clear plan and a detailed, honest estimate with no hidden costs.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">03</span><h3>Build</h3><p>Our family crew gets to work and keeps you updated at every milestone.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><h3>Walkthrough &amp; Handoff</h3><p>We walk every detail with you and don't call it done until you're thrilled.</p></li>
-    </ol>
-    <div class="center" data-reveal><a class="btn btn--gold" href="#contact">Book Your Free Consultation</a></div>
-  </div>
-</section>
-
-<!-- ================= 8. REVIEWS ================= -->
-<section class="section section--warm" id="reviews" aria-labelledby="reviews-title">
-  <div class="wrap">
-    <div class="section-head section-head--center" data-reveal>
-      <p class="eyebrow">Reviews</p>
-      <h2 id="reviews-title">What Our Neighbors Say</h2>
-      <!-- REPLACE: your real Google rating -->
-      <p class="rating-badge"><svg aria-hidden="true"><use href="#i-google"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><span data-rating-text>5.0</span> on Google</span></p>
-    </div>
-    <div class="reviews" data-reveal-stagger="100">
-      <!-- REPLACE: real customer review -->
-      <figure class="review" data-reveal>
-        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-        <blockquote>"They built our forever home and treated us like family the entire time. Every question answered, every detail right."</blockquote>
-        <figcaption><span class="avatar" aria-hidden="true">S</span><span><strong>Sarah &amp; Mike T.</strong>Custom Home · Greenville</span></figcaption>
-      </figure>
-      <!-- REPLACE: real customer review -->
-      <figure class="review" data-reveal>
-        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-        <blockquote>"Our septic failed on a Friday. RamFam was out the next morning and had it fixed fast at a fair price. Highly recommend."</blockquote>
-        <figcaption><span class="avatar" aria-hidden="true">J</span><span><strong>James R.</strong>Septic Repair · Washington</span></figcaption>
-      </figure>
-      <!-- REPLACE: real customer review -->
-      <figure class="review" data-reveal>
-        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-        <blockquote>"Beautiful new driveway and patio. Clean crew, on schedule, and the finish work is perfect. We'll use them again."</blockquote>
-        <figcaption><span class="avatar" aria-hidden="true">L</span><span><strong>Linda K.</strong>Concrete · Kinston</span></figcaption>
-      </figure>
-    </div>
-    <div class="center" data-reveal>
-      <a class="btn btn--dark" href="#google-review-link" data-review-link target="_blank" rel="noopener">
-        <svg class="icon" aria-hidden="true"><use href="#i-google"/></svg>Leave Us a Google Review
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 9. CTA BAND ================= -->
+<!-- ================= 6. CTA BAND ================= -->
 <section class="cta-band" aria-labelledby="cta-title">
   <!-- Real photo: Havelock, NC project (decorative background) -->
   <picture>
@@ -1326,7 +1092,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
 </section>
 
-<!-- ================= 10. CONTACT ================= -->
+<!-- ================= 7. CONTACT ================= -->
 <section class="section" id="contact" aria-labelledby="contact-title">
   <div class="wrap contact-grid" data-reveal-stagger="100">
     <div data-reveal>
@@ -1476,7 +1242,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 
 </main>
 
-<!-- ================= 11. FOOTER ================= -->
+<!-- ================= 8. FOOTER ================= -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -1494,20 +1260,20 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <nav aria-label="Footer">
         <h3>Explore</h3>
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="gallery.html">Our Work</a></li>
-          <li><a href="#process">How It Works</a></li>
+          <li><a href="#top" aria-current="page">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="story.html">Our Story</a></li>
-          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
           <li><a href="#contact">Free Estimate</a></li>
         </ul>
       </nav>
       <div>
         <h3>Services</h3>
         <ul>
-          <li><a href="#services">Custom Homes</a></li>
-          <li><a href="#services">Concrete</a></li>
-          <li><a href="#services">Septic Installation &amp; Repair</a></li>
+          <li><a href="service-custom-homes.html">Custom Homes</a></li>
+          <li><a href="service-concrete.html">Concrete</a></li>
+          <li><a href="service-septic.html">Septic Installation &amp; Repair</a></li>
         </ul>
       </div>
       <div>
@@ -1629,11 +1395,6 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   });
   matchMedia("(min-width:1024px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
 
-  /* ---- "Request a Quote" links pre-select the service ---- */
-  $$("[data-service]").forEach(a => a.addEventListener("click", () => {
-    const tile = $(`.tile[data-group="service"][data-value="${a.dataset.service}"]`);
-    if (tile && tile.getAttribute("aria-pressed") !== "true") tile.click();
-  }));
 
   /* ---- Gallery: single-row project carousel ---- */
   const LABELS = { homes: "Custom Home", interiors: "Interior", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card
@@ -1845,6 +1606,11 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     if (q.classList.contains("invalid")) mark(q, !(g === "service" ? F.service.value : F.timeline.value));
   }));
   F.consent.addEventListener("change", () => { if (F.consent.checked) mark($(".est-check", form), false, F.consent); });
+  // service pages link here as index.html?service=Concrete#contact: pre-select that service
+  new URLSearchParams(location.search).getAll("service").forEach(v => {
+    const tile = $$(`.tile[data-group="service"]`, form).find(t => t.dataset.value === v);
+    if (tile && tile.getAttribute("aria-pressed") !== "true") tile.click();
+  });
 
   const valid = n => {
     if (n === 1) {
@@ -2050,5 +1816,39 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
 })();
 </script>
 
+<!-- NAV DROPDOWN (synced by tools/sync-nav.js; edit it there) -->
+<script>
+(function () {
+  /* desktop Services dropdown: CSS opens it on hover/focus; this keeps aria-expanded in sync,
+     lets Esc close it, and ArrowDown on "Services" jumps into the list */
+  document.querySelectorAll(".nav-dd").forEach(function (dd) {
+    var link = dd.querySelector(".nav-dd-link"), items = dd.querySelectorAll(".nav-dd-panel a");
+    function sync() {
+      var open = !dd.classList.contains("is-dismissed") && (dd.matches(":hover") || dd.contains(document.activeElement));
+      link.setAttribute("aria-expanded", String(open));
+    }
+    dd.addEventListener("mouseenter", sync);
+    dd.addEventListener("mouseleave", function () { if (!dd.contains(document.activeElement)) dd.classList.remove("is-dismissed"); sync(); });
+    dd.addEventListener("focusin", sync);
+    dd.addEventListener("focusout", function () { setTimeout(function () { if (!dd.contains(document.activeElement)) dd.classList.remove("is-dismissed"); sync(); }); });
+    dd.addEventListener("keydown", function (e) {
+      var list = Array.prototype.slice.call(items), i = list.indexOf(document.activeElement);
+      if (e.key === "Escape") { dd.classList.add("is-dismissed"); link.focus(); sync(); }
+      else if (e.key === "ArrowDown") { e.preventDefault(); dd.classList.remove("is-dismissed"); (list[i + 1] || list[0]).focus(); }
+      else if (e.key === "ArrowUp" && i >= 0) { e.preventDefault(); (i > 0 ? list[i - 1] : link).focus(); }
+    });
+  });
+  /* phone menu: tapping "Services" expands / collapses its list */
+  document.querySelectorAll(".m-dd-toggle").forEach(function (btn) {
+    var li = btn.parentNode;
+    btn.addEventListener("click", function () {
+      var open = !li.classList.contains("is-open");
+      li.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+})();
+</script>
+<!-- END NAV DROPDOWN -->
 </body>
 </html>
