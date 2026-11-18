@@ -186,7 +186,7 @@ p{margin:0 0 1em}
    on the left, a dark serif headline, a spaced services line with gold dividers, an italic
    "Serving Eastern NC" between short gold lines, one charcoal "See Our Work" button and a small
    call link. Phones get a 16:10 photo band; ≥769 shows the whole photo (see the 769px block). */
-.hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:#F3F7FA;isolation:isolate}
+.hero{--hero-pos:61% 50%;--dream-top:#F6F9FB;--hero-fade:clamp(26px,7vw,96px);position:relative;display:flex;flex-direction:column;text-align:center;background:var(--dream-top);isolation:isolate}
 .hero-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#AFC2D2}
 .hero-media picture,.dream-bg,.split-media picture,.bleed-media picture,.cta-band > picture{display:contents}
 /* Photo framing for the hero (heroclear.png → images/hero/hero-640 / 1280 / 1467; 1467x659, ~2.23:1).
@@ -195,8 +195,11 @@ p{margin:0 0 1em}
    are cropped (~72% of the width stays): --hero-pos x picks the part in view.
    REPLACE: if you swap the hero photo, re-tune the --hero-pos values. */
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border-radius:0;object-fit:cover;object-position:var(--hero-pos)}
+/* soft fade from the photo's lawn into the band's sky, so the two read as one opening (no hard seam) */
+.hero-media::after{content:"";position:absolute;z-index:0;left:0;right:0;bottom:-1px;height:var(--hero-fade);pointer-events:none;
+  background:linear-gradient(180deg,rgba(246,249,251,0) 0%,rgba(246,249,251,.55) 55%,var(--dream-top) 100%)}
 /* "Follow us on [Instagram]": a frosted charcoal pill in the photo's bottom-right corner, over the lawn */
-.hero-ig{display:inline-flex;position:absolute;z-index:1;right:12px;bottom:12px;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(246,243,238,.2);background:rgba(46,43,40,.78);color:#F6F3EE;font:600 .75rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);transition:transform .2s,background-color .2s}
+.hero-ig{display:inline-flex;position:absolute;z-index:1;right:12px;bottom:calc(var(--hero-fade) + 6px);align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(246,243,238,.2);background:rgba(46,43,40,.78);color:#F6F3EE;font:600 .75rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);transition:transform .2s,background-color .2s}
 .hero-ig::before{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:44px;transform:translateY(-50%)}   /* tap area */
 @supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
   .hero-ig{background:rgba(46,43,40,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
@@ -206,34 +209,40 @@ p{margin:0 0 1em}
 .hero-ig:hover svg,.hero-ig:focus-visible svg{color:var(--gold-light)}
 
 /* --- "Building Dream Homes" band --- */
-/* sky: the photo's own colors continued as a gradient (the photo covers it on phones, and sits on the
-   left and fades into it on wider screens), plus a soft light veil behind the text for contrast */
+/* Sized to its content (not to the screen). Sky: the photo's own colors continued as a gradient that
+   starts in the hero fade's color (--dream-top) and ends in white, the next section's background.
+   The photo covers it on phones, and sits on the left and fades into it on wider screens; its top and
+   bottom edges fade out too, and a soft light veil sits behind the text so it reads layered on the sky. */
 .dream{position:relative;isolation:isolate;overflow:hidden;
-  background:radial-gradient(ellipse 45% 60% at 82% 78%,rgba(255,255,255,.95),rgba(255,255,255,0) 70%),
-             linear-gradient(180deg,#FAFCFC 0%,#E7F1F9 32%,#DCEEFA 52%,#F2F7FA 78%,#F8FAFA 100%)}
-.dream-bg img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:0% 45%}
+  background:radial-gradient(ellipse 45% 60% at 82% 70%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%),
+             linear-gradient(180deg,var(--dream-top) 0%,#E9F2F9 30%,#E2EFF9 50%,#F4F8FB 78%,#FFFFFF 100%)}
+.dream-bg img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:0% 45%;
+  filter:saturate(.8) brightness(1.05) contrast(.9);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 16%,#000 68%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 16%,#000 68%,transparent 100%)}
 .dream::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(ellipse 70% 75% at 50% 50%,rgba(251,250,247,.72) 0%,rgba(251,250,247,.4) 60%,rgba(251,250,247,.12) 100%)}
-.dream-inner{position:relative;max-width:960px;margin:0 auto;padding:clamp(26px,7vw,40px) 16px clamp(18px,5vw,28px);display:flex;flex-direction:column;align-items:center;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
+  background:radial-gradient(ellipse 72% 80% at 50% 48%,rgba(251,250,247,.8) 0%,rgba(251,250,247,.5) 60%,rgba(251,250,247,.2) 100%)}
+.dream-inner{position:relative;max-width:960px;margin:0 auto;padding:clamp(8px,2.5vw,14px) 16px clamp(4px,1.5vw,12px);display:flex;flex-direction:column;align-items:center;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
 .dream h1{margin:0;color:var(--charcoal-deep);font-family:var(--serif);font-weight:600;text-transform:uppercase}
-.dream-title{display:block;font-size:clamp(2.1rem,10.8vw,3.2rem);line-height:.98;letter-spacing:.035em}
+.dream-title{display:block;font-size:clamp(1.85rem,9.2vw,2.8rem);line-height:.98;letter-spacing:.035em}
 /* CUSTOM HOMES | CONCRETE | SEPTIC: spaced caps with thin gold dividers */
-.dream-services{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;margin-top:clamp(12px,3.4vw,16px);font:500 clamp(.62rem,2.75vw,.74rem)/1.2 var(--sans);letter-spacing:.2em;color:var(--charcoal);white-space:nowrap}
+.dream-services{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;margin-top:clamp(6px,1.8vw,12px);font:500 clamp(.62rem,2.75vw,.74rem)/1.2 var(--sans);letter-spacing:.2em;color:var(--charcoal);white-space:nowrap}
 .dream-services > span{display:inline-flex;align-items:center;margin-right:-.2em}   /* cancel the trailing letter-space so the line stays centered */
 .dream-services > span + span::before{content:"";width:1px;height:1.3em;margin:0 clamp(10px,3vw,14px) 0 calc(clamp(10px,3vw,14px) + .2em);background:var(--gold)}
 /* Serving Eastern NC, between two short gold lines */
-.dream-area{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3.5vw,18px);margin:clamp(6px,2vw,10px) 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.15rem,5vw,1.4rem);line-height:1.3;letter-spacing:.03em;color:var(--charcoal)}
+.dream-area{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3.5vw,18px);margin:clamp(3px,1vw,6px) 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.1rem,4.8vw,1.35rem);line-height:1.25;letter-spacing:.03em;color:var(--charcoal)}
 .dream-area::before,.dream-area::after{content:"";width:clamp(32px,11vw,56px);height:1px;background:var(--gold)}
-/* one solid charcoal pill (the reference's green, in RamFam charcoal) */
-.dream-btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:54px;margin-top:clamp(18px,5vw,24px);padding:0 clamp(32px,9vw,44px);border-radius:999px;border:1px solid rgba(201,162,74,.45);background:var(--charcoal);color:#F6F3EE;font:600 clamp(1.3rem,5.4vw,1.5rem)/1 var(--serif);letter-spacing:.01em;text-decoration:none;box-shadow:0 0 0 4px rgba(255,255,255,.55),0 14px 28px -14px rgba(33,31,29,.6);transition:background-color .2s,transform .2s,box-shadow .2s}
-.dream-btn svg{width:20px;height:20px;color:var(--gold-light);transition:transform .2s}
-.dream-btn:hover,.dream-btn:focus-visible{background:var(--charcoal-deep);transform:translateY(-1px);box-shadow:0 0 0 4px rgba(255,255,255,.7),0 18px 32px -14px rgba(33,31,29,.7)}
+/* one solid charcoal button (the reference's green, in RamFam charcoal), same 6px radius as the site's other buttons */
+.dream-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;margin-top:clamp(12px,3.6vw,18px);padding:0 clamp(26px,7vw,34px);border-radius:6px;border:1px solid rgba(201,162,74,.45);background:var(--charcoal);color:#F6F3EE;font:600 clamp(1.15rem,4.8vw,1.3rem)/1 var(--serif);letter-spacing:.01em;text-decoration:none;box-shadow:0 0 0 3px rgba(255,255,255,.5),0 12px 24px -14px rgba(33,31,29,.6);transition:background-color .2s,transform .2s,box-shadow .2s}
+.dream-btn svg{width:18px;height:18px;color:var(--gold-light);transition:transform .2s}
+.dream-btn:hover,.dream-btn:focus-visible{background:var(--charcoal-deep);transform:translateY(-1px);box-shadow:0 0 0 3px rgba(255,255,255,.65),0 16px 28px -14px rgba(33,31,29,.7)}
 .dream-btn:hover svg,.dream-btn:focus-visible svg{transform:translateX(4px)}
 .dream-btn:active{transform:translateY(1px)}
 /* smaller secondary call link under the button */
-.dream-call{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;padding:0 10px;font:600 .9rem/1.2 var(--sans);color:var(--charcoal);text-decoration:none;transition:color .2s}
+.dream-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:2px;padding:0 10px;font:600 .9rem/1.2 var(--sans);color:var(--charcoal);text-decoration:none;transition:color .2s}
 .dream-call svg{width:15px;height:15px;color:var(--gold-text)}
 .dream-call:hover{color:var(--gold-text)}
+/* the section right after the band starts close under it (the band already fades into its white) */
+.hero + .section{padding-top:clamp(16px,4vw,28px)}
 @keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* ================= SPLITS ================= */
@@ -554,21 +563,25 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 @media (min-width:769px){
   .hero-media{aspect-ratio:auto}
   .hero-media img{position:static;display:block;width:100%;height:auto;object-fit:initial}   /* the whole photo, nothing cropped */
-  .hero-ig{right:clamp(20px,1.7vw,24px);bottom:clamp(20px,1.7vw,24px);gap:8px;min-height:40px;padding:0 16px;font-size:.85rem}
+  .hero-ig{right:clamp(20px,1.7vw,24px);bottom:calc(var(--hero-fade) + 10px);gap:8px;min-height:40px;padding:0 16px;font-size:.85rem}
   .hero-ig::before{content:none}
   .hero-ig svg{width:18px;height:18px}
   .dream-bg img{inset:0 auto 0 0;width:auto;height:100%;aspect-ratio:640/629;object-position:0 50%;
-    -webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 100%);mask-image:linear-gradient(90deg,#000 45%,transparent 100%)}
-  .dream-inner{padding:clamp(32px,6vh,60px) 32px clamp(22px,4vh,40px)}
-  .dream-title{font-size:clamp(3.2rem,min(6.4vw,9.5vh),5.6rem);line-height:.96}
-  .dream-services{margin-top:clamp(14px,2.4vh,22px);font-size:clamp(.8rem,.55rem + .5vw,1.05rem);letter-spacing:.28em}
+    -webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 16%,#000 68%,transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,#000 45%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 16%,#000 68%,transparent 100%);
+    mask-composite:intersect}
+  .dream-inner{padding:clamp(10px,2vh,22px) 32px clamp(14px,2.4vh,26px)}
+  .dream-title{font-size:clamp(2.6rem,min(5vw,7.4vh),4.4rem);line-height:.96}
+  .dream-services{margin-top:clamp(8px,1.4vh,14px);font-size:clamp(.8rem,.55rem + .5vw,1.05rem);letter-spacing:.28em}
   .dream-services > span{margin-right:-.28em}
   .dream-services > span + span::before{margin:0 clamp(18px,2.4vw,34px) 0 calc(clamp(18px,2.4vw,34px) + .28em)}
-  .dream-area{margin-top:clamp(8px,1.6vh,14px);font-size:clamp(1.45rem,1rem + 1vw,2rem);gap:24px}
+  .dream-area{margin-top:clamp(4px,.8vh,8px);font-size:clamp(1.35rem,.95rem + .8vw,1.75rem);gap:24px}
   .dream-area::before,.dream-area::after{width:clamp(64px,8vw,120px)}
-  .dream-btn{min-height:clamp(54px,7.4vh,66px);margin-top:clamp(20px,3.6vh,34px);padding:0 clamp(48px,5vw,72px);font-size:clamp(1.5rem,1.1rem + .8vw,1.95rem);gap:18px}
-  .dream-btn svg{width:24px;height:24px}
-  .dream-call{margin-top:clamp(6px,1.2vh,10px);font-size:.88rem}
+  .dream-btn{min-height:clamp(46px,6.2vh,54px);margin-top:clamp(12px,2.2vh,20px);padding:0 clamp(34px,3.2vw,46px);font-size:clamp(1.25rem,.95rem + .55vw,1.55rem);gap:14px}
+  .dream-btn svg{width:20px;height:20px}
+  .dream-call{margin-top:clamp(0px,.5vh,4px);font-size:.88rem}
+  .hero + .section{min-height:0;padding-top:clamp(20px,3.5vh,36px)}   /* hugs its content so it starts right under the band */
 }
 
 /* ================= LOGO INTRO (every page load + back/forward restores) =================
@@ -1354,10 +1367,11 @@ const SITE_CONFIG = {
   };
   var glide = function (h1) {
     // scroll just far enough that the whole "Building Dream Homes" band (headline to call link) is on
-    // screen, without pushing the band's top under the sticky header; no scroll if it already fits
+    // screen with the next section peeking in below it (~18% of the screen, enough for its photo to fade in), without pushing the
+    // band's top under the sticky header; no scroll if it already fits
     var band = h1.closest(".dream") || h1, r = band.getBoundingClientRect(), vh = innerHeight;
     var headerH = document.getElementById("site-header").offsetHeight;
-    var dist = Math.round(Math.min(r.bottom - vh + 8, r.top - headerH));
+    var dist = Math.round(Math.min(r.bottom - vh + vh * 0.18, r.top - headerH));
     if (dist < 24) return;
     var stops = ["wheel", "touchstart", "keydown", "mousedown"], start = null, last = 0, raf;
     var stop = function () {
