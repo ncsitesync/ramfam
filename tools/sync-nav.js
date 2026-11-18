@@ -30,6 +30,7 @@ const svcFile = s => `service-${s.slug}.html`;
 const PAGES = {
   "index.html":    { current: "home" },
   "services.html": { current: "services" },
+  "process.html":  { current: "process" },
   "gallery.html":  { current: "gallery" },
   "story.html":    { current: "story" },
   "reviews.html":  { current: "reviews" },
@@ -60,7 +61,8 @@ ${SERVICES.map(s => `              <li><a href="${svcFile(s)}"${svcCur(s)}><stro
             </ul>
           </div>
         </li>
-        <li><a href="gallery.html"${cur("gallery")}>Gallery</a></li>
+        <li><a href="process.html"${cur("process")}>Process</a></li>
+        <li><a href="gallery.html"${cur("gallery")}>See Our Work</a></li>
         <li><a href="story.html"${cur("story")}>Our Story</a></li>
         <li><a href="reviews.html"${cur("reviews")}>Reviews</a></li>
       </ul>
@@ -79,7 +81,8 @@ ${SERVICES.map(s => `            <li><a href="${svcFile(s)}"${svcCur(s)}>${s.nam
           </ul>
         </div>
       </li>
-      <li><a href="gallery.html"${cur("gallery")}>Gallery</a></li>
+      <li><a href="process.html"${cur("process")}>Process</a></li>
+      <li><a href="gallery.html"${cur("gallery")}>See Our Work</a></li>
       <li><a href="story.html"${cur("story")}>Our Story</a></li>
       <li><a href="reviews.html"${cur("reviews")}>Reviews</a></li>
       <li><a href="${contact}">Contact</a></li>
@@ -92,7 +95,8 @@ ${SERVICES.map(s => `            <li><a href="${svcFile(s)}"${svcCur(s)}>${s.nam
         <ul>
           <li><a href="${homeHref}"${cur("home")}>Home</a></li>
           <li><a href="services.html"${cfg.current === "services" && !cfg.service ? ' aria-current="page"' : ""}>Services</a></li>
-          <li><a href="gallery.html"${cur("gallery")}>Gallery</a></li>
+          <li><a href="process.html"${cur("process")}>Process</a></li>
+          <li><a href="gallery.html"${cur("gallery")}>See Our Work</a></li>
           <li><a href="story.html"${cur("story")}>Our Story</a></li>
           <li><a href="reviews.html"${cur("reviews")}>Reviews</a></li>
           <li><a href="${contact}">Free Estimate</a></li>

@@ -619,6 +619,16 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
 .gproject-head h3{font-size:clamp(1.15rem,1.05rem + .35vw,1.35rem);margin:0}
 .gcard picture{display:contents}
 
+/* Recent Projects slideshow at the top of the page (built from the featured photos in photos.js) */
+.recent{padding:clamp(18px,2.6vw,30px) 0 clamp(6px,1vw,12px)}
+.recent[hidden]{display:none}
+.recent-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 24px;margin-bottom:4px}
+.recent-head h2{font-size:clamp(1.5rem,1.3rem + .5vw,1.75rem);margin:0}
+.recent-head .lead{margin:0;font-size:.95rem}
+.recent .marquee{margin-bottom:0}
+.marquee-item picture{display:contents}
+@media (min-width:1024px){ .recent .marquee{--card-w:clamp(260px,22vw,330px)} }
+
 /* Even-filling grid: every row is the same height (cards are 4:3 at full column width),
    and any leftover photos in a category's last row widen to fill it, at any photo count. */
 .ggrid{display:grid;gap:10px;margin:0;padding:0;list-style:none;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:calc((100cqw - 10px) / 2 * .75)}
@@ -763,7 +773,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
             </ul>
           </div>
         </li>
-        <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="gallery.html" aria-current="page">See Our Work</a></li>
         <li><a href="story.html">Our Story</a></li>
         <li><a href="reviews.html">Reviews</a></li>
       </ul>
@@ -802,7 +813,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
           </ul>
         </div>
       </li>
-      <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="gallery.html" aria-current="page">See Our Work</a></li>
       <li><a href="story.html">Our Story</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="index.html#contact">Contact</a></li>
@@ -824,6 +836,22 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     </nav>
     <h1 id="page-title">Our Work</h1>
     <p class="lead">Custom homes, remodels, concrete &amp; septic work across Eastern NC.</p>
+  </div>
+</section>
+
+<!-- ================= RECENT PROJECTS (slideshow) ================= -->
+<!-- Built from the photos marked featured in photos.js, in their featured order. -->
+<section class="recent" aria-labelledby="recent-title">
+  <div class="wrap recent-head" data-reveal>
+    <h2 id="recent-title">Recent Projects</h2>
+    <p class="lead">Custom homes we've completed around Eastern North Carolina.</p>
+  </div>
+  <div class="marquee" id="recent-carousel" role="region" aria-roledescription="carousel" aria-label="Recent project photos">
+    <div class="marquee-row"><ul class="marquee-track"></ul></div>
+    <button class="marquee-toggle" type="button" aria-pressed="false" aria-label="Pause project slideshow" aria-controls="recent-carousel">
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
+    </button>
   </div>
 </section>
 
@@ -884,7 +912,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="gallery.html" aria-current="page">See Our Work</a></li>
           <li><a href="story.html">Our Story</a></li>
           <li><a href="reviews.html">Reviews</a></li>
           <li><a href="index.html#contact">Free Estimate</a></li>
@@ -1061,10 +1090,107 @@ const CATEGORIES = [
     }, 250);
   }));
 
+  /* ---- Recent Projects slideshow: one row drifting left (photos marked featured in photos.js,
+     in their featured order). The track holds the set twice; JS measures one set's real width and
+     animates translateX(0 → −setWidth), so the loop is seamless. Hover, touch or keyboard focus
+     eases it to a stop; the round button pauses it. Reduced motion: a static swipeable row. ---- */
+  const carousel = $("#recent-carousel");
+  const featured = PHOTOS.map((p, i) => i).filter(i => PHOTOS[i].featured)
+    .sort((a, b) => (PHOTOS[a].order || 99) - (PHOTOS[b].order || 99) || a - b);
+  if (carousel && !featured.length) carousel.closest("section").hidden = true;   // nothing marked featured
+  else if (carousel) {
+    const row = $(".marquee-row", carousel), track = $(".marquee-track", carousel), toggleBtn = $(".marquee-toggle", carousel);
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const SPEED = 36;                                // px per second: slow and calm
+    let paused = false, anim = null, rate = 1, rampRaf = 0;
+    const hold = { hover: false, touch: false, focus: false };
+    const cardHTML = (i, isCopy) => {
+      const p = PHOTOS[i], cat = CAT[p.category];
+      return `<li class="marquee-item"${isCopy ? ' aria-hidden="true"' : ""}>
+        <button type="button" data-index="${i}"${isCopy ? ' tabindex="-1"' : ""} aria-label="View larger: ${esc(p.alt)}">
+          <picture><source type="image/webp" srcset="${esc(webp(p.thumb))}">
+          <img src="${esc(p.thumb)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" width="${p.w}" height="${p.h}"></picture>
+          <span class="g-tag" aria-hidden="true">${cat ? esc(cat.tag) : ""}</span>
+        </button>
+      </li>`;
+    };
+    const startLoop = keepProgress => {
+      const items = track.children, half = items.length / 2;
+      const loopW = items[half].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+      const duration = (loopW / SPEED) * 1000;
+      let progress = 0;
+      if (anim) {
+        if (keepProgress) { const d = anim.effect.getTiming().duration; progress = (anim.currentTime % d) / d; }
+        anim.cancel();
+      }
+      anim = track.animate([{ transform: "translate3d(0,0,0)" }, { transform: `translate3d(${-loopW}px,0,0)` }],
+                           { duration, iterations: Infinity, easing: "linear" });
+      anim.currentTime = progress * duration;
+      anim.playbackRate = rate;
+    };
+    // the photo set (repeated if needed so ONE set is wider than the screen), then an exact copy of it
+    const buildTrack = keepProgress => {
+      if (reduceMotion) { track.innerHTML = featured.map(i => cardHTML(i, false)).join(""); return; }
+      track.innerHTML = cardHTML(featured[0], false);
+      const first = track.firstElementChild;
+      const stepW = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
+      const reps = Math.max(1, Math.ceil((row.clientWidth + stepW) / (stepW * featured.length)));
+      const set = Array.from({ length: reps }, () => featured).flat();
+      const seen = new Set();                        // only the first appearance of each photo is focusable/announced
+      track.innerHTML = [...set, ...set].map(i => { const copy = seen.has(i); seen.add(i); return cardHTML(i, copy); }).join("");
+      startLoop(keepProgress);
+    };
+    buildTrack(false);
+    const settle = () => {
+      if (!anim) return;
+      const target = (paused || hold.hover || hold.touch || hold.focus) ? 0 : 1;
+      cancelAnimationFrame(rampRaf);
+      const from = rate, t0 = performance.now(), D = 450;
+      const tick = now => {
+        const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+        rate = from + (target - from) * e;
+        anim.playbackRate = rate;
+        if (k < 1) rampRaf = requestAnimationFrame(tick);
+      };
+      rampRaf = requestAnimationFrame(tick);
+    };
+    if (!reduceMotion) {
+      row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") { hold.hover = true; settle(); } });
+      row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hold.hover = false; settle(); } });
+      let touchTimer;
+      row.addEventListener("touchstart", () => { clearTimeout(touchTimer); hold.touch = true; settle(); }, { passive: true });
+      const release = () => { touchTimer = setTimeout(() => { hold.touch = false; settle(); }, 1200); };
+      row.addEventListener("touchend", release, { passive: true });
+      row.addEventListener("touchcancel", release, { passive: true });
+      row.addEventListener("focusin", () => { hold.focus = !!row.querySelector(":focus-visible"); settle(); });   // keyboard focus only
+      row.addEventListener("focusout", e => { if (!row.contains(e.relatedTarget)) { hold.focus = false; settle(); } });
+      // re-measure on resize so the loop stays seamless at the new card size
+      let lastW = row.clientWidth, resizeTimer;
+      addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { if (row.clientWidth !== lastW) { lastW = row.clientWidth; buildTrack(true); } }, 200);
+      });
+      // entrance: the row fades + slides in once
+      if ("IntersectionObserver" in window) {
+        carousel.classList.add("reveal-ready");
+        const io = new IntersectionObserver(entries => {
+          if (entries.some(en => en.isIntersecting)) { carousel.classList.add("is-in"); io.disconnect(); }
+        }, { threshold: 0.15 });
+        io.observe(carousel);
+      }
+    }
+    toggleBtn.addEventListener("click", () => {
+      paused = !paused;
+      toggleBtn.setAttribute("aria-pressed", paused);
+      toggleBtn.setAttribute("aria-label", paused ? "Play project slideshow" : "Pause project slideshow");
+      settle();
+    });
+  }
+
   /* ---- Lightbox (click, arrows, keyboard, swipe) ---- */
   const lb = $("#lightbox"), lbImg = $("#lb-img"), lbCap = $("#lb-cap"), lbCount = $("#lb-count");
-  let current = 0, lastFocus = null;
-  const visible = () => $$(".ggroup:not([hidden]) .gcard", wrap).map(b => +b.dataset.index);   // order on screen
+  let current = 0, lastFocus = null, lbList = null;   // lbList: the slideshow's photos when opened from it
+  const visible = () => lbList || $$(".ggroup:not([hidden]) .gcard", wrap).map(b => +b.dataset.index);   // order on screen
   const show = i => {
     current = i; const p = PHOTOS[i], v = visible();
     lbImg.src = p.src; lbImg.alt = p.alt;
@@ -1073,10 +1199,11 @@ const CATEGORIES = [
     lbCount.textContent = `${v.indexOf(i) + 1} / ${v.length}`;
   };
   const step = d => { const v = visible(); show(v[(v.indexOf(current) + d + v.length) % v.length]); };
-  const openLb = i => { lastFocus = document.activeElement; show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; $(".lb-close", lb).focus(); };
+  const openLb = (i, list) => { lastFocus = document.activeElement; lbList = list || null; show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; $(".lb-close", lb).focus(); };
   const closeLb = () => { lb.classList.remove("open"); document.body.style.overflow = ""; lbImg.removeAttribute("src"); if (lastFocus) lastFocus.focus(); };
 
   wrap.addEventListener("click", e => { const b = e.target.closest("button[data-index]"); if (b) openLb(+b.dataset.index); });
+  if (carousel) carousel.addEventListener("click", e => { const b = e.target.closest("button[data-index]"); if (b) openLb(+b.dataset.index, featured); });
   $(".lb-close", lb).addEventListener("click", closeLb);
   $(".lb-prev", lb).addEventListener("click", () => step(-1));
   $(".lb-next", lb).addEventListener("click", () => step(1));

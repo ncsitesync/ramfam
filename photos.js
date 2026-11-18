@@ -1,7 +1,7 @@
 /* =====================================================================
-   RAMFAM BUILDERS: PROJECT PHOTOS (shared by index.html and gallery.html)
+   RAMFAM BUILDERS: PROJECT PHOTOS (used by gallery.html)
    ---------------------------------------------------------------------
-   Edit this ONE list to add, remove, or reorder job photos on both pages.
+   Edit this ONE list to add, remove, or reorder job photos.
 
    One line per photo:
      src      : large photo for the lightbox   (images/gallery/<name>-full.jpg)
@@ -13,8 +13,8 @@
      project  : which project it belongs to (see RAMFAM_PROJECTS below)
      alt      : what the photo shows (for screen readers and Google)
      caption  : short note shown in the lightbox
-     featured : a number (1, 2, 3…) → ALSO show it in the home-page "Recent Projects"
-                carousel, in that order (about 8). Leave it off to show it only in the gallery.
+     featured : a number (1, 2, 3…) → ALSO show it in the "Recent Projects" slideshow
+                at the top of gallery.html, in that order (about 8). Leave it off to show it only in the gallery.
                 The carousel shows custom homes only, so don't mark septic photos as featured.
 
    To add photos: put the originals in this folder, add them to the list at the top of

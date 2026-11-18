@@ -7,8 +7,8 @@
   1. Business info (phone, email, service area, socials, Google review link, form endpoint):
      edit SITE_CONFIG at the top of the <script> near the bottom of this file.
      It updates every phone/email link, social icon, review button and the JSON-LD schema.
-  2. Project photos: edit photos.js (shared with gallery.html). Mark photos with
-     featured: true to show them in the home-page "Recent Projects" carousel.
+  2. Project photos: edit photos.js (shared with gallery.html). Photos marked featured
+     show in the "Recent Projects" slideshow at the top of gallery.html.
   3. Logo: drop your file at assets/logo.png
   4. Search this file for "REPLACE" to find every placeholder (photos, copy, meta tags).
 -->
@@ -121,15 +121,8 @@ h3{font-size:var(--fs-h3);line-height:1.15}
 p{margin:0 0 1em}
 .wrap{width:100%;max-width:calc(var(--wrap) + var(--gutter)*2);margin:0 auto;padding:0 var(--gutter)}
 .section{padding:var(--section-y) 0}
-.section--warm{background:var(--warm)}
 .eyebrow{display:flex;align-items:center;gap:var(--s-3);font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text);margin:0 0 var(--s-4)}
 .eyebrow::before{content:"";width:32px;height:2px;background:var(--gold);flex:none}
-.section-head{max-width:680px;margin-bottom:clamp(36px, 4vw, 64px)}
-.section-head--center{margin-inline:auto;text-align:center}
-.section-head--center .eyebrow{justify-content:center}
-.section-head--center .eyebrow::after{content:"";width:32px;height:2px;background:var(--gold)}
-.section-head--row{max-width:none;display:flex;flex-direction:column;gap:var(--s-5)}
-.section-head--row > div{max-width:640px}
 .lead{font-size:var(--fs-lead);color:var(--muted);line-height:1.65}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;left:12px;top:-80px;z-index:500;background:var(--charcoal);color:#fff;padding:12px 18px;border-radius:var(--radius-sm)}
@@ -144,8 +137,6 @@ p{margin:0 0 1em}
 .btn--gold:hover{background:var(--gold-hover);border-color:var(--gold-hover);box-shadow:0 10px 24px -10px rgba(201,162,74,.75)}
 .btn--ghost{color:#fff;border-color:rgba(255,255,255,.8);background:transparent}
 .btn--ghost:hover{background:#fff;color:var(--charcoal)}
-.btn--dark{color:var(--charcoal);border-color:var(--charcoal);background:transparent}
-.btn--dark:hover{background:var(--charcoal);color:#fff}
 .btn--sm{min-height:44px;padding:10px 20px;font-size:.92rem;width:auto}
 .link-arrow{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;color:var(--charcoal);text-decoration:none}
 .link-arrow span{border-bottom:2px solid var(--gold);padding-bottom:2px}
@@ -189,85 +180,61 @@ p{margin:0 0 1em}
 .menu-overlay .menu-meta{margin-top:auto;padding-top:var(--s-5);font-size:.9rem;color:rgba(255,255,255,.7)}
 .menu-open{overflow:hidden}
 
-/* sticky mobile call bar */
-
 /* ================= HERO ================= */
-/* Same layout at every width: the photo full-width with nothing over it, then the headline
-   block + buttons centered on a dark charcoal panel right below it, then the trust strip.
-   Phones get a 16:10 photo band; ≥768 / ≥1024 only scale things up. */
-:root{--trust-h:84px}                                     /* trust strip height: 2x2 grid on phones */
-@media (min-width:768px){ :root{--trust-h:68px} }       /* 1 row */
-.hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:var(--charcoal-deep);isolation:isolate}
+/* The hero photo full-width with nothing over it, then the "Building Dream Homes" band right below it
+   (design reference: dream-homes-ref.png, kept out of the site): a light sky photo with a pine branch
+   on the left, a dark serif headline, a spaced services line with gold dividers, an italic
+   "Serving Eastern NC" between short gold lines, one charcoal "See Our Work" button and a small
+   call link. Phones get a 16:10 photo band; ≥769 shows the whole photo (see the 769px block). */
+.hero{--hero-pos:61% 50%;position:relative;display:flex;flex-direction:column;text-align:center;background:#F3F7FA;isolation:isolate}
 .hero-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#AFC2D2}
-.hero-media picture,.split-media picture,.bleed-media picture,.cta-band > picture,.marquee-item picture{display:contents}
+.hero-media picture,.dream-bg,.split-media picture,.bleed-media picture,.cta-band > picture{display:contents}
 /* Photo framing for the hero (heroclear.png → images/hero/hero-640 / 1280 / 1467; 1467x659, ~2.23:1).
    The roof peak is ~2% down, the house base ~93% down, and the house spans ~32%-88% across
    (stairs on the right). In the phones' 16:10 band the full height shows and only the sides
    are cropped (~72% of the width stays): --hero-pos x picks the part in view.
-   - phones (≤768): 61% 50%, the whole house in a 16:10 band
-   - tablet/desktop (≥769): no crop at all, the photo shows at its natural ratio (see the 769px block)
    REPLACE: if you swap the hero photo, re-tune the --hero-pos values. */
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border-radius:0;object-fit:cover;object-position:var(--hero-pos)}
-.hero-content{width:100%;max-width:900px;margin-inline:auto;padding:20px 16px 0}
-.hero h1{margin:0;color:#F6F3EE;font-size:clamp(1.25rem,6.2vw,1.65rem);font-weight:700;line-height:1.1;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
-.hero h1 .hero-h1-main{display:block}
-/* the three core services, a second line inside the headline, gold dot separators */
-.hero-services{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:8px;font-family:var(--sans);font-size:clamp(.62rem,2.9vw,.74rem);font-weight:800;line-height:1.3;letter-spacing:.14em;color:var(--gold)}
-.hero-services > span{display:inline-flex;align-items:center;gap:9px}
-.hero-services > span + span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:none}
-/* service area: a small third line (the trust strip carries the family owned / licensed / free estimate badges) */
-.hero-area{margin:6px 0 0;font-size:.78rem;font-weight:500;line-height:1.3;letter-spacing:.04em;color:rgba(246,243,238,.72)}
-/* buttons + helper text, centered under the headline */
-.hero-cta{width:100%;max-width:900px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;padding:16px 16px 18px;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .25s}
-.hero-actions{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
-.hero .btn{border-radius:999px;width:100%;max-width:320px;min-height:46px;padding:10px 22px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
-/* "See Our Work" only: a slow soft gold glow pulse + a faint sheen every few seconds (box-shadow/transform only, no layout shift) */
-.hero .hero-btn{position:relative;overflow:hidden;isolation:isolate;animation:heroGlow 3s ease-in-out infinite}
-.hero .hero-btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.32) 50%,rgba(255,255,255,0) 100%);transform:translateX(-110%);animation:heroSheen 6s ease-in-out 2s infinite}
-.hero .hero-btn:hover,.hero .hero-btn:focus-visible{transform:translateY(-2px);animation-name:heroGlowStrong}
-.hero .hero-btn:active{transform:translateY(1px)}
-@keyframes heroGlow{
-  0%{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 0 rgba(201,162,74,.35)}
-  100%{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 12px rgba(201,162,74,0)}
-}
-@keyframes heroGlowStrong{
-  0%{box-shadow:0 14px 28px -12px rgba(0,0,0,.5),0 0 0 0 rgba(201,162,74,.5)}
-  100%{box-shadow:0 14px 28px -12px rgba(0,0,0,.5),0 0 0 14px rgba(201,162,74,0)}
-}
-@keyframes heroSheen{0%{transform:translateX(-110%)}18%,100%{transform:translateX(260%)}}
-.hero-call{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-top:6px;padding:0 12px;font-size:.92rem;font-weight:600;color:#fff;text-decoration:none;transition:color .2s,border-color .2s}
-.hero-call svg{width:16px;height:16px;color:var(--gold)}
-.hero-call:hover{color:var(--gold-light)}   /* no underline: a color shift on hover instead */
-.hero-note{margin:2px 0 0;font-size:.78rem;white-space:nowrap;font-weight:500;color:rgba(246,243,238,.72)}
-/* "Follow us on [Instagram]": a frosted charcoal pill in the photo's bottom-right corner, over the lawn
-   (phone sizing here, tablet/desktop sizing in the 769px block) */
-.hero-ig{display:none;position:absolute;z-index:1;right:12px;bottom:12px;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(246,243,238,.2);background:rgba(46,43,40,.78);color:#F6F3EE;font:600 .75rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);transition:transform .2s,background-color .2s}
+/* "Follow us on [Instagram]": a frosted charcoal pill in the photo's bottom-right corner, over the lawn */
+.hero-ig{display:inline-flex;position:absolute;z-index:1;right:12px;bottom:12px;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(246,243,238,.2);background:rgba(46,43,40,.78);color:#F6F3EE;font:600 .75rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);transition:transform .2s,background-color .2s}
+.hero-ig::before{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:44px;transform:translateY(-50%)}   /* tap area */
 @supports ((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))){
   .hero-ig{background:rgba(46,43,40,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 }
-.hero-ig svg{width:15px;height:15px;color:var(--gold);transition:color .2s}
+.hero-ig svg{width:14px;height:14px;color:var(--gold);transition:color .2s}
 .hero-ig:hover,.hero-ig:focus-visible{transform:translateY(-2px);background-color:rgba(46,43,40,.7)}
 .hero-ig:hover svg,.hero-ig:focus-visible svg{color:var(--gold-light)}
-@media (max-width:768px){
-  .hero-ig{display:inline-flex;min-height:0;padding:6px 12px}
-  .hero-ig svg{width:14px;height:14px}
-  .hero-ig::before{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:44px;transform:translateY(-50%)}   /* tap area */
-}
 
-/* trust strip: charcoal band right under the hero, at an exact height (--trust-h) */
-.trust-strip{height:var(--trust-h);display:flex;align-items:center;background:var(--charcoal);color:#F6F3EE;border-bottom:1px solid rgba(201,162,74,.22)}
-.trust-strip .wrap{width:100%}
-.trust{display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;gap:10px 24px;list-style:none;margin:0;padding:0;font-size:.88rem;font-weight:600;line-height:1.3;color:#F6F3EE}
-.trust li{display:flex;align-items:center;gap:8px}
-.trust svg{width:20px;height:20px;color:var(--gold);flex:none}
-.trust .stars{color:var(--gold);letter-spacing:1px;font-size:.82rem}
-.trust-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-bottom:1px solid rgba(201,162,74,.55);padding-bottom:1px}
-.trust-link:hover{color:var(--gold-light);border-bottom-color:var(--gold)}
-.hero + .trust-strip{border-top:1px solid rgba(201,162,74,.22)}   /* separates it from the dark hero panel */
-
-/* the one load-in animation on the page */
+/* --- "Building Dream Homes" band --- */
+/* sky: the photo's own colors continued as a gradient (the photo covers it on phones, and sits on the
+   left and fades into it on wider screens), plus a soft light veil behind the text for contrast */
+.dream{position:relative;isolation:isolate;overflow:hidden;
+  background:radial-gradient(ellipse 45% 60% at 82% 78%,rgba(255,255,255,.95),rgba(255,255,255,0) 70%),
+             linear-gradient(180deg,#FAFCFC 0%,#E7F1F9 32%,#DCEEFA 52%,#F2F7FA 78%,#F8FAFA 100%)}
+.dream-bg img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:0% 45%}
+.dream::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 75% at 50% 50%,rgba(251,250,247,.72) 0%,rgba(251,250,247,.4) 60%,rgba(251,250,247,.12) 100%)}
+.dream-inner{position:relative;max-width:960px;margin:0 auto;padding:clamp(26px,7vw,40px) 16px clamp(18px,5vw,28px);display:flex;flex-direction:column;align-items:center;animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
+.dream h1{margin:0;color:var(--charcoal-deep);font-family:var(--serif);font-weight:600;text-transform:uppercase}
+.dream-title{display:block;font-size:clamp(2.1rem,10.8vw,3.2rem);line-height:.98;letter-spacing:.035em}
+/* CUSTOM HOMES | CONCRETE | SEPTIC: spaced caps with thin gold dividers */
+.dream-services{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;margin-top:clamp(12px,3.4vw,16px);font:500 clamp(.62rem,2.75vw,.74rem)/1.2 var(--sans);letter-spacing:.2em;color:var(--charcoal);white-space:nowrap}
+.dream-services > span{display:inline-flex;align-items:center;margin-right:-.2em}   /* cancel the trailing letter-space so the line stays centered */
+.dream-services > span + span::before{content:"";width:1px;height:1.3em;margin:0 clamp(10px,3vw,14px) 0 calc(clamp(10px,3vw,14px) + .2em);background:var(--gold)}
+/* Serving Eastern NC, between two short gold lines */
+.dream-area{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3.5vw,18px);margin:clamp(6px,2vw,10px) 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.15rem,5vw,1.4rem);line-height:1.3;letter-spacing:.03em;color:var(--charcoal)}
+.dream-area::before,.dream-area::after{content:"";width:clamp(32px,11vw,56px);height:1px;background:var(--gold)}
+/* one solid charcoal pill (the reference's green, in RamFam charcoal) */
+.dream-btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:54px;margin-top:clamp(18px,5vw,24px);padding:0 clamp(32px,9vw,44px);border-radius:999px;border:1px solid rgba(201,162,74,.45);background:var(--charcoal);color:#F6F3EE;font:600 clamp(1.3rem,5.4vw,1.5rem)/1 var(--serif);letter-spacing:.01em;text-decoration:none;box-shadow:0 0 0 4px rgba(255,255,255,.55),0 14px 28px -14px rgba(33,31,29,.6);transition:background-color .2s,transform .2s,box-shadow .2s}
+.dream-btn svg{width:20px;height:20px;color:var(--gold-light);transition:transform .2s}
+.dream-btn:hover,.dream-btn:focus-visible{background:var(--charcoal-deep);transform:translateY(-1px);box-shadow:0 0 0 4px rgba(255,255,255,.7),0 18px 32px -14px rgba(33,31,29,.7)}
+.dream-btn:hover svg,.dream-btn:focus-visible svg{transform:translateX(4px)}
+.dream-btn:active{transform:translateY(1px)}
+/* smaller secondary call link under the button */
+.dream-call{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;padding:0 10px;font:600 .9rem/1.2 var(--sans);color:var(--charcoal);text-decoration:none;transition:color .2s}
+.dream-call svg{width:15px;height:15px;color:var(--gold-text)}
+.dream-call:hover{color:var(--gold-text)}
 @keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.hero-content{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both .1s}
 
 /* ================= SPLITS ================= */
 .split{display:grid;gap:clamp(32px,5vw,88px);align-items:center}
@@ -275,13 +242,7 @@ p{margin:0 0 1em}
 .framed{position:relative;isolation:isolate}
 /* even offset frame: same size as the image, shifted 16px down/right, sitting behind it */
 .framed::after{content:"";position:absolute;z-index:-1;inset:16px -16px -16px 16px;border:1.5px solid var(--gold);border-radius:var(--radius);pointer-events:none}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin:var(--s-6) 0 var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--line)}
-.stats strong{display:block;font-family:var(--serif);font-size:clamp(2rem,1.6rem + 1.4vw,2.8rem);font-weight:600;line-height:1;color:var(--charcoal)}
-.stats .star{display:inline-block;margin-left:.08em;font-family:var(--sans);font-size:.78em;line-height:1;vertical-align:.1em;color:var(--gold-text)}
-.stats span:not(.star){font-size:.84rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
-/* license line under the About stats */
-.license-badge{display:flex;align-items:center;gap:8px;margin:0 0 var(--s-5);font-size:.86rem;font-weight:600;color:var(--charcoal)}
-.license-badge svg{width:18px;height:18px;color:var(--gold-text);flex:none}
+
 
 /* ================= CRAFTSMANSHIP (full-bleed split) ================= */
 .bleed{display:grid;background:var(--charcoal);color:rgba(255,255,255,.86)}
@@ -294,66 +255,6 @@ p{margin:0 0 1em}
 .checklist li{display:flex;gap:var(--s-3);align-items:flex-start;padding:var(--s-3) 0;border-top:1px solid rgba(255,255,255,.12)}
 .checklist li:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
 .checklist svg{width:20px;height:20px;color:var(--gold);flex:none;margin-top:4px}
-
-/* ================= PROCESS ================= */
-.steps{display:grid;gap:var(--s-4);list-style:none;padding:0;margin:0 0 var(--s-7)}
-.step{position:relative;padding:var(--s-5) 0 var(--s-5) 72px;border-top:1px solid var(--line)}
-.step-num{position:absolute;left:0;top:var(--s-5);font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--gold-text);font-weight:600}
-.step h3{margin-bottom:var(--s-2)}
-.step p{color:var(--muted);margin:0}
-
-/* ================= GALLERY ================= */
-.filters{display:flex;flex-wrap:nowrap;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;margin:-6px calc(var(--gutter)*-1);padding:6px var(--gutter)}
-.filters::-webkit-scrollbar{display:none}
-.filter-btn{flex:none;min-height:44px;padding:8px 14px;border:1px solid var(--line);background:#fff;border-radius:999px;font:500 .9rem var(--sans);color:var(--charcoal);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
-.filter-btn:hover{border-color:var(--charcoal)}
-.filter-btn[aria-pressed="true"]{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
-/* Recent Projects header: title + "See All Our Work" on one line; lead and filters below */
-.gallery-head{display:grid;grid-template-areas:"title" "lead" "all";max-width:none}
-.gallery-head .gh-title{grid-area:title}
-.gallery-head .lead{grid-area:lead;max-width:640px}
-.gallery-head .btn-all{grid-area:all;width:100%;margin:0 0 var(--s-4)}
-
-/* Project carousel: ONE row drifting left, full-bleed, clean faded edges.
-   The track holds the photo set exactly twice. JS measures one set's real width
-   (cards + gaps) and animates translateX(0 → −setWidth), so the loop is seamless. */
-.marquee-wrap{position:relative;margin-bottom:clamp(40px,6vh,52px)}   /* space between carousel and the estimate button */
-.marquee{--card-w:min(74vw,320px);--card-gap:16px;position:relative;margin:0;overflow:hidden;transition:opacity .3s ease}
-.marquee.is-fading{opacity:0}
-.marquee-row{--fade:clamp(28px,6vw,72px);overflow:hidden;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
-.marquee-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;will-change:transform}
-.marquee-item{flex:0 0 var(--card-w);width:var(--card-w);margin-right:var(--card-gap)}   /* margin (not gap) so both halves are identical */
-.marquee-item button{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:var(--line);cursor:zoom-in;border-radius:6px;overflow:hidden;transition:transform .35s ease,filter .35s ease}
-.marquee-item img{display:block;width:100%;height:100%;object-fit:cover}
-.marquee-item button:hover,.marquee-item button:focus-visible{transform:scale(1.03);filter:brightness(1.07)}
-.g-tag{position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(33,31,29,.78);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:background-color .35s ease,color .35s ease}
-.marquee-item button:hover .g-tag,.marquee-item button:focus-visible .g-tag{background:var(--gold);color:var(--charcoal-deep)}
-/* small round pause/play button in the carousel's bottom-right corner */
-.marquee-toggle{position:absolute;z-index:2;top:calc(100% + 2px);right:max(var(--gutter), calc((100% - var(--wrap)) / 2));width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--charcoal);cursor:pointer;transition:border-color .2s,background-color .2s}
-.marquee-toggle:hover{border-color:var(--charcoal)}
-.marquee-toggle svg{width:16px;height:16px}
-.marquee-toggle .i-play{display:none}
-.marquee-toggle[aria-pressed="true"] .i-play{display:block}
-.marquee-toggle[aria-pressed="true"] .i-pause{display:none}
-/* entrance: the row fades + slides in once (class added by JS) */
-.marquee.reveal-ready .marquee-row{opacity:0;transform:translateX(48px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
-.marquee.reveal-ready.is-in .marquee-row{opacity:1;transform:none}
-
-/* lightbox */
-.lightbox{position:fixed;inset:0;z-index:400;background:rgba(15,13,12,.96);display:none;align-items:center;justify-content:center;padding:64px 0 72px;touch-action:pan-y}
-.lightbox.open{display:flex}
-.lightbox figure{margin:0;width:100%;max-width:1280px;padding:0 var(--s-3);text-align:center}
-.lightbox img{max-height:76svh;width:auto;max-width:100%;margin:0 auto;border-radius:var(--radius-sm);user-select:none;-webkit-user-drag:none}
-.lightbox figcaption{display:flex;justify-content:center;gap:var(--s-4);color:rgba(255,255,255,.85);margin-top:var(--s-4);font-size:.95rem;padding:0 var(--s-4)}
-.lb-count{color:var(--gold-light);font-variant-numeric:tabular-nums;white-space:nowrap}
-.lb-btn{position:absolute;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.4);color:#fff;cursor:pointer}
-.lb-btn:hover{background:rgba(0,0,0,.7);border-color:#fff}
-.lb-btn svg{width:22px;height:22px}
-.lb-close{top:12px;right:12px}
-.lb-prev,.lb-next{bottom:12px}
-.lb-prev{left:calc(50% - 60px)}
-.lb-next{right:calc(50% - 60px)}
-
 
 /* ================= CTA BAND ================= */
 /* compact band (not a full-screen section): ~320-380px desktop, ~280-340px phones */
@@ -511,25 +412,10 @@ p{margin:0 0 1em}
 
 /* ================= ≥768px (tablet) ================= */
 @media (min-width:768px){
-  .trust{display:flex;flex-wrap:nowrap;gap:0;font-size:.92rem}
-  .trust li{padding:0 16px}
-  .trust li + li{border-left:1px solid rgba(201,162,74,.3)}   /* thin gold dividers */
-  .trust svg{width:22px;height:22px}
-  .filter-btn{padding:8px 20px;font-size:.95rem}
-  .filters{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
-  .marquee{--card-w:clamp(280px,38vw,320px);--card-gap:18px}
-  .gallery-head{grid-template-columns:1fr auto;grid-template-areas:"title all" "lead lead";column-gap:var(--s-6)}
-  .gallery-head .btn-all{width:auto;align-self:center;justify-self:end;margin:0 0 .45em}
-  .steps{grid-template-columns:repeat(2,1fr);gap:0 var(--s-6)}
   .form-card{padding:var(--s-7) var(--s-7)}
   .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
   .footer-grid > :last-child{grid-column:1 / -1}
   .footer-bottom{flex-direction:row;justify-content:space-between}
-  .section-head--row{flex-direction:row;align-items:flex-end;justify-content:space-between}
-  .lb-prev,.lb-next{bottom:auto;top:50%;transform:translateY(-50%)}
-  .lb-prev{left:20px}.lb-next{right:20px}
-  .lightbox figure{padding:0 84px}
-  .lightbox{padding:64px 0}
 }
 
 /* ================= ≥1024px (desktop) ================= */
@@ -550,11 +436,6 @@ p{margin:0 0 1em}
   .header-phone:hover{color:var(--charcoal)}
   .main-nav a,.brand-text,.header-actions .btn{white-space:nowrap}
 
-  .trust{font-size:1rem}
-  .trust li{padding:0 32px}
-  .trust svg{width:24px;height:24px}
-  .trust .stars{font-size:.9rem}
-
 
   /* asymmetric splits */
   .split{grid-template-columns:7fr 5fr}
@@ -564,11 +445,6 @@ p{margin:0 0 1em}
   .bleed{grid-template-columns:1fr 1fr;min-height:640px}
   .bleed-media img{aspect-ratio:auto}
   .bleed-text{align-self:center;padding:var(--s-9) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--s-9) clamp(48px,6vw,112px);max-width:none}
-
-  .steps{grid-template-columns:repeat(4,1fr)}
-  .step{padding:var(--s-7) 0 0;border-top:2px solid var(--line)}
-  .step::before{content:"";position:absolute;top:-2px;left:0;width:56px;height:2px;background:var(--gold)}
-  .step-num{position:static;display:block;margin-bottom:var(--s-4);font-size:3.4rem}
 
 
   .contact-grid{grid-template-columns:5fr 7fr;gap:clamp(48px,6vw,112px);align-items:start}
@@ -590,18 +466,12 @@ p{margin:0 0 1em}
    ===================================================================== */
 main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav links land below the sticky header */
 .btn[hidden]{display:none}
-.stats strong,.step-num{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
-.gallery-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-3)}
-.section-head--row .btn{white-space:nowrap;flex:none}
 
 @media (max-width:1023px){
-  .section-head{margin-bottom:clamp(24px,5vw,40px)}
   .split{gap:28px}
   .split-media img{max-height:45svh}
   .bleed-media img{min-height:0;max-height:45svh}
   .bleed-text{padding:var(--section-y) var(--gutter)}
-  .stats{margin:var(--s-5) 0}
-  .steps{margin-bottom:var(--s-6)}
   .contact-grid{gap:36px}
 }
 
@@ -613,7 +483,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   }
   /* each section fills one screen with its content vertically centered */
   .section{min-height:var(--fit-h);display:flex;flex-direction:column;justify-content:center}
-  .section-head{margin-bottom:clamp(20px,3.5vh,40px)}
   .eyebrow{margin-bottom:10px}
   .section .lead{font-size:clamp(1rem,.85rem + .35vh,1.15rem)}
 
@@ -623,8 +492,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .split > div:not(.split-media){max-width:34rem}
   .split p{font-size:.96rem;line-height:1.65}
   .split .lead{font-size:clamp(1rem,.9rem + .25vh,1.1rem)}
-  .stats{margin:clamp(14px,2.5vh,28px) 0;padding-top:clamp(12px,2vh,20px)}
-  .stats strong{font-size:clamp(1.8rem,1rem + 2vh,2.5rem)}
 
   /* Craftsmanship: image and text side by side at exactly one screen tall */
   .bleed{min-height:0;height:var(--fit-h);max-height:1000px}
@@ -633,19 +500,6 @@ main > section[id], main > section{scroll-margin-top:var(--header-h)}   /* nav l
   .bleed-text{padding:var(--section-y) max(var(--gutter), calc((100vw - var(--wrap)) / 2)) var(--section-y) clamp(40px,5vw,96px)}
   .checklist{margin:clamp(14px,2.5vh,24px) 0 clamp(18px,3vh,32px)}
   .checklist li{padding:clamp(8px,1.3vh,12px) 0}
-
-  /* How It Works: four steps in one row */
-  .steps{margin-bottom:clamp(24px,4vh,48px)}
-  .step{padding-top:clamp(24px,4vh,48px)}
-  .step-num{font-size:clamp(2.4rem,1.4rem + 2.6vh,3.4rem);margin-bottom:clamp(8px,1.5vh,16px)}
-
-  /* Gallery: two carousel rows sized so the whole section fits one screen */
-  .marquee{--card-gap:20px;--card-w:clamp(240px, min(21vw, calc((var(--fit-h) - 380px) * 4 / 3)), 300px)}
-  /* this section hugs its content (no full-screen centering), with a short bottom margin */
-  #gallery.section{min-height:0;padding-top:clamp(32px,5vh,56px);padding-bottom:clamp(48px,6vh,64px)}
-  .gallery-head .lead{margin:0}
-
-
 
   /* CTA band */
 
@@ -692,44 +546,29 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 }
 
 /* ================= HERO ON TABLET + DESKTOP (769px and up) =================
-   Phones (≤768) keep the base hero above. Here the whole photo shows at its natural 2.4:1 ratio
-   (roofline to lawn, no crop), full-bleed edge to edge right under the header, and the text block
-   below is kept compact. */
+   Phones (≤768) keep the base hero above. Here the whole photo shows at its natural ratio
+   (roofline to lawn, no crop), full-bleed right under the header. The sky photo in the
+   "Building Dream Homes" band sits on the left at the band's height and fades into the sky
+   gradient, so the small photo is never stretched across a wide screen.
+   Sizes use vh as well as vw so the band stays within one screen on short laptops. */
 @media (min-width:769px){
-  .hero-media{width:100%;margin:0;aspect-ratio:auto;border-radius:0;box-shadow:none}   /* full-bleed, directly under the header */
-  .hero-media img{position:static;display:block;width:100%;height:auto;object-fit:initial}   /* the whole photo at its natural ratio (from the width/height attributes): nothing cropped */
-  .hero-content{padding:32px 32px 0}
-  .hero-content::before{content:"";display:block;width:32px;height:1px;margin:0 auto 14px;background:var(--gold);opacity:.75}   /* small gold hairline */
-  .hero h1{font-size:clamp(2rem,1rem + 1.75vw,2.4rem);line-height:1.05;letter-spacing:.04em}
-  .hero-services{gap:10px;margin-top:8px;font-size:.8rem;letter-spacing:.18em}
-  .hero-services > span{gap:10px}
-  .hero-services > span + span::before{width:5px;height:5px}
-  .hero-area{margin-top:4px;font-size:.82rem}
-  .hero-cta{padding:20px 32px 32px}
-  .hero-actions{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:12px}
-  .hero .btn,.hero .hero-call{box-sizing:border-box;width:auto;max-width:none;min-width:208px;height:46px;min-height:46px;margin:0;padding:0 26px;font-size:.95rem;border-radius:999px}
-  .hero .hero-call{justify-content:center;border:1.5px solid rgba(246,243,238,.3)}
-  .hero .hero-call:hover{border-color:var(--gold)}
-  /* softer glow at rest on the dark panel (hover keeps the stronger pulse) */
-  .hero .btn{box-shadow:0 8px 20px -12px rgba(0,0,0,.5)}
-  .hero .hero-btn{animation-name:heroGlowSoft}
-  .hero-note{margin-top:10px;font-size:.8rem}
-  .hero-ig{display:inline-flex;right:clamp(20px,1.7vw,24px);bottom:clamp(20px,1.7vw,24px);gap:8px;min-height:40px;padding:0 16px;font-size:.85rem}
+  .hero-media{aspect-ratio:auto}
+  .hero-media img{position:static;display:block;width:100%;height:auto;object-fit:initial}   /* the whole photo, nothing cropped */
+  .hero-ig{right:clamp(20px,1.7vw,24px);bottom:clamp(20px,1.7vw,24px);gap:8px;min-height:40px;padding:0 16px;font-size:.85rem}
+  .hero-ig::before{content:none}
   .hero-ig svg{width:18px;height:18px}
-  /* trust strip: ~20% less vertical padding, slightly smaller icons + text */
-  :root{--trust-h:58px}
-  .trust{font-size:.88rem}
-  .trust svg{width:20px;height:20px}
-}
-@media (min-width:1024px){
-  .trust{font-size:.94rem}
-  .trust li{padding:0 28px}
-  .trust svg{width:22px;height:22px}
-  .trust .stars{font-size:.84rem}
-}
-@keyframes heroGlowSoft{
-  0%{box-shadow:0 8px 20px -12px rgba(0,0,0,.5),0 0 0 0 rgba(201,162,74,.22)}
-  100%{box-shadow:0 8px 20px -12px rgba(0,0,0,.5),0 0 0 10px rgba(201,162,74,0)}
+  .dream-bg img{inset:0 auto 0 0;width:auto;height:100%;aspect-ratio:640/629;object-position:0 50%;
+    -webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 100%);mask-image:linear-gradient(90deg,#000 45%,transparent 100%)}
+  .dream-inner{padding:clamp(32px,6vh,60px) 32px clamp(22px,4vh,40px)}
+  .dream-title{font-size:clamp(3.2rem,min(6.4vw,9.5vh),5.6rem);line-height:.96}
+  .dream-services{margin-top:clamp(14px,2.4vh,22px);font-size:clamp(.8rem,.55rem + .5vw,1.05rem);letter-spacing:.28em}
+  .dream-services > span{margin-right:-.28em}
+  .dream-services > span + span::before{margin:0 clamp(18px,2.4vw,34px) 0 calc(clamp(18px,2.4vw,34px) + .28em)}
+  .dream-area{margin-top:clamp(8px,1.6vh,14px);font-size:clamp(1.45rem,1rem + 1vw,2rem);gap:24px}
+  .dream-area::before,.dream-area::after{width:clamp(64px,8vw,120px)}
+  .dream-btn{min-height:clamp(54px,7.4vh,66px);margin-top:clamp(20px,3.6vh,34px);padding:0 clamp(48px,5vw,72px);font-size:clamp(1.5rem,1.1rem + .8vw,1.95rem);gap:18px}
+  .dream-btn svg{width:24px;height:24px}
+  .dream-call{margin-top:clamp(6px,1.2vh,10px);font-size:.88rem}
 }
 
 /* ================= LOGO INTRO (every page load + back/forward restores) =================
@@ -751,27 +590,22 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 @keyframes introLogo{to{opacity:1;transform:none}}
 
 /* ================= STICKY "GET A FREE ESTIMATE" PILL =================
-   Fixed bottom-right. Hidden while the hero, the estimate form (#contact) or the footer is on
-   screen (JS toggles .is-visible). z-index sits under the mobile menu (150) and the lightbox (400). */
+   Fixed bottom-right. Hidden while the hero, the estimate form (#contact), the footer, or any other
+   estimate / call button is on screen (JS toggles .is-visible). z-index sits under the mobile menu (150). */
 .cta-pill{position:fixed;z-index:140;right:calc(16px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--gold);background:var(--charcoal);color:var(--gold-light);font:600 .95rem/1 var(--sans);letter-spacing:.01em;text-decoration:none;box-shadow:0 12px 28px -12px rgba(0,0,0,.55);
   opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s,background-color .2s,color .2s}
 .cta-pill svg{width:18px;height:18px;transition:transform .2s}
 .cta-pill.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .3s ease,transform .3s ease,visibility 0s,background-color .2s,color .2s}
 .cta-pill:hover{background:var(--gold);color:var(--charcoal-deep)}
 .cta-pill:hover svg{transform:translateX(3px)}
+/* phones/tablets: room at the very bottom of the page so the pill never covers the last lines */
+@media (max-width:1023px){ .site-footer{padding-bottom:calc(var(--s-6) + 80px + env(safe-area-inset-bottom))} }
 @media (min-width:1024px){ .cta-pill{right:calc(24px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom))} }
 
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
-  /* "See Our Work": no pulse or sheen, just a static soft glow */
-  .hero .hero-btn{box-shadow:0 10px 24px -12px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,74,.18),0 0 18px rgba(201,162,74,.3)}
-  .hero .hero-btn::after{display:none}
-  /* gallery carousel becomes two swipeable/scrollable rows (no duplicates are built) */
-  .marquee-row{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
-  .marquee-item{scroll-snap-align:start}
-  .marquee-toggle{display:none}
 }
 /* ===== NAV DROPDOWN (synced by tools/sync-nav.js; edit it there) ===== */
 /* current page in the nav */
@@ -882,7 +716,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
             </ul>
           </div>
         </li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="gallery.html">See Our Work</a></li>
         <li><a href="story.html">Our Story</a></li>
         <li><a href="reviews.html">Reviews</a></li>
       </ul>
@@ -921,7 +756,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
           </ul>
         </div>
       </li>
-      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="gallery.html">See Our Work</a></li>
       <li><a href="story.html">Our Story</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -948,33 +784,23 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
     </picture>
     <a class="hero-ig" href="https://www.instagram.com/ramfambuilders/" data-instagram-link target="_blank" rel="noopener" aria-label="Follow RamFam Builders on Instagram"><span>Follow us on</span><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
   </div>
-  <div class="hero-content">
-    <div class="hero-band">
-      <h1 id="hero-title"><span class="hero-h1-main">Building Dream Homes</span><span class="hero-services"><span>Custom Homes</span><span>Concrete</span><span>Septic</span></span></h1>
-      <p class="hero-area">Serving Eastern NC</p>
+  <!-- "Building Dream Homes" band: light sky photo with a pine branch on the left, text centered over it.
+       Photo: images/hero/sky-pine.* = the sky + pine corner of heroclear.png (top right, mirrored).
+       It is small (640px), so on wide screens it sits on the left and fades into a matching sky gradient.
+       REPLACE: for a sharper look, swap in a real wide sky + pine photo (and drop the fade in .dream-bg). -->
+  <div class="dream">
+    <picture class="dream-bg" aria-hidden="true">
+      <source type="image/webp" srcset="images/hero/sky-pine.webp">
+      <img src="images/hero/sky-pine.jpg" alt="" width="640" height="629" decoding="async">
+    </picture>
+    <div class="dream-inner">
+      <h1 id="hero-title"><span class="dream-title">Building<br> Dream Homes</span><span class="dream-services"><span>Custom Homes</span><span>Concrete</span><span>Septic</span></span></h1>
+      <p class="dream-area">Serving Eastern NC</p>
+      <a class="dream-btn" href="gallery.html">See Our Work<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="dream-call" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(910) 385-7680</span></span></a>
     </div>
-  </div>
-  <div class="hero-cta">
-    <div class="hero-actions">
-      <a class="btn btn--gold hero-btn" href="gallery.html">See Our Work</a>
-      <a class="hero-call" href="tel:+19103857680" data-phone-link><svg aria-hidden="true"><use href="#i-phone"/></svg><span>Call <span data-phone-text>(910) 385-7680</span></span></a>
-    </div>
-    <p class="hero-note">Typically reply within 24 hours</p>
   </div>
 </section>
-
-<!-- Trust strip (directly below the hero) -->
-<div class="trust-strip">
-  <div class="wrap">
-    <ul class="trust" aria-label="Why homeowners choose RamFam" data-reveal-stagger="90" data-reveal-base="300">
-      <li data-reveal><svg aria-hidden="true"><use href="#i-home"/></svg>Family Owned</li>
-      <li data-reveal><svg aria-hidden="true"><use href="#i-shield"/></svg>Licensed &amp; Insured</li>
-      <li data-reveal><svg aria-hidden="true"><use href="#i-doc"/></svg>Free Estimates</li>
-      <!-- REPLACE: your real Google rating -->
-      <li data-reveal><a class="trust-link" href="#google-review-link" data-review-link target="_blank" rel="noopener"><span class="stars" aria-hidden="true">★★★★★</span><span><span data-rating-text>5.0</span> on Google</span></a></li>
-    </ul>
-  </div>
-</div>
 
 <!-- ================= 2. INTRO ================= -->
 <section class="section" id="about" aria-labelledby="about-title">
@@ -992,14 +818,6 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
       <h2 id="about-title">Built on Family. Built on Trust.</h2>
       <p class="lead">RamFam Builders is a family-owned company that builds every project like it's going up next door to our own. You work directly with the family that owns the business, from the first walk of your lot to the day we hand you the keys.</p>
       <p>Custom homes, concrete, and septic, all handled by one trusted crew. That means clear communication, honest pricing, and work we're proud to put our name on.</p>
-      <!-- REPLACE: your real numbers -->
-      <div class="stats">
-        <div><strong>18</strong><span>Years experience</span></div>
-        <div><strong>200+</strong><span>Projects completed</span></div>
-        <div><strong>5.0<span class="star" aria-hidden="true">★</span></strong><span>Average Google rating</span></div>
-      </div>
-      <p class="license-badge"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-license-text>NC General Contractor License #104768</span></p>
-      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
     </div>
   </div>
 </section>
@@ -1027,55 +845,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
 </section>
 
-<!-- ================= 4. HOW IT WORKS ================= -->
-<section class="section section--warm" id="process" aria-labelledby="process-title">
-  <div class="wrap">
-    <div class="section-head section-head--center" data-reveal>
-      <p class="eyebrow">How It Works</p>
-      <h2 id="process-title">Four Simple Steps</h2>
-      <p class="lead">No surprises. Here's exactly what working with RamFam looks like.</p>
-    </div>
-    <ol class="steps" data-reveal-stagger="90">
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">01</span><h3>Consultation</h3><p>We meet at your property, listen to your goals, and walk the site together, free of charge.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">02</span><h3>Design &amp; Estimate</h3><p>You get a clear plan and a detailed, honest estimate with no hidden costs.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">03</span><h3>Build</h3><p>Our family crew gets to work and keeps you updated at every milestone.</p></li>
-      <li class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><h3>Walkthrough &amp; Handoff</h3><p>We walk every detail with you and don't call it done until you're thrilled.</p></li>
-    </ol>
-    <div class="center" data-reveal><a class="btn btn--gold" href="#contact">Book Your Free Consultation</a></div>
-  </div>
-</section>
-
-<!-- ================= 5. GALLERY (Recent Projects) ================= -->
-<!-- Photos are generated from the GALLERY array in the <script> at the bottom of this file. -->
-<section class="section" id="gallery" aria-labelledby="gallery-title">
-  <div class="wrap">
-    <div class="section-head gallery-head" data-reveal>
-      <div class="gh-title">
-        <p class="eyebrow">Our Work</p>
-        <h2 id="gallery-title">Recent Projects</h2>
-      </div>
-      <a class="btn btn--dark btn-all" href="gallery.html">See All Our Work</a>
-      <p class="lead">Custom homes we've completed around Eastern North Carolina.</p>
-    </div>
-  </div>
-  <!-- Project carousel: one row built from the GALLERY array in the <script> below. -->
-  <div class="marquee-wrap">
-  <div class="marquee" id="gallery-grid" role="region" aria-roledescription="carousel" aria-label="Recent project photos">
-    <div class="marquee-row"><ul class="marquee-track"></ul></div>
-  </div>
-    <button class="marquee-toggle" type="button" id="marquee-toggle" aria-pressed="false" aria-label="Pause project carousel" aria-controls="gallery-grid">
-      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
-    </button>
-  </div>
-  <div class="wrap">
-    <div class="gallery-actions">
-      <a class="btn btn--gold" href="#contact">Get a Free Estimate</a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 6. CTA BAND ================= -->
+<!-- ================= 4. CTA BAND ================= -->
 <section class="cta-band" aria-labelledby="cta-title">
   <!-- Real photo: Havelock, NC project (decorative background) -->
   <picture>
@@ -1092,7 +862,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
   </div>
 </section>
 
-<!-- ================= 7. CONTACT ================= -->
+<!-- ================= 5. CONTACT ================= -->
 <section class="section" id="contact" aria-labelledby="contact-title">
   <div class="wrap contact-grid" data-reveal-stagger="100">
     <div data-reveal>
@@ -1242,7 +1012,7 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 
 </main>
 
-<!-- ================= 8. FOOTER ================= -->
+<!-- ================= 6. FOOTER ================= -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -1262,7 +1032,8 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
         <ul>
           <li><a href="#top" aria-current="page">Home</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="gallery.html">See Our Work</a></li>
           <li><a href="story.html">Our Story</a></li>
           <li><a href="reviews.html">Reviews</a></li>
           <li><a href="#contact">Free Estimate</a></li>
@@ -1296,16 +1067,6 @@ main > section{overflow-x:clip}   /* side-slide reveals can never cause sideways
 <!-- Sticky "Get a Free Estimate" pill (shows after the hero, hides at the estimate form and the footer) -->
 <a class="cta-pill" id="cta-pill" href="#contact">Get a Free Estimate<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo viewer">
-  <button class="lb-btn lb-close" type="button" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
-  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
-  <button class="lb-btn lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
-  <figure><img id="lb-img" alt=""><figcaption><span id="lb-cap"></span><span class="lb-count" id="lb-count"></span></figcaption></figure>
-</div>
-
-<!-- Shared project photo list (also used by gallery.html) -->
-<script src="photos.js"></script>
 <script>
 /* =====================================================================
    SITE_CONFIG: UPDATE ALL BUSINESS INFO HERE (one place)
@@ -1333,10 +1094,6 @@ const SITE_CONFIG = {
   googleReviewCount: "25",                      // REPLACE
   formEndpoint:      ""                         // REPLACE: e.g. "https://formspree.io/f/xxxxxxx" (empty = nothing is sent)
 };
-
-/* Project photos live in photos.js (shared with gallery.html).
-   Photos marked featured: true are the ones shown in the Recent Projects carousel. */
-const GALLERY = window.RAMFAM_PHOTOS || [];
 
 /* ===================== no edits needed below ===================== */
 (function () {
@@ -1395,161 +1152,6 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   });
   matchMedia("(min-width:1024px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
 
-
-  /* ---- Gallery: single-row project carousel ---- */
-  const LABELS = { homes: "Custom Home", interiors: "Interior", remodels: "Remodel", concrete: "Concrete", septic: "Septic" };   // tag on each card
-  const PROJECTS = window.RAMFAM_PROJECTS || {};
-  const webp = src => src.replace(/\.jpe?g$/i, ".webp");
-  const grid = $("#gallery-grid");                 // carousel container (the lightbox listens for clicks here)
-  const row = $(".marquee-row", grid), track = $(".marquee-track", grid);
-  const toggleBtn = $("#marquee-toggle");
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SPEED = 36;                                // px per second: slow and calm
-  let currentList = [], globalPaused = false, anim = null, rate = 1;
-  const hold = { hover: false, touch: false, focus: false };
-
-  // Cards use the thumbnail size (WebP with a JPG fallback); the lightbox loads the full size.
-  const cardHTML = (i, isCopy) => {
-    const p = GALLERY[i];
-    return `<li class="marquee-item"${isCopy ? ' aria-hidden="true"' : ""}>
-      <button type="button" data-index="${i}"${isCopy ? ' tabindex="-1"' : ""} aria-label="View larger: ${esc(p.alt)}">
-        <picture><source type="image/webp" srcset="${esc(webp(p.thumb))}">
-        <img src="${esc(p.thumb)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" width="${p.w}" height="${p.h}"></picture>
-        <span class="g-tag" aria-hidden="true">${LABELS[p.category] || ""}</span>
-      </button>
-    </li>`;
-  };
-
-  // Animate the track left by exactly one set's measured width, forever.
-  const startLoop = keepProgress => {
-    const items = track.children, half = items.length / 2;
-    // distance from the first card to its duplicate = one full set including every gap (sub-pixel exact)
-    const loopW = items[half].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
-    const duration = (loopW / SPEED) * 1000;
-    let progress = 0;
-    if (anim) {
-      if (keepProgress) { const d = anim.effect.getTiming().duration; progress = (anim.currentTime % d) / d; }
-      anim.cancel();
-    }
-    anim = track.animate([{ transform: "translate3d(0,0,0)" }, { transform: `translate3d(${-loopW}px,0,0)` }],
-                         { duration, iterations: Infinity, easing: "linear" });
-    anim.currentTime = progress * duration;
-    anim.playbackRate = rate;
-  };
-
-  // Build the row: the photo set (repeated if needed so ONE set is wider than the screen), then an exact copy of it.
-  const buildTrack = keepProgress => {
-    if (reduceMotion) {                            // static, swipeable row; no copies
-      track.innerHTML = currentList.map(i => cardHTML(i, false)).join("");
-      return;
-    }
-    track.innerHTML = cardHTML(currentList[0], false);
-    const first = track.firstElementChild;
-    const step = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
-    const reps = Math.max(1, Math.ceil((row.clientWidth + step) / (step * currentList.length)));
-    const set = Array.from({ length: reps }, () => currentList).flat();
-    const seen = new Set();                        // only the first appearance of each photo is focusable/announced
-    track.innerHTML = [...set, ...set].map(i => { const copy = seen.has(i); seen.add(i); return cardHTML(i, copy); }).join("");
-    startLoop(keepProgress);
-  };
-
-  // Featured photos only, in their featured order (1, 2, 3… in photos.js).
-  const renderGallery = keepProgress => {
-    currentList = GALLERY.map((p, i) => i).filter(i => GALLERY[i].featured)
-      .sort((a, b) => (GALLERY[a].order || 99) - (GALLERY[b].order || 99) || a - b);
-    if (!currentList.length) { grid.hidden = true; return; }   // nothing marked featured
-    buildTrack(keepProgress);
-  };
-  renderGallery(false);
-
-  // Smooth pause/resume: ease the playback rate between 1 and 0 (hover, touch, keyboard focus, or the toggle).
-  let rampRaf = 0;
-  const settle = () => {
-    if (!anim) return;
-    const target = (globalPaused || hold.hover || hold.touch || hold.focus) ? 0 : 1;
-    cancelAnimationFrame(rampRaf);
-    const from = rate, t0 = performance.now(), D = 450;
-    const tick = now => {
-      const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
-      rate = from + (target - from) * e;
-      anim.playbackRate = rate;
-      if (k < 1) rampRaf = requestAnimationFrame(tick);
-    };
-    rampRaf = requestAnimationFrame(tick);
-  };
-  if (!reduceMotion) {
-    row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") { hold.hover = true; settle(); } });
-    row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hold.hover = false; settle(); } });
-    let touchTimer;
-    row.addEventListener("touchstart", () => { clearTimeout(touchTimer); hold.touch = true; settle(); }, { passive: true });
-    const release = () => { touchTimer = setTimeout(() => { hold.touch = false; settle(); }, 1200); };
-    row.addEventListener("touchend", release, { passive: true });
-    row.addEventListener("touchcancel", release, { passive: true });
-    row.addEventListener("focusin", () => { hold.focus = !!row.querySelector(":focus-visible"); settle(); });   // keyboard focus only
-    row.addEventListener("focusout", e => { if (!row.contains(e.relatedTarget)) { hold.focus = false; settle(); } });
-    // re-measure on resize so the loop stays seamless at the new card size
-    let lastW = row.clientWidth, resizeTimer;
-    addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { if (row.clientWidth !== lastW) { lastW = row.clientWidth; buildTrack(true); } }, 200);
-    });
-  }
-  toggleBtn.addEventListener("click", () => {
-    globalPaused = !globalPaused;
-    toggleBtn.setAttribute("aria-pressed", globalPaused);
-    toggleBtn.setAttribute("aria-label", globalPaused ? "Play project carousel" : "Pause project carousel");
-    settle();
-  });
-
-
-  // Entrance: the row fades + slides in the first time the carousel scrolls into view.
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    grid.classList.add("reveal-ready");
-    const io = new IntersectionObserver(entries => {
-      if (entries.some(en => en.isIntersecting)) { grid.classList.add("is-in"); io.disconnect(); }
-    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
-    io.observe(grid);
-  }
-
-  /* ---- Lightbox (click, keyboard arrows, swipe) ---- */
-  const lb = $("#lightbox"), lbImg = $("#lb-img"), lbCap = $("#lb-cap"), lbCount = $("#lb-count");
-  let current = 0, lastFocus = null;
-  // step through every photo in the current filter (each once, in GALLERY order)
-  const visible = () => currentList;
-  const show = i => {
-    current = i; const p = GALLERY[i], v = visible();
-    lbImg.src = p.src; lbImg.alt = p.alt;
-    lbCap.textContent = [PROJECTS[p.project], p.caption || p.alt].filter(Boolean).join(" · "); lbCount.textContent = `${v.indexOf(i) + 1} / ${v.length}`;
-  };
-  const step = d => { const v = visible(); show(v[(v.indexOf(current) + d + v.length) % v.length]); };
-  const openLb = i => { lastFocus = document.activeElement; show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; $(".lb-close", lb).focus(); };
-  const closeLb = () => { lb.classList.remove("open"); document.body.style.overflow = ""; lbImg.removeAttribute("src"); if (lastFocus) lastFocus.focus(); };
-
-  grid.addEventListener("click", e => { const b = e.target.closest("button[data-index]"); if (b) openLb(+b.dataset.index); });
-  $(".lb-close", lb).addEventListener("click", closeLb);
-  $(".lb-prev", lb).addEventListener("click", () => step(-1));
-  $(".lb-next", lb).addEventListener("click", () => step(1));
-  lb.addEventListener("click", e => { if (e.target === lb || e.target.tagName === "FIGURE") closeLb(); });
-  document.addEventListener("keydown", e => {
-    if (!lb.classList.contains("open")) return;
-    if (e.key === "Escape") closeLb();
-    else if (e.key === "ArrowLeft") step(-1);
-    else if (e.key === "ArrowRight") step(1);
-    else if (e.key === "Tab") {
-      const f = $$(".lb-btn", lb), first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
-  let tx = null, ty = null;
-  lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-  lb.addEventListener("touchend", e => {
-    if (tx === null) return;
-    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
-    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) closeLb();   // swipe down to close
-    tx = ty = null;
-  });
 
   /* ---- Estimate form: 4 steps in one card. Still a single <form> posted as FormData to
      C.formEndpoint; the tiles fill hidden inputs (service, timeline, land). ---- */
@@ -1727,7 +1329,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   els.forEach(function (el) { io.observe(el); });
 })();
 </script>
-<!-- Logo intro + sticky "See our work" pill -->
+<!-- Logo intro + sticky "Get a Free Estimate" pill -->
 <script>
 (function () {
   /* ---- Logo intro: hold until window "load" (at least ~1.8s on screen, so the logo rests
@@ -1737,8 +1339,7 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
   var timers = [];
 
   /* ---- Scroll hint: once the intro is gone, slowly scroll (2s, easeInOutCubic) so the
-     "BUILDING DREAM HOMES" headline sits at ~72% of the screen height (at least 80px, at most
-     60% of the screen). Measured after the hero photo has decoded, so its height is real.
+     whole "BUILDING DREAM HOMES" band comes into view under the header. Measured after the hero photo has decoded, so its height is real.
      Skipped when the page is not at the very top, has a #hash, or reduced motion is on.
      Any wheel, touch, key, click or outside scroll stops it at once and leaves the page where
      the user put it. ---- */
@@ -1752,8 +1353,12 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     ready.then(function () { if (!skipNudge()) glide(h1); });
   };
   var glide = function (h1) {
-    var vh = innerHeight, top = h1.getBoundingClientRect().top;
-    var dist = Math.round(Math.min(Math.max(top - vh * 0.72, 80), vh * 0.6));
+    // scroll just far enough that the whole "Building Dream Homes" band (headline to call link) is on
+    // screen, without pushing the band's top under the sticky header; no scroll if it already fits
+    var band = h1.closest(".dream") || h1, r = band.getBoundingClientRect(), vh = innerHeight;
+    var headerH = document.getElementById("site-header").offsetHeight;
+    var dist = Math.round(Math.min(r.bottom - vh + 8, r.top - headerH));
+    if (dist < 24) return;
     var stops = ["wheel", "touchstart", "keydown", "mousedown"], start = null, last = 0, raf;
     var stop = function () {
       cancelAnimationFrame(raf);
@@ -1802,15 +1407,20 @@ const GALLERY = window.RAMFAM_PHOTOS || [];
     });
   }
 
-  /* ---- Sticky "Get a Free Estimate" pill: visible only when none of the hero, the estimate
-     form section (#contact, where it links to) or the footer is on screen ---- */
+  /* ---- Sticky "Get a Free Estimate" pill: visible only when nothing else on screen already
+     offers the same thing, so it never sits on top of another button. Hidden while any of
+     these is in view: the hero, the estimate form section (#contact), the footer, or any other
+     estimate / contact / call button in the page (links to #contact or tel:). The header and
+     the phone menu are left out: they are always on screen. ---- */
   var pill = document.getElementById("cta-pill");
-  var watched = [document.getElementById("top"), document.getElementById("contact"), document.querySelector(".site-footer")];
-  if (!pill || watched.indexOf(null) > -1 || !("IntersectionObserver" in window)) return;
-  var inView = [true, false, false];   // the page starts at the hero
+  if (!pill || !("IntersectionObserver" in window)) return;
+  var watched = [document.getElementById("top"), document.getElementById("contact"), document.querySelector(".site-footer")]
+    .concat(Array.prototype.slice.call(document.querySelectorAll('main a[href$="#contact"], main a[href^="tel:"]')))
+    .filter(function (el, i, all) { return el && all.indexOf(el) === i; });
+  var inView = new Set([watched[0]]);   // the page starts at the hero
   var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { inView[watched.indexOf(e.target)] = e.isIntersecting; });
-    pill.classList.toggle("is-visible", inView.indexOf(true) === -1);
+    entries.forEach(function (e) { if (e.isIntersecting) inView.add(e.target); else inView.delete(e.target); });
+    pill.classList.toggle("is-visible", inView.size === 0);
   });
   watched.forEach(function (el) { io.observe(el); });
 })();
